@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Spring Security Tutorial</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/loginAndRegistration.css}"/>
+</head>
+
+<body>
+<div class="main">
+    <input type="checkbox" id="chk" aria-hidden="true">
+
+    <div class="signup">
+        <form
+                method="post"
+                role="form"
+                th:action="@{/api/auth/signup}"
+                th:object="${user}">
+
+            <label for="chk" aria-hidden="true">Sign up</label>
+            <input
+                    class="form-control"
+                    id="usernameSignUp"
+                    name="username"
+                    placeholder="Enter username"
+                    th:field="*{username}"
+                    type="text"/>
+
+            <p th:errors="*{username}" class="text-danger"
+               th:if="${#fields.hasErrors('username')}"></p>
+
+            <input
+                    class="form-control"
+                    id="firstName"
+                    name="firstName"
+                    placeholder="Enter first name"
+                    th:field="*{firstName}"
+                    type="text"/>
+
+            <p th:errors="*{firstName}" class="text-danger"
+               th:if="${#fields.hasErrors('firstName')}"></p>
+
+
+            <input
+                    class="form-control"
+                    id="lastName"
+                    name="lastName"
+                    placeholder="Enter lastName"
+                    th:field="*{lastName}"
+                    type="text"/>
+
+            <p th:errors="*{firstName}" class="text-danger"
+               th:if="${#fields.hasErrors('firstName')}"></p>
+
+            <input
+                    class="form-control"
+                    id="email"
+                    name="email"
+                    placeholder="Enter email"
+                    th:field="*{email}"
+                    type="email"/>
+
+            <p th:errors="*{email}" class="text-danger"
+               th:if="${#fields.hasErrors('email')}"></p>
+
+            <input
+                    class="form-control"
+                    id="passwordSignUp"
+                    name="password"
+                    placeholder="Enter password"
+                    th:field="*{password}"
+                    type="password"/>
+
+            <p th:errors="*{password}" class="text-danger"
+               th:if="${#fields.hasErrors('password')}"></p>
+
+            <button>Sign up</button>
+        </form>
+    </div>
+
+    <div class="login">
+        <form
+                method="post"
+                role="form"
+                th:action="@{/api/auth/login}"
+                th:object="${login}">
+
+            <label for="chk" aria-hidden="true">Login</label>
+
+            <input
+                    class="form-control"
+                    id="usernameLogin"
+                    name="username"
+                    placeholder="Enter username"
+                    th:field="*{username}"
+                    type="text"/>
+
+            <p th:errors="*{username}" class="text-danger"
+               th:if="${#fields.hasErrors('username')}"></p>
+
+            <input
+                    class="form-control"
+                    id="passwordLogin"
+                    name="password"
+                    placeholder="Enter password"
+                    th:field="*{password}"
+                    type="password"/>
+
+            <p th:errors="*{password}" class="text-danger"
+               th:if="${#fields.hasErrors('password')}"></p>
+
+            <button>Login</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
