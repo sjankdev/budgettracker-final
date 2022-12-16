@@ -55,17 +55,16 @@ public class WalletController {
         return new ResponseEntity<>(walletRepository.save(_wallet), HttpStatus.OK);
     }
 
-    @DeleteMapping("/wallet/{id}")
-    public ResponseEntity<HttpStatus> deleteWallet(@PathVariable("id") long id) {
-        walletRepository.deleteById(id);
-
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    @PostMapping("/delete/{id}")
+    public String deleteWallet(@PathVariable("id") long id, Model model) {
+        walletService.deleteWalletById(id);
+        return "redirect:/";
     }
 
 
     @GetMapping("/userWallet/balance/{user_id}")
     public String getUserWallet(@PathVariable(value = "user_id") Long user_id, Model model) {
-        model.addAttribute("wallet", walletService.findByUserId(user_id));
+        model.addAttribute("wallet", walletService.findDistinctIdByUserId(user_id));
         return "userProfile";
     }
 

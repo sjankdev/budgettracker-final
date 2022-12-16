@@ -8,6 +8,8 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Component
 @EnableAutoConfiguration
@@ -17,7 +19,12 @@ public class WalletServiceImpl implements WalletService {
     WalletRepository walletRepository;
 
     @Override
-    public Wallet findByUserId(Long userId) {
-        return walletRepository.findByUserId(userId);
+    public List<Wallet> findDistinctIdByUserId(Long userId) {
+        return walletRepository.findDistinctIdByUserId(userId);
+    }
+
+    @Override
+    public void deleteWalletById(Long id) {
+        this.walletRepository.deleteById(id);
     }
 }
