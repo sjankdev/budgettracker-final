@@ -13,12 +13,12 @@
 <h1>Email </h1>
 <h1 th:text="${#authentication.getPrincipal().getEmail()}"></h1>
 
-<tr th:each="wallet:${wallet}">
-    <div class="title">
-        <h1>Balance </h1>
-        <h1 th:text="${wallet.initialBalance}"></h1>
-    </div>
-</tr>
+<div th:each="wallet : ${wallet}">
+    <a th:href="@{/api/wallet/userWallet/balance/{user_id}(user_id = ${wallet.id})}">
+        <span th:text="${wallet.initialBalance}"></span>
+        <span th:text="${wallet.walletName}"></span>
+    </a>
+</div>
 
 
 <div class="main">

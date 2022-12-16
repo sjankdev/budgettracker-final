@@ -63,7 +63,7 @@ public class WalletController {
     }
 
 
-    @GetMapping("/userWallet/{user_id}/balance")
+    @GetMapping("/userWallet/balance/{user_id}")
     public String getUserWallet(@PathVariable(value = "user_id") Long user_id, Model model) {
         model.addAttribute("wallet", walletService.findByUserId(user_id));
         return "userProfile";
