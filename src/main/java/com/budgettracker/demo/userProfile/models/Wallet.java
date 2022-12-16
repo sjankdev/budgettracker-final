@@ -1,5 +1,6 @@
-package com.example.demo.userProfile.models;
+package com.budgettracker.demo.userProfile.models;
 
+import com.budgettracker.demo.security.models.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;

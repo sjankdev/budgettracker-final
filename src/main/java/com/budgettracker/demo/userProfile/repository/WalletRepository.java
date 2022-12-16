@@ -1,6 +1,6 @@
-package com.example.demo.userProfile.repository;
+package com.budgettracker.demo.userProfile.repository;
 
-import com.example.demo.userProfile.models.Wallet;
+import com.budgettracker.demo.userProfile.models.Wallet;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

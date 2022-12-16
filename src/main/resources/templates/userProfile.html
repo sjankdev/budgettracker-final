@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Username </h1>
+<h1 th:text="${#authentication.getPrincipal().getUsername()}"></h1>
+<br>
+<h1>Email </h1>
+<h1 th:text="${#authentication.getPrincipal().getEmail()}"></h1>
+
+<tr th:each="wallet:${wallet}">
+    <div class="title">
+        <h1>Balance </h1>
+        <h1 th:text="${wallet.initialBalance}"></h1>
+    </div>
+</tr>
+
+
+<div class="main">
+
+    <div class="signup">
+        <form
+                method="post"
+                role="form"
+                th:action="@{/api/auth/signout}">
+            <button>Logout</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
