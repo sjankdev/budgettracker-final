@@ -11,7 +11,7 @@
     <hr>
     <h2>Save Employee</h2>
 
-    <form action="#" th:action="@{/api/wallet/saveEmployee}" th:object="${wallet}" method="POST">
+    <form action="#" th:action="@{/api/wallet/saveWallet}" th:object="${wallet}" method="POST">
         <input type="text" th:field="*{walletName}" placeholder="Wallet name" class="form-control mb-4 col-4">
 
         <input type="text" th:field="*{initialBalance}" placeholder="Enter balance" class="form-control mb-4 col-4">
