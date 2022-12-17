@@ -10,4 +10,9 @@ public interface WalletService {
 
     void deleteWalletById(Long id);
 
+    Wallet getWalletById(Long id);
+
+    void saveWallet(Wallet wallet);
+
+
 }

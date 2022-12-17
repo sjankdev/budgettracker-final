@@ -45,14 +45,23 @@ public class WalletController {
         return new ResponseEntity<>(comment, HttpStatus.CREATED);
     }
 
-    @PutMapping("/tutorials/{walletId}")
-    public ResponseEntity<Wallet> updateWallet(@PathVariable("walletId") long walletId, @RequestBody Wallet wallet) {
-        Wallet _wallet = walletRepository.findById(walletId).orElseThrow(() -> new IllegalArgumentException("Not found Tutorial with id = " + walletId));
+    @PostMapping("/saveWallet")
+    public String saveWallet(@ModelAttribute("wallet") Wallet wallet) {
+        // save employee to database
+        walletService.saveWallet(wallet);
+        return "redirect:/";
+    }
 
-        _wallet.setWalletName(wallet.getWalletName());
-        _wallet.setInitialBalance(wallet.getInitialBalance());
 
-        return new ResponseEntity<>(walletRepository.save(_wallet), HttpStatus.OK);
+    @GetMapping("/showFormForUpdate/{id}")
+    public String showFormForUpdate(@PathVariable(value = "id") long id, Model model) {
+
+        // get employee from the service
+        Wallet wallet = walletService.getWalletById(id);
+
+        // set employee as a model attribute to pre-populate the form
+        model.addAttribute("wallet", wallet);
+        return "update_wallet";
     }
 
     @PostMapping("/delete/{id}")
