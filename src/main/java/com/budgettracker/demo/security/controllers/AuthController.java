@@ -63,7 +63,7 @@ public class AuthController {
 
         return ResponseEntity
                 .status(HttpStatus.FOUND)
-                .location(URI.create(url))//here we go if login is success
+                .location(URI.create(url))
                 .header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
                 .build();
 

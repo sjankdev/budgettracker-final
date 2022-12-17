@@ -1,7 +1,5 @@
 package com.budgettracker.demo.userProfile.controller;
 
-
-import com.budgettracker.demo.security.models.User;
 import com.budgettracker.demo.security.payload.response.MessageResponse;
 import com.budgettracker.demo.security.repository.UserRepository;
 import com.budgettracker.demo.userProfile.models.Wallet;
@@ -10,8 +8,6 @@ import com.budgettracker.demo.userProfile.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -30,19 +26,17 @@ public class WalletController {
     @Autowired
     WalletService walletService;
 
-    @PostMapping("/user/{user_id}/wallets")
-    public ResponseEntity<?> createWallet(@PathVariable(value = "user_id") Long user_id, @RequestBody Wallet walletRequest) {
+    @GetMapping("/showNewWalletForm")
+    public String showNewWalletForm(Model model) {
+        Wallet wallet = new Wallet();
+        model.addAttribute("wallet", wallet);
+        return "new_wallet";
+    }
 
-        if (walletRepository.existsByUserIdAndWalletName(user_id, walletRequest.getWalletName())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("You already have wallet with that name, choose another!"));
-        }
-
-        Wallet comment = userRepository.findById(user_id).map(tutorial -> {
-            walletRequest.setUser(tutorial);
-            return walletRepository.save(walletRequest);
-        }).orElseThrow(() -> new IllegalArgumentException("Not found Tutorial with id = " + user_id));
-
-        return new ResponseEntity<>(comment, HttpStatus.CREATED);
+    @GetMapping("/userWallet/balance/{user_id}")
+    public String getUserWallet(@PathVariable(value = "user_id") Long user_id, Model model) {
+        model.addAttribute("wallet", walletService.findDistinctIdByUserId(user_id));
+        return "userProfile";
     }
 
     @PostMapping("/saveWallet")
@@ -51,7 +45,6 @@ public class WalletController {
         walletService.saveWallet(wallet);
         return "redirect:/";
     }
-
 
     @GetMapping("/showFormForUpdate/{id}")
     public String showFormForUpdate(@PathVariable(value = "id") long id, Model model) {
@@ -69,13 +62,4 @@ public class WalletController {
         walletService.deleteWalletById(id);
         return "redirect:/";
     }
-
-
-    @GetMapping("/userWallet/balance/{user_id}")
-    public String getUserWallet(@PathVariable(value = "user_id") Long user_id, Model model) {
-        model.addAttribute("wallet", walletService.findDistinctIdByUserId(user_id));
-        return "userProfile";
-    }
-
-
 }
