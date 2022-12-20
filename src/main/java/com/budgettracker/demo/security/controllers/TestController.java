@@ -36,7 +36,7 @@ public class TestController {
 
   @GetMapping("/homePage")
   public String index() {
-    return "userProfile"; //this is api to be referenced after success login
+    return "user_profile"; //this is api to be referenced after success login
   }
 
 }

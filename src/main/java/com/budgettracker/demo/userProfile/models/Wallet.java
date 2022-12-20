@@ -21,10 +21,14 @@ public class Wallet {
     private double initialBalance;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id", insertable = false, updatable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private User user;
+
+    @Column(name = "user_id", nullable = false)
+    private Long userId;
+
 
     public Wallet() {
     }
@@ -64,5 +68,13 @@ public class Wallet {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

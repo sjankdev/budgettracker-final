@@ -113,7 +113,7 @@ public class AuthController {
         SignupRequest signupRequest = new SignupRequest();
         model.addAttribute("login", loginRequest);
         model.addAttribute("user", signupRequest);
-        return "loginAndRegistration";
+        return "login_and_registration";
     }
 
 }

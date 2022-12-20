@@ -2,6 +2,7 @@ package com.budgettracker.demo.userProfile.controller;
 
 import com.budgettracker.demo.security.payload.response.MessageResponse;
 import com.budgettracker.demo.security.repository.UserRepository;
+import com.budgettracker.demo.security.token.jwt.CurrentUserUtility;
 import com.budgettracker.demo.userProfile.models.Wallet;
 import com.budgettracker.demo.userProfile.repository.WalletRepository;
 import com.budgettracker.demo.userProfile.service.WalletService;
@@ -36,12 +37,12 @@ public class WalletController {
     @GetMapping("/userWallet/balance/{user_id}")
     public String getUserWallet(@PathVariable(value = "user_id") Long user_id, Model model) {
         model.addAttribute("wallet", walletService.findDistinctIdByUserId(user_id));
-        return "userProfile";
+        return "user_profile";
     }
 
     @PostMapping("/saveWallet")
     public String saveWallet(@ModelAttribute("wallet") Wallet wallet) {
-        // save employee to database
+        wallet.setUserId(CurrentUserUtility.getCurrentUser().getId());
         walletService.saveWallet(wallet);
         return "redirect:/";
     }
