@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <h1>Employee Management System</h1>
+    <hr>
+    <h2>Save Employee</h2>
+
+    <form action="#" th:action="@{/api/wallet/saveWallet}" th:object="${wallet}" method="POST">
+        <input type="text" th:field="*{walletName}" placeholder="Wallet name" class="form-control mb-4 col-4">
+
+        <input type="text" th:field="*{initialBalance}" placeholder="Enter balance" class="form-control mb-4 col-4">
+
+
+        <button type="submit" class="btn btn-info col-2"> Save Wallet</button>
+    </form>
+
+    <hr>
+
+    <a th:href="@{/}"> Back to Wallet List</a>
+</div>
+</body>
+</html>

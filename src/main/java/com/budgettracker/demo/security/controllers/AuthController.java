@@ -1,7 +1,6 @@
 package com.budgettracker.demo.security.controllers;
 
 
-
 import com.budgettracker.demo.security.models.User;
 import com.budgettracker.demo.security.payload.request.LoginRequest;
 import com.budgettracker.demo.security.payload.request.SignupRequest;
@@ -57,11 +56,14 @@ public class AuthController {
 
         ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(user);
 
+        long userId = user.getId();
+        String url = "/api/wallet/userWallet/balance/" + userId;
+
         model.addAttribute("login", loginRequest);
 
         return ResponseEntity
                 .status(HttpStatus.FOUND)
-                .location(URI.create("/api/test/homePage"))//here we go if login is success
+                .location(URI.create(url))
                 .header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
                 .build();
 
@@ -111,7 +113,7 @@ public class AuthController {
         SignupRequest signupRequest = new SignupRequest();
         model.addAttribute("login", loginRequest);
         model.addAttribute("user", signupRequest);
-        return "loginAndRegistration";
+        return "login_and_registration";
     }
 
 }
