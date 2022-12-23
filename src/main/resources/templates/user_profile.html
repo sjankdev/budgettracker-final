@@ -49,27 +49,10 @@
     </div>
 </section>
 
+<a href="javascript: document.logoutForm.submit()" role="menuitem"> Logout</a>
 
-<!--<table class="table table-striped table-hover" id="productTable">
-    <thead>
-    <tr class="success">
-        <th>Wallet Name</th>
-        <th>Initial Balance</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="wallet : ${wallet}">
-        <td th:text="${wallet.walletName}"></td>
-        <br>
-        <td th:text="${wallet.initialBalance}"></td>
-        <td>
-            <form th:action="@{/api/wallet/delete/{id}(id=${wallet.id})}" th:object="${wallet}" method="post">
-                <input type="hidden" th:field="${wallet}">Delete</input>
-                <button type="submit" onClick="return confirm('sure?')"/>
-            </form>
-        </td>
-    </tr>
-    </tbody>
-</table>-->
+<form name="logoutForm" th:action="@{/api/auth/signout}" method="post" th:hidden="true">
+    <input hidden type="submit" value="Sign Out"/>
+</form>
 </body>
 </html>

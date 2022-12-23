@@ -1,0 +1,56 @@
+body {
+background-color: #90e0ef;
+}
+
+h1{
+text-align: center;
+  color: white;
+}
+#wrap-wallets {
+    /* Your styling. */
+ margin: auto;
+   padding: 10px;
+    height: 5%;
+    text-align: center;
+
+    /* Solution part I. */
+    display: table;
+    background:#03045e;
+}
+
+/* Solution part II. */
+#inside-wallets {
+    color: white;
+    width: 50%;
+    height: 50%;
+    display: table-cell;
+    vertical-align: middle;
+}
+a {
+    color: white;
+    color: inherit;
+}
+a:link{
+  text-decoration: none!important;
+}
+#wrap-logout {
+    /* Your styling. */
+   position:fixed;
+   right:20px;
+   top:10px;
+    height: 5%;
+    text-align: center;
+
+    /* Solution part I. */
+    display: table;
+    background:#03045e;
+}
+
+/* Solution part II. */
+#inside-logout {
+    color: white;
+    width: 50%;
+    height: 50%;
+    display: table-cell;
+    vertical-align: middle;
+}
