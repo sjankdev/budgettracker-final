@@ -9,50 +9,18 @@
 </head>
 <body>
 
-<h1 th:text="${#authentication.getPrincipal().getUsername()}"/>
+<div class="header">
+    <h1>Currency Balance</h1>
+</div>
 
-
-<section>
-    <!--for demo wrap-->
-    <h1>Wallets</h1>
-    <div class="tbl-header">
-        <table cellpadding="0" cellspacing="0" border="0">
-            <thead>
-            <tr>
-                <th>Wallet Name</th>
-                <th>Balance</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-        </table>
+<div th:each="wallet : ${wallet}">
+    <div class="wallet">
+        <p th:text="${wallet.walletName}"></p>
+        <p th:text="${wallet.initialBalance}"></p>
     </div>
-    <div class="tbl-content">
+    <br>
+</div>
 
-        <a th:href="@{/api/wallet/showNewWalletForm}" class="btn btn-primary btn-sm mb-3"> Add Wallet </a>
 
-
-        <table cellpadding="0" cellspacing="0" border="0">
-            <tr th:each="wallet : ${wallet}">
-                <td th:text="${wallet.walletName}"></td>
-                <br>
-                <td th:text="${wallet.initialBalance}"></td>
-                <td>
-                    <form th:action="@{/api/wallet/delete/{id}(id=${wallet.id})}" th:object="${wallet}" method="post">
-                        <input type="hidden" th:field="${wallet}">Delete</input>
-                        <button type="submit" onClick="return confirm('sure?')"/>
-                    </form>
-                </td>
-                <td> <a th:href="@{/api/wallet/showFormForUpdate/{id}(id=${wallet.id})}" class="btn btn-primary">Edit</a>
-
-            </tr>
-        </table>
-    </div>
-</section>
-
-<a href="javascript: document.logoutForm.submit()" role="menuitem"> Logout</a>
-
-<form name="logoutForm" th:action="@{/api/auth/signout}" method="post" th:hidden="true">
-    <input hidden type="submit" value="Sign Out"/>
-</form>
 </body>
 </html>
