@@ -37,6 +37,7 @@ public class WalletController {
     @GetMapping("/userWallet/balance/{user_id}")
     public String getUserWallet(@PathVariable(value = "user_id") Long user_id, Model model) {
         model.addAttribute("wallet", walletService.findDistinctIdByUserId(user_id));
+        walletService.netWorth(user_id);
         return "user_profile";
     }
 

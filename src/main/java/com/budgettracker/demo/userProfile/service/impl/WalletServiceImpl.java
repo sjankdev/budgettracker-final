@@ -46,4 +46,13 @@ public class WalletServiceImpl implements WalletService {
     public void saveWallet(Wallet wallet) {
         this.walletRepository.save(wallet);
     }
+
+    @Override
+    public void netWorth(Long userId) {
+        List<Wallet> wallets = walletRepository.findDistinctIdByUserId(userId);
+        double totalBalance = 0;
+        for (int i = 0; i < wallets.size(); i++)
+            totalBalance += wallets.get(i).getInitialBalance();
+        System.out.println(totalBalance);
+    }
 }
