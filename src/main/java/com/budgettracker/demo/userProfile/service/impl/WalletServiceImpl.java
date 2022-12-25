@@ -58,7 +58,6 @@ public class WalletServiceImpl implements WalletService {
         for (int i = 0; i < wallets.size(); i++)
             worth += wallets.get(i).getInitialBalance();
         wallet.setTotalBalance(worth);
-        System.out.println(wallet.getTotalBalance());
         return wallet;
     }
 }

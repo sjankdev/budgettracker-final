@@ -32,7 +32,11 @@ public class WalletController {
 
 
     @GetMapping("/showNewWalletForm")
-    public String showNewWalletForm(Wallet wallet) {
+    public String showNewWalletForm(Wallet wallet, Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
+        long userId = user.getId();
+        model.addAttribute("userId", userId);
         return "new_wallet";
     }
 
@@ -58,10 +62,13 @@ public class WalletController {
     @GetMapping("/showFormForUpdate/{id}")
     public String showFormForUpdate(@PathVariable(value = "id") long id, Model model) {
 
-        // get employee from the service
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
+        long userId = user.getId();
+        model.addAttribute("userId", userId);
+
         Wallet wallet = walletService.getWalletById(id);
 
-        // set employee as a model attribute to pre-populate the form
         model.addAttribute("wallet", wallet);
         return "update_wallet";
     }
