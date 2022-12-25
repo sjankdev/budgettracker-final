@@ -3,12 +3,15 @@ package com.budgettracker.demo.userProfile.controller;
 import com.budgettracker.demo.security.payload.response.MessageResponse;
 import com.budgettracker.demo.security.repository.UserRepository;
 import com.budgettracker.demo.security.token.jwt.CurrentUserUtility;
+import com.budgettracker.demo.security.token.services.UserDetailsImpl;
 import com.budgettracker.demo.userProfile.models.Wallet;
 import com.budgettracker.demo.userProfile.repository.WalletRepository;
 import com.budgettracker.demo.userProfile.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,10 +30,9 @@ public class WalletController {
     @Autowired
     WalletService walletService;
 
+
     @GetMapping("/showNewWalletForm")
-    public String showNewWalletForm(Model model) {
-        Wallet wallet = new Wallet();
-        model.addAttribute("wallet", wallet);
+    public String showNewWalletForm(Wallet wallet) {
         return "new_wallet";
     }
 
@@ -43,9 +45,14 @@ public class WalletController {
 
     @PostMapping("/saveWallet")
     public String saveWallet(@ModelAttribute("wallet") Wallet wallet) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
+        long userId = user.getId();
+
         wallet.setUserId(CurrentUserUtility.getCurrentUser().getId());
         walletService.saveWallet(wallet);
-        return "redirect:/";
+        return "redirect:/api/wallet/userWallet/balance/" + userId;
     }
 
     @GetMapping("/showFormForUpdate/{id}")
@@ -59,9 +66,13 @@ public class WalletController {
         return "update_wallet";
     }
 
-    @PostMapping("/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String deleteWallet(@PathVariable("id") long id, Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
+        long userId = user.getId();
+
         walletService.deleteWalletById(id);
-        return "redirect:/";
+        return "redirect:/api/wallet/userWallet/balance/" + userId;
     }
 }

@@ -4,19 +4,39 @@ background:#212529;
 
 .header{
 text-align: center;
-color:white;
+color:black;
 
 
 }
 .wallet {
       background: #495057;
-      width: 300px;
       color: White;
-      height: 18px;
-      margin: auto;
       width: 45%;
       height: 80px;
       font-family: 'Trebuchet MS', sans-serif;
       padding: 10px;
       border-radius: 25px;
+
+}
+.addWallet{
+    background: #495057;
+    color: White;
+    width: 10%;
+    height: 20px;
+    font-family: 'Trebuchet MS', sans-serif;
+    padding: 10px;
+    border-radius: 25px;
+    position: relative;
+    left: 420px;
+    top: 30px;
+    text-align:center;
+    }
+
+a:link{
+  text-decoration: none!important;
+
+}
+a{
+font-size: 20px;
+color:black;
 }
