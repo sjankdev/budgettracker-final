@@ -56,8 +56,7 @@ public class AuthController {
 
         ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(user);
 
-        long userId = user.getId();
-        String url = "/api/wallet/userWallet/balance/" + userId;
+        String url = "/api/test/homePage";
 
         model.addAttribute("login", loginRequest);
 

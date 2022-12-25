@@ -14,5 +14,5 @@ public interface WalletService {
 
     void saveWallet(Wallet wallet);
 
-
+    Wallet netWorth(Long userId);
 }

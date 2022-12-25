@@ -19,6 +19,9 @@ public class WalletServiceImpl implements WalletService {
 
     @Autowired
     WalletRepository walletRepository;
+/*
+    @Autowired
+    Wallet wallet;*/
 
     @Override
     public List<Wallet> findDistinctIdByUserId(Long userId) {
@@ -45,5 +48,16 @@ public class WalletServiceImpl implements WalletService {
     @Override
     public void saveWallet(Wallet wallet) {
         this.walletRepository.save(wallet);
+    }
+
+    @Override
+    public Wallet netWorth(Long userId) {
+        Wallet wallet = new Wallet();
+        List<Wallet> wallets = walletRepository.findDistinctIdByUserId(userId);
+        double worth = 0;
+        for (int i = 0; i < wallets.size(); i++)
+            worth += wallets.get(i).getInitialBalance();
+        wallet.setTotalBalance(worth);
+        return wallet;
     }
 }
