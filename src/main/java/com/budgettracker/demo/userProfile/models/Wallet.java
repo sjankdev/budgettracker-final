@@ -20,6 +20,8 @@ public class Wallet {
 
     private double initialBalance;
 
+    private double totalBalance;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id", insertable = false, updatable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -76,5 +78,13 @@ public class Wallet {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public double getTotalBalance() {
+        return totalBalance;
+    }
+
+    public void setTotalBalance(double totalBalance) {
+        this.totalBalance = totalBalance;
     }
 }

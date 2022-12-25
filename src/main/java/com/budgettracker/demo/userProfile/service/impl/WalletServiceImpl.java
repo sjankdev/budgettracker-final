@@ -19,6 +19,9 @@ public class WalletServiceImpl implements WalletService {
 
     @Autowired
     WalletRepository walletRepository;
+/*
+    @Autowired
+    Wallet wallet;*/
 
     @Override
     public List<Wallet> findDistinctIdByUserId(Long userId) {
@@ -48,11 +51,14 @@ public class WalletServiceImpl implements WalletService {
     }
 
     @Override
-    public void netWorth(Long userId) {
+    public Wallet netWorth(Long userId) {
+        Wallet wallet = new Wallet();
         List<Wallet> wallets = walletRepository.findDistinctIdByUserId(userId);
-        double totalBalance = 0;
+        double worth = 0;
         for (int i = 0; i < wallets.size(); i++)
-            totalBalance += wallets.get(i).getInitialBalance();
-        System.out.println(totalBalance);
+            worth += wallets.get(i).getInitialBalance();
+        wallet.setTotalBalance(worth);
+        System.out.println(wallet.getTotalBalance());
+        return wallet;
     }
 }

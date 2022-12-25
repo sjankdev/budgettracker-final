@@ -9,8 +9,10 @@
 </head>
 <body>
 
-<div class="header">
-    <h1>Currency Balance</h1>
+<div class="header" th:each="wallets : ${wallets}">
+    <h1>Net Worth</h1>
+    <h1 th:text="${wallets.totalBalance}"></h1>
+
 </div>
 
 <div th:each="wallet : ${wallet}">
@@ -19,6 +21,7 @@
         <p th:text="${wallet.initialBalance}"></p>
     </div>
     <br>
+</div>
 </div>
 </body>
 </html>
