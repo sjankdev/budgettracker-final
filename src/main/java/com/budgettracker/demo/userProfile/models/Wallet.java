@@ -7,6 +7,8 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "wallet")
@@ -32,6 +34,9 @@ public class Wallet {
 
     @Column(name = "user_id", nullable = false)
     private Long userId;
+
+    @OneToMany(mappedBy = "wallet")
+    private Set<Transaction> transactions;
 
 
     public Wallet() {
