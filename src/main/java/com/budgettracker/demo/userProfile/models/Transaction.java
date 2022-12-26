@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static javax.persistence.TemporalType.DATE;
+
 @Entity
 @Table(name = "transaction")
 public class Transaction {
@@ -20,7 +22,7 @@ public class Transaction {
 
     private String note;
 
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @DateTimeFormat(pattern = "mm-DD-yyyy")
     @Column(name = "date")
     private Date date;
 
@@ -32,4 +34,73 @@ public class Transaction {
     @JoinColumn(name="wallet_id", nullable=false)
     private Wallet wallet;
 
+
+    public Transaction() {
+    }
+
+    public Transaction(double amount, String note, Date date, Category category) {
+        this.amount = amount;
+        this.note = note;
+        this.date = date;
+        this.category = category;
+    }
+
+    @Column(name = "wallet_ids", nullable = false)
+    private Long walletId;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Wallet getWallet() {
+        return wallet;
+    }
+
+    public void setWallet(Wallet wallet) {
+        this.wallet = wallet;
+    }
+
+    public Long getWalletId() {
+        return walletId;
+    }
+
+    public void setWalletId(Long walletId) {
+        this.walletId = walletId;
+    }
 }
