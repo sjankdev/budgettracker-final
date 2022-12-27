@@ -22,7 +22,7 @@ public class Transaction {
 
     private String note;
 
-    @DateTimeFormat(pattern = "mm-DD-yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "date")
     private Date date;
 
