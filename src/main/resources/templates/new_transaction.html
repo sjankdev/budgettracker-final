@@ -11,14 +11,16 @@
     <hr>
     <h2>Save Employee</h2>
 
-    <form action="#" th:action="@{/api/transaction/saveTransaction}" th:object="${transaction}" method="POST">
+    <form action="#" th:action="@{/api/transaction/saveTransaction/{walletId} (walletId=${id})}"
+          th:object="${transaction}" method="POST">
         <input type="text" th:field="*{amount}" placeholder="Enter amount" class="form-control mb-4 col-4">
 
         <input type="text" th:field="*{note}" placeholder="Enter note" class="form-control mb-4 col-4">
         <input type="date" th:field="*{date}" class="form-control mb-4 col-4">
-       <select class="form-control"  id="dropOperator">
+        <select class="form-control" id="dropOperator">
             <option value="0">Select category</option>
-            <option th:each="categories : ${categories}" th:value="${categories.name}" th:text="${categories.name}"></option>
+            <option th:each="categories : ${categories}" th:value="${categories.name}"
+                    th:text="${categories.name}"></option>
         </select>
 
         <button type="submit" class="btn btn-info col-2"> Save Wallet</button>

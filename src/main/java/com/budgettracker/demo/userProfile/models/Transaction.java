@@ -45,8 +45,6 @@ public class Transaction {
         this.category = category;
     }
 
-    @Column(name = "wallet_ids", nullable = false)
-    private Long walletId;
 
     public Long getId() {
         return id;
@@ -96,11 +94,5 @@ public class Transaction {
         this.wallet = wallet;
     }
 
-    public Long getWalletId() {
-        return walletId;
-    }
 
-    public void setWalletId(Long walletId) {
-        this.walletId = walletId;
-    }
 }
