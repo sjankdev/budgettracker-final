@@ -7,12 +7,15 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "wallet")
 public class Wallet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "wallet_id")
     private Long id;
 
     @NotEmpty(message = "Please, insert a wallet name")
@@ -20,16 +23,20 @@ public class Wallet {
 
     private double initialBalance;
 
+    @Transient
     private double totalBalance;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "user_id", insertable = false, updatable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private User user;
 
     @Column(name = "user_id", nullable = false)
     private Long userId;
+
+    @OneToMany(mappedBy = "wallet")
+    private Set<Transaction> transactions;
 
 
     public Wallet() {
