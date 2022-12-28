@@ -35,7 +35,8 @@ public class Wallet {
     @Column(name = "user_id", nullable = false)
     private Long userId;
 
-    @OneToMany(mappedBy = "wallet")
+    @OneToMany(mappedBy = "wallet", cascade = {
+            CascadeType.ALL})
     private Set<Transaction> transactions;
 
 

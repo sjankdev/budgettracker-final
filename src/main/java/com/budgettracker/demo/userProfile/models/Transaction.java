@@ -10,7 +10,7 @@ import java.util.List;
 import static javax.persistence.TemporalType.DATE;
 
 @Entity
-@Table(name = "transaction")
+@Table(name = "transaction")//course
 public class Transaction {
 
     @Id
@@ -26,11 +26,11 @@ public class Transaction {
     @Column(name = "date")
     private Date date;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_name", referencedColumnName = "category_name")
     private Category category;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="wallet_id", nullable=false)
     private Wallet wallet;
 
