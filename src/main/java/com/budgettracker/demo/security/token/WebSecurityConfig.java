@@ -84,7 +84,9 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers("/api/auth/**").permitAll()
-                .antMatchers("/api/user/**").authenticated().and()
+                .antMatchers("/api/user/**").authenticated()
+                .antMatchers("/api/wallet/**").authenticated()
+                .antMatchers("/api/transaction/**").authenticated().and()
                 .formLogin().loginPage("/api/auth/loginAndRegisterForm")
                 .permitAll();
 

@@ -10,6 +10,7 @@ import com.budgettracker.demo.userProfile.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -41,6 +42,7 @@ public class WalletController {
     }
 
     @GetMapping("/userWallet/balance/{user_id}")
+    @PreAuthorize("#user_id == authentication.principal.id")
     public String getUserWallet(@PathVariable(value = "user_id") Long user_id, Model model) {
         model.addAttribute("wallet", walletService.findDistinctIdByUserId(user_id));
         model.addAttribute("wallets", walletService.netWorth(user_id));
