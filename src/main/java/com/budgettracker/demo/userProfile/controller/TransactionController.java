@@ -53,7 +53,8 @@ public class TransactionController {
     }
 
     @PostMapping("/saveTransaction/{walletId}")
-    public String saveTransaction(@PathVariable(value = "walletId") long walletId, @ModelAttribute("transaction") Transaction transaction) {
+    public String saveTransaction(@PathVariable(value = "walletId") long walletId,
+                                  @ModelAttribute("wallets") Transaction transaction, Model model) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
@@ -61,7 +62,9 @@ public class TransactionController {
 
         Wallet wallet = walletService.getWalletById(walletId);
 
+        double amount = transaction.getAmount();
 
+        wallet.setTotalBalance(transactionService.netWorthAfterOutcomeTransaction(userId, amount));
         transaction.setWallet(wallet);
         transactionService.saveTransaction(transaction);
         return "redirect:/api/wallet/userWallet/balance/" + userId;
