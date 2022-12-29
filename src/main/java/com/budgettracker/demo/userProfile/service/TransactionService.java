@@ -7,4 +7,5 @@ public interface TransactionService {
 
     void saveTransaction(Transaction transaction);
 
+    public double netWorthAfterOutcomeTransaction(Long userId, double amount);
 }
