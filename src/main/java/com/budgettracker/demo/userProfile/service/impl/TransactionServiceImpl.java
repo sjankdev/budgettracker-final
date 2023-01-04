@@ -33,10 +33,11 @@ public class TransactionServiceImpl implements TransactionService {
         List<Wallet> wallets = walletRepository.findDistinctIdByUserId(userId);
         double worth = 0;
         double worthAfterOutcome = 0;
-        for (int i = 0; i < wallets.size(); i++)
+        for (int i = 0; i < wallets.size(); i++) {
             worth += wallets.get(i).getInitialBalance();
-        worthAfterOutcome = worth - amount;
-        System.out.println(worthAfterOutcome);
+            wallets.get(i).setInitialBalance(worth - amount);
+            break;
+        }
         return worthAfterOutcome;
     }
 }
