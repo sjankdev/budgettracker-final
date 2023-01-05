@@ -2,6 +2,7 @@ package com.budgettracker.demo.userProfile.models;
 
 import org.hibernate.annotations.OnDelete;
 import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,20 +32,22 @@ public class Transaction {
     private Category category;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="wallet_id", nullable=false)
+    @JoinColumn(name = "wallet_id", nullable = false)
     private Wallet wallet;
 
+    @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "ENUM('EXPENSE', 'INCOME')")
+    private TransactionType transactionType;
 
     public Transaction() {
     }
 
-    public Transaction(double amount, String note, Date date, Category category) {
+    public Transaction(double amount, String note, Date date, TransactionType transactionType) {
         this.amount = amount;
         this.note = note;
         this.date = date;
-        this.category = category;
+        this.transactionType = transactionType;
     }
-
 
     public Long getId() {
         return id;
@@ -94,5 +97,11 @@ public class Transaction {
         this.wallet = wallet;
     }
 
+    public TransactionType getTransactionType() {
+        return transactionType;
+    }
 
+    public void setTransactionType(TransactionType transactionType) {
+        this.transactionType = transactionType;
+    }
 }

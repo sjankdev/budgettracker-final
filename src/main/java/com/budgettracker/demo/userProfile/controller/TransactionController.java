@@ -4,6 +4,7 @@ import com.budgettracker.demo.security.token.jwt.CurrentUserUtility;
 import com.budgettracker.demo.security.token.services.UserDetailsImpl;
 import com.budgettracker.demo.userProfile.models.Category;
 import com.budgettracker.demo.userProfile.models.Transaction;
+import com.budgettracker.demo.userProfile.models.TransactionType;
 import com.budgettracker.demo.userProfile.models.Wallet;
 import com.budgettracker.demo.userProfile.repository.CategoryRepository;
 import com.budgettracker.demo.userProfile.repository.WalletRepository;
@@ -46,7 +47,7 @@ public class TransactionController {
 
         model.addAttribute("transaction", transaction);
         List<Category> categories = categoryService.getAllCategories();
-        model.addAttribute("categories", categories);
+        model.addAttribute("categories", TransactionType.values());
 
         return "new_transaction";
 

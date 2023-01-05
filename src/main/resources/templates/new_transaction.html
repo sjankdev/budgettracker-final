@@ -17,12 +17,19 @@
 
         <input type="text" th:field="*{note}" placeholder="Enter note" class="form-control mb-4 col-4">
         <input type="date" th:field="*{date}" class="form-control mb-4 col-4">
-        <select th:field="*{category}" class="form-control" id="dropOperator">
-            <option value="0">Select category</option>
-            <option th:each="categories : ${categories}" th:value="${categories.id}"
-                    th:text="${categories.name}"></option>
+        <!-- <select th:field="*{category}" class="form-control" id="dropOperator">
+             <option value="0">Select category</option>
+             <option th:each="categories : ${categories}" th:value="${categories.id}"
+                     th:text="${categories.name}"></option>
+         </select>-->
+        <select th:field="${transaction.transactionType}">
+            <option value="0">Select transaction category</option>
+            <option
+                    th:each="type : ${categories}"
+                    th:value="${type}"
+                    th:text="${type.displayName}"
+            ></option>
         </select>
-
         <button type="submit" class="btn btn-info col-2"> Save Wallet</button>
     </form>
 
