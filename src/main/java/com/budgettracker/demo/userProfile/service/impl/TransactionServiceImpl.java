@@ -5,11 +5,13 @@ import com.budgettracker.demo.userProfile.models.Wallet;
 import com.budgettracker.demo.userProfile.repository.TransactionRepository;
 import com.budgettracker.demo.userProfile.repository.WalletRepository;
 import com.budgettracker.demo.userProfile.service.TransactionService;
+import com.budgettracker.demo.userProfile.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -21,23 +23,17 @@ public class TransactionServiceImpl implements TransactionService {
     TransactionRepository transactionRepository;
 
     @Autowired
-    WalletRepository walletRepository;
+    WalletService walletService;
 
     @Override
-    public void saveTransaction(Transaction transaction) {
+    public void saveTransaction(Transaction transaction, Long walletId, Long userId, double amount) {
+        Wallet wallet = walletService.getWalletById(walletId);
+
+        wallet.setInitialBalance(wallet.getInitialBalance() - amount);
+
+        System.out.println(wallet);
         this.transactionRepository.save(transaction);
     }
 
-    @Override
-    public double netWorthAfterOutcomeTransaction(Long userId, double amount) {
-        List<Wallet> wallets = walletRepository.findDistinctIdByUserId(userId);
-        double worth = 0;
-        double worthAfterOutcome = 0;
-        for (int i = 0; i < wallets.size(); i++) {
-            worth += wallets.get(i).getInitialBalance();
-            wallets.get(i).setInitialBalance(worth - amount);
-            break;
-        }
-        return worthAfterOutcome;
-    }
 }
+

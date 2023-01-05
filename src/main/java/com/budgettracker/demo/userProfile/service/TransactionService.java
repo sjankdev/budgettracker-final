@@ -5,7 +5,5 @@ import com.budgettracker.demo.userProfile.models.Wallet;
 
 public interface TransactionService {
 
-    void saveTransaction(Transaction transaction);
-
-    public double netWorthAfterOutcomeTransaction(Long userId, double amount);
+    public void saveTransaction(Transaction transaction, Long walletId, Long userId, double amount);
 }
