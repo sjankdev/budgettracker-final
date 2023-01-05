@@ -26,7 +26,7 @@ public class Transaction {
     @Column(name = "date")
     private Date date;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "category_name", referencedColumnName = "category_name")
     private Category category;
 

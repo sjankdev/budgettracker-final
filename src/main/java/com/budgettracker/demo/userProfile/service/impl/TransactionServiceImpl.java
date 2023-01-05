@@ -31,7 +31,6 @@ public class TransactionServiceImpl implements TransactionService {
 
         wallet.setInitialBalance(wallet.getInitialBalance() - amount);
 
-        System.out.println(wallet);
         this.transactionRepository.save(transaction);
     }
 
