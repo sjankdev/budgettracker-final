@@ -64,9 +64,6 @@ public class TransactionController {
 
         double amount = transaction.getAmount();
 
-/*
-        wallet.setTotalBalance(transactionService.netWorthAfterOutcomeTransaction(walletId, userId, amount));
-*/
         transaction.setWallet(wallet);
         transactionService.saveTransaction(transaction, walletId, userId, amount);
         return "redirect:/api/wallet/userWallet/balance/" + userId;
