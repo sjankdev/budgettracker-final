@@ -23,11 +23,28 @@
                      th:text="${categories.name}"></option>
          </select>-->
         <select th:field="${transaction.transactionType}">
-            <option value="0">Select transaction category</option>
             <option
-                    th:each="type : ${categories}"
-                    th:value="${type}"
-                    th:text="${type.displayName}"
+                    th:each="transactionType : ${transactionType}"
+                    th:value="${transactionType}"
+                    th:text="${transactionType.displayName}"
+            ></option>
+        </select>
+
+        <select th:field="${transaction.expenseCategories}">
+            <option value="0">Select expense category</option>
+            <option
+                    th:each="expenseCategories : ${expenseCategories}"
+                    th:value="${expenseCategories}"
+                    th:text="${expenseCategories.displayName}"
+            ></option>
+        </select>
+
+        <select th:field="${transaction.incomeCategories}">
+            <option value="0">Select income category</option>
+            <option
+                    th:each="incomeCategories : ${incomeCategories}"
+                    th:value="${incomeCategories}"
+                    th:text="${incomeCategories.displayName}"
             ></option>
         </select>
         <button type="submit" class="btn btn-info col-2"> Save Wallet</button>

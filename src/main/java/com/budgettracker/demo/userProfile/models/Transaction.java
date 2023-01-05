@@ -2,6 +2,7 @@ package com.budgettracker.demo.userProfile.models;
 
 import org.hibernate.annotations.OnDelete;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -27,26 +28,36 @@ public class Transaction {
     @Column(name = "date")
     private Date date;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "category_name", referencedColumnName = "category_name")
-    private Category category;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "wallet_id", nullable = false)
     private Wallet wallet;
 
     @Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "ENUM('EXPENSE', 'INCOME')")
+    @Column(name = "transaction_type", columnDefinition = "ENUM('EXPENSE', 'INCOME')")
     private TransactionType transactionType;
+
+    @Enumerated(EnumType.STRING)
+    @Nullable
+    @Column(name = "expense_categories", columnDefinition = "ENUM('FOOD_AND_DRINK', 'SHOPPING', 'TRANSPORT', 'HOME'," +
+            " 'BILLS_AND_FEES', 'ENTERTAINMENT', 'CAR', 'TRAVEL', 'FAMILY_AND_PERSONAL', 'HEALTHCARE'," +
+            " 'EDUCATION', 'GROCERIES', 'GIFTS', 'BEAUTY', 'WORK', 'SPORTS_AND_HOBBIES', 'OTHER')")
+    private ExpenseCategories expenseCategories;
+
+    @Nullable
+    @Enumerated(EnumType.STRING)
+    @Column(name = "income_categories", columnDefinition = "ENUM('SALARY', 'BUSINESS', 'GIFTS', 'EXTRA_INCOME', 'LOAN', 'PARENTAL_LEAVE', 'INSURANCE_PAYOUT', 'OTHER')")
+    private IncomeCategories incomeCategories;
 
     public Transaction() {
     }
 
-    public Transaction(double amount, String note, Date date, TransactionType transactionType) {
+    public Transaction(double amount, String note, Date date, ExpenseCategories expenseCategories, IncomeCategories incomeCategories) {
         this.amount = amount;
         this.note = note;
         this.date = date;
-        this.transactionType = transactionType;
+        this.expenseCategories = expenseCategories;
+        this.incomeCategories = incomeCategories;
     }
 
     public Long getId() {
@@ -81,13 +92,6 @@ public class Transaction {
         this.date = date;
     }
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
 
     public Wallet getWallet() {
         return wallet;
@@ -103,5 +107,21 @@ public class Transaction {
 
     public void setTransactionType(TransactionType transactionType) {
         this.transactionType = transactionType;
+    }
+
+    public ExpenseCategories getExpenseCategories() {
+        return expenseCategories;
+    }
+
+    public void setExpenseCategories(ExpenseCategories expenseCategories) {
+        this.expenseCategories = expenseCategories;
+    }
+
+    public IncomeCategories getIncomeCategories() {
+        return incomeCategories;
+    }
+
+    public void setIncomeCategories(IncomeCategories incomeCategories) {
+        this.incomeCategories = incomeCategories;
     }
 }
