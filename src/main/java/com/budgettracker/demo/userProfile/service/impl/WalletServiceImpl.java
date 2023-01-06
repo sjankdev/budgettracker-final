@@ -54,10 +54,8 @@ public class WalletServiceImpl implements WalletService {
     public Wallet netWorth(Long userId) {
         Wallet wallet = new Wallet();
         List<Wallet> wallets = walletRepository.findDistinctIdByUserId(userId);
-        double worth = 0;
-        for (int i = 0; i < wallets.size(); i++)
-            worth += wallets.get(i).getInitialBalance();
-        wallet.setTotalBalance(worth);
+        wallet.setTotalBalance(wallets.stream().mapToDouble(Wallet::getInitialBalance).sum());
         return wallet;
     }
 }
+
