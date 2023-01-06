@@ -3,7 +3,6 @@ package com.budgettracker.demo.security.repository;
 import com.budgettracker.demo.security.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
 import java.util.Optional;
 
 @Repository

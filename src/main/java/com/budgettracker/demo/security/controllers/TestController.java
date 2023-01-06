@@ -1,7 +1,6 @@
 package com.budgettracker.demo.security.controllers;
 
 import com.budgettracker.demo.security.token.services.UserDetailsImpl;
-import org.apache.catalina.Session;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
 
@@ -49,7 +47,7 @@ public class TestController {
         long userId = user.getId();
         model.addAttribute("userId", userId);
 
-        return "homepage"; //this is api to be referenced after success login
+        return "homepage";
     }
 
 }

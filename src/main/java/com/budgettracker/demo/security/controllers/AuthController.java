@@ -1,6 +1,5 @@
 package com.budgettracker.demo.security.controllers;
 
-
 import com.budgettracker.demo.security.models.User;
 import com.budgettracker.demo.security.payload.request.LoginRequest;
 import com.budgettracker.demo.security.payload.request.SignupRequest;

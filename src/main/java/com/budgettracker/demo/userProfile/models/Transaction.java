@@ -1,18 +1,14 @@
 package com.budgettracker.demo.userProfile.models;
 
-import org.hibernate.annotations.OnDelete;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.lang.Nullable;
-
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-import static javax.persistence.TemporalType.DATE;
+
 
 @Entity
-@Table(name = "transaction")//course
+@Table(name = "transaction")
 public class Transaction {
 
     @Id

@@ -2,7 +2,6 @@ package com.budgettracker.demo.userProfile.controller;
 
 import com.budgettracker.demo.security.token.services.UserDetailsImpl;
 import com.budgettracker.demo.userProfile.models.*;
-import com.budgettracker.demo.userProfile.repository.WalletRepository;
 import com.budgettracker.demo.userProfile.service.TransactionService;
 import com.budgettracker.demo.userProfile.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +14,6 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/api/transaction")
 public class TransactionController {
-
-    @Autowired
-    WalletRepository walletRepository;
 
     @Autowired
     TransactionService transactionService;
@@ -42,9 +38,9 @@ public class TransactionController {
 
     }
 
-    @PostMapping("/saveTransaction/{walletId}")
-    public String saveTransaction(@PathVariable(value = "walletId") long walletId,
-                                  @ModelAttribute("wallets") Transaction transaction, Model model) {
+    @PostMapping("/saveExpense/{walletId}")
+    public String saveExpense(@PathVariable(value = "walletId") long walletId,
+                              @ModelAttribute("wallets") Transaction transaction, Model model) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
@@ -55,8 +51,26 @@ public class TransactionController {
         double amount = transaction.getAmount();
 
         transaction.setWallet(wallet);
-        transactionService.saveTransaction(transaction, walletId, userId, amount);
+        transactionService.saveExpense(transaction, walletId, userId, amount);
         return "redirect:/api/wallet/userWallet/balance/" + userId;
     }
+
+    @PostMapping("/saveIncome/{walletId}")
+    public String saveIncome(@PathVariable(value = "walletId") long walletId,
+                             @ModelAttribute("wallets") Transaction transaction, Model model) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
+        long userId = user.getId();
+
+        Wallet wallet = walletService.getWalletById(walletId);
+
+        double amount = transaction.getAmount();
+
+        transaction.setWallet(wallet);
+        transactionService.saveIncome(transaction, walletId, userId, amount);
+        return "redirect:/api/wallet/userWallet/balance/" + userId;
+    }
+
 
 }
