@@ -48,10 +48,9 @@ public class TransactionController {
 
         Wallet wallet = walletService.getWalletById(walletId);
 
-        double amount = transaction.getAmount();
 
         transaction.setWallet(wallet);
-        transactionService.saveExpense(transaction, walletId, userId, amount);
+        transactionService.saveExpense(transaction, walletId, userId);
         return "redirect:/api/wallet/userWallet/balance/" + userId;
     }
 
@@ -65,10 +64,8 @@ public class TransactionController {
 
         Wallet wallet = walletService.getWalletById(walletId);
 
-        double amount = transaction.getAmount();
-
         transaction.setWallet(wallet);
-        transactionService.saveIncome(transaction, walletId, userId, amount);
+        transactionService.saveIncome(transaction, walletId, userId);
         return "redirect:/api/wallet/userWallet/balance/" + userId;
     }
 

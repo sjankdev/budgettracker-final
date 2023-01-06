@@ -24,8 +24,10 @@ public class TransactionServiceImpl implements TransactionService {
     WalletService walletService;
 
     @Override
-    public void saveExpense(Transaction transaction, Long walletId, Long userId, double amount) {
+    public void saveExpense(Transaction transaction, Long walletId, Long userId) {
         Wallet wallet = walletService.getWalletById(walletId);
+
+        double amount = transaction.getAmount();
 
         wallet.setInitialBalance(wallet.getInitialBalance() - amount);
         transaction.setTransactionType(TransactionType.EXPENSE);
@@ -34,8 +36,10 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public void saveIncome(Transaction transaction, Long walletId, Long userId, double amount) {
+    public void saveIncome(Transaction transaction, Long walletId, Long userId) {
         Wallet wallet = walletService.getWalletById(walletId);
+
+        double amount = transaction.getAmount();
 
         wallet.setInitialBalance(wallet.getInitialBalance() + amount);
         transaction.setTransactionType(TransactionType.INCOME);
