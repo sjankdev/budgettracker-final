@@ -20,6 +20,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
@@ -69,7 +70,7 @@ public class AuthController {
 
     @PostMapping("/signup")
     @Transactional
-    public ResponseEntity<?> signup(@Valid @ModelAttribute("signup") SignupRequest signupRequest, Model model) throws Exception {
+    public ResponseEntity<?> signup(@Valid @ModelAttribute("signup") SignupRequest signupRequest, BindingResult result, Model model) throws Exception {
 
         if (userRepository.existsByUsername(signupRequest.getUsername())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
@@ -77,6 +78,16 @@ public class AuthController {
 
         if (userRepository.existsByEmail(signupRequest.getEmail())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
+        }
+
+        System.out.println(signupRequest);
+        boolean thereAreErrors = result.hasErrors();
+        if (thereAreErrors) {
+            model.addAttribute("user", signupRequest);
+            return ResponseEntity
+                    .status(HttpStatus.FOUND)
+                    .location(URI.create("/api/auth/loginAndRegisterForm"))
+                    .build();
         }
 
         User user = new User(signupRequest.getUsername(),

@@ -24,8 +24,11 @@
 
     <form action="#" id="Expense" class="hidden" th:action="@{/api/transaction/saveExpense/{walletId} (walletId=${id})}"
           th:object="${transaction}" method="POST">
-        <input type="text" th:field="*{amount}" placeholder="Enter amount" class="form-control mb-4 col-4">
-
+        <label for="amount" class="col-form-label">Amount</label> <input
+            type="text" th:field="*{amount}" class="form-control"
+            id="amount" placeholder="amount"> <span
+            th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"
+            class="text-danger"></span>
         <input type="text" th:field="*{note}" placeholder="Enter note" class="form-control mb-4 col-4">
         <input type="date" th:field="*{date}" class="form-control mb-4 col-4">
 
@@ -39,17 +42,19 @@
         </select>
 
         <button type="submit" class="btn btn-info col-2"> Save Wallet</button>
+
     </form>
 
     <form action="#" id="Income" class="hidden" th:action="@{/api/transaction/saveIncome/{walletId} (walletId=${id})}"
           th:object="${transaction}" method="POST">
 
-
-        <input type="text" th:field="*{amount}" placeholder="Enter amount" class="form-control mb-4 col-4">
-
+        <label for="amountIncome" class="col-form-label">Amount</label> <input
+            type="text" th:field="*{amount}" class="form-control"
+            id="amountIncome" placeholder="amount"> <span
+            th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"
+            class="text-danger"></span>
         <input type="text" th:field="*{note}" placeholder="Enter note" class="form-control mb-4 col-4">
         <input type="date" th:field="*{date}" class="form-control mb-4 col-4">
-
 
         <select th:field="${transaction.incomeCategories}">
             <option value="0">Select income category</option>

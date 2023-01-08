@@ -2,9 +2,10 @@ package com.budgettracker.demo.userProfile.models;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.lang.Nullable;
-import javax.persistence.*;
-import java.util.Date;
 
+import javax.persistence.*;
+import javax.validation.constraints.Min;
+import java.util.Date;
 
 
 @Entity
@@ -16,6 +17,7 @@ public class Transaction {
     @Column(name = "transaction_id")
     private Long id;
 
+    @Min(value = 0, message = "Please, insert a positive amount")
     private double amount;
 
     private String note;
