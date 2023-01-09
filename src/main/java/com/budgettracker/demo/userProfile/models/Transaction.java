@@ -5,6 +5,7 @@ import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 
@@ -17,6 +18,7 @@ public class Transaction {
     @Column(name = "transaction_id")
     private Long id;
 
+    @NotNull
     @Min(value = 0, message = "Please, insert a positive amount")
     private double amount;
 

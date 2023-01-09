@@ -55,8 +55,7 @@ public class TransactionController {
     }
 
     @PostMapping("/saveExpense/{walletId}")
-    public String saveExpense(@PathVariable(value = "walletId") long walletId,
-                              @Valid Transaction transaction, BindingResult result) {
+    public String saveExpense(@PathVariable(value = "walletId") long walletId, @Valid Transaction transaction, BindingResult result, Model model) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
@@ -66,6 +65,7 @@ public class TransactionController {
 
         boolean thereAreErrors = result.hasErrors();
         if (thereAreErrors) {
+            model.addAttribute("expenseCategories", ExpenseCategories.values());
             return "expense_transaction";
         }
 
@@ -73,12 +73,10 @@ public class TransactionController {
         transactionService.saveExpense(transaction, walletId, userId);
         return "redirect:/api/wallet/userWallet/balance/" + userId;
 
-
     }
 
     @PostMapping("/saveIncome/{walletId}")
-    public String saveIncome(@PathVariable(value = "walletId") long walletId,
-                             @Valid Transaction transaction, BindingResult result) {
+    public String saveIncome(@PathVariable(value = "walletId") long walletId, @Valid Transaction transaction, BindingResult result, Model model) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
@@ -88,6 +86,7 @@ public class TransactionController {
 
         boolean thereAreErrors = result.hasErrors();
         if (thereAreErrors) {
+            model.addAttribute("incomeCategories", IncomeCategories.values());
             return "income_transaction";
         }
 

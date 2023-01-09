@@ -17,27 +17,56 @@
 
 <body>
 
-<form action="#" id="Expense" class="hidden" th:action="@{/api/transaction/saveExpense/{walletId} (walletId=${id})}"
-      th:object="${transaction}" method="POST">
-    <label for="amount" class="col-form-label">Amount</label> <input
-        type="text" th:field="*{amount}" class="form-control"
-        id="amount" placeholder="amount"> <span
-        th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"
-        class="text-danger"></span>
-    <input type="text" th:field="*{note}" placeholder="Enter note" class="form-control mb-4 col-4">
-    <input type="date" th:field="*{date}" class="form-control mb-4 col-4">
+<div class="container my-5">
+    <h3>Expense transaction</h3>
+    <div class="card">
+        <div class="card-body">
+            <div class="col-md-8">
+                <form action="#"
+                      th:action="@{/api/transaction/saveExpense/{walletId} (walletId=${id})}"
+                      th:object="${transaction}" method="post">
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="amount" class="col-form-label">Amount</label> <input
+                                type="text" th:field="*{amount}" class="form-control" id="amount"
+                                placeholder="amount"> <span
+                                th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"
+                                class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="note" class="col-form-label">Note</label> <input
+                                type="text" th:field="*{note}" class="form-control" id="note"
+                                placeholder="note"> <span
+                                th:if="${#fields.hasErrors('note')}" th:errors="*{note}"
+                                class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="date" class="col-form-label">Date</label> <input
+                                type="date" th:field="*{date}" class="form-control"
+                                id="date" placeholder="date"> <span
+                                th:if="${#fields.hasErrors('date')}" th:errors="date"
+                                class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <select th:field="${transaction.expenseCategories}">
+                                <option value="0">Select expense category</option>
+                                <option
+                                        th:each="expenseCategories : ${expenseCategories}"
+                                        th:value="${expenseCategories}"
+                                        th:text="${expenseCategories.displayName}"
+                                ></option>
+                            </select>
+                        </div>
 
-    <select th:field="${transaction.expenseCategories}">
-        <option value="0">Select expense category</option>
-        <option
-                th:each="expenseCategories : ${expenseCategories}"
-                th:value="${expenseCategories}"
-                th:text="${expenseCategories.displayName}"
-        ></option>
-    </select>
-
-    <button type="submit" class="btn btn-info col-2"> Save Wallet</button>
-
-</form>
+                        <div class="form-group col-md-8">
+                            <input type="submit" class="btn btn-primary"
+                                   value="Create transaction">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
