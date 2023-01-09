@@ -24,9 +24,8 @@ public class TransactionController {
     @Autowired
     WalletService walletService;
 
-
-    @GetMapping("/showNewTransactionForm/{id}")
-    public String showNewTransactionForm(@PathVariable(value = "id") long id, Transaction transaction, Model model) {
+    @GetMapping("/incomeTransaction/{id}")
+    public String incomeTransaction(@PathVariable(value = "id") long id, Transaction transaction, Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
         long userId = user.getId();
@@ -34,11 +33,24 @@ public class TransactionController {
 
 
         model.addAttribute("transaction", transaction);
-        model.addAttribute("transactionType", TransactionType.values());
-        model.addAttribute("expenseCategories", ExpenseCategories.values());
         model.addAttribute("incomeCategories", IncomeCategories.values());
 
-        return "new_transaction";
+        return "income_transaction";
+
+    }
+
+    @GetMapping("/expenseTransaction/{id}")
+    public String expenseTransaction(@PathVariable(value = "id") long id, Transaction transaction, Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
+        long userId = user.getId();
+        model.addAttribute("userId", userId);
+
+
+        model.addAttribute("transaction", transaction);
+        model.addAttribute("expenseCategories", ExpenseCategories.values());
+
+        return "expense_transaction";
 
     }
 
@@ -54,7 +66,7 @@ public class TransactionController {
 
         boolean thereAreErrors = result.hasErrors();
         if (thereAreErrors) {
-            return "new_transaction";
+            return "expense_transaction";
         }
 
         transaction.setWallet(wallet);
@@ -76,7 +88,7 @@ public class TransactionController {
 
         boolean thereAreErrors = result.hasErrors();
         if (thereAreErrors) {
-            return "new_transaction";
+            return "income_transaction";
         }
 
         transaction.setWallet(wallet);
