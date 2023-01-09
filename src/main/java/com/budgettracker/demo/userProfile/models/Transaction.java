@@ -5,6 +5,7 @@ import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -18,7 +19,6 @@ public class Transaction {
     @Column(name = "transaction_id")
     private Long id;
 
-    @NotNull
     @Min(value = 0, message = "Please, insert a positive amount")
     private double amount;
 
@@ -38,13 +38,13 @@ public class Transaction {
     private TransactionType transactionType;
 
     @Enumerated(EnumType.STRING)
-    @Nullable
+    @NotNull(message = "Choose")
     @Column(name = "expense_categories", columnDefinition = "ENUM('FOOD_AND_DRINK', 'SHOPPING', 'TRANSPORT', 'HOME'," +
             " 'BILLS_AND_FEES', 'ENTERTAINMENT', 'CAR', 'TRAVEL', 'FAMILY_AND_PERSONAL', 'HEALTHCARE'," +
             " 'EDUCATION', 'GROCERIES', 'GIFTS', 'BEAUTY', 'WORK', 'SPORTS_AND_HOBBIES', 'OTHER')")
     private ExpenseCategories expenseCategories;
 
-    @Nullable
+    @NotNull(message = "Choose")
     @Enumerated(EnumType.STRING)
     @Column(name = "income_categories", columnDefinition = "ENUM('SALARY', 'BUSINESS', 'GIFTS', 'EXTRA_INCOME', 'LOAN', 'PARENTAL_LEAVE', 'INSURANCE_PAYOUT', 'OTHER')")
     private IncomeCategories incomeCategories;

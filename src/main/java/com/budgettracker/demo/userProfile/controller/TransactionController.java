@@ -24,8 +24,8 @@ public class TransactionController {
     @Autowired
     WalletService walletService;
 
-    @GetMapping("/incomeTransaction/{id}")
-    public String incomeTransaction(@PathVariable(value = "id") long id, Transaction transaction, Model model) {
+    @GetMapping("/incomeTransaction/{walletId}")
+    public String incomeTransaction(@PathVariable(value = "walletId") long walletId, Transaction transaction, Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
         long userId = user.getId();
@@ -39,8 +39,8 @@ public class TransactionController {
 
     }
 
-    @GetMapping("/expenseTransaction/{id}")
-    public String expenseTransaction(@PathVariable(value = "id") long id, Transaction transaction, Model model) {
+    @GetMapping("/expenseTransaction/{walletId}")
+    public String expenseTransaction(@PathVariable(value = "walletId") long walletId, Transaction transaction, Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
         long userId = user.getId();
