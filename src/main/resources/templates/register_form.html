@@ -16,7 +16,7 @@
                 method="post"
                 role="form"
                 th:action="@{/api/auth/signup}"
-                th:object="${user}">
+                th:object="${signup}">
 
             <label for="chk" aria-hidden="true">Sign up</label>
             <input
@@ -50,8 +50,8 @@
                     th:field="*{lastName}"
                     type="text"/>
 
-            <p th:errors="*{firstName}" class="text-danger"
-               th:if="${#fields.hasErrors('firstName')}"></p>
+            <p th:errors="*{lastName}" class="text-danger"
+               th:if="${#fields.hasErrors('lastName')}"></p>
 
             <input
                     class="form-control"
@@ -79,40 +79,6 @@
         </form>
     </div>
 
-    <div class="login">
-        <form
-                method="post"
-                role="form"
-                th:action="@{/api/auth/login}"
-                th:object="${login}">
-
-            <label for="chk" aria-hidden="true">Login</label>
-
-            <input
-                    class="form-control"
-                    id="usernameLogin"
-                    name="username"
-                    placeholder="Enter username"
-                    th:field="*{username}"
-                    type="text"/>
-
-            <p th:errors="*{username}" class="text-danger"
-               th:if="${#fields.hasErrors('username')}"></p>
-
-            <input
-                    class="form-control"
-                    id="passwordLogin"
-                    name="password"
-                    placeholder="Enter password"
-                    th:field="*{password}"
-                    type="password"/>
-
-            <p th:errors="*{password}" class="text-danger"
-               th:if="${#fields.hasErrors('password')}"></p>
-
-            <button>Login</button>
-        </form>
-    </div>
 </div>
 </body>
 </html>

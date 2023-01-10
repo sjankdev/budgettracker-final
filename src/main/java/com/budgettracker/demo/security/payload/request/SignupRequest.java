@@ -4,15 +4,15 @@ import javax.validation.constraints.*;
 import java.util.Set;
 
 public class SignupRequest {
-    @NotEmpty
+    @NotBlank
     @Size(min = 3, max = 20)
     private String username;
 
-    @NotEmpty(message = "Please, insert a first name")
+    @NotBlank/*(message = "Please, insert a first name")*/
     private String firstName;
 
 
-    @NotEmpty(message = "Please, insert a last name")
+    @NotBlank/*(message = "Please, insert a first name")*/
     private String lastName;
 
     @NotEmpty
@@ -20,7 +20,7 @@ public class SignupRequest {
     @Email
     private String email;
 
-    @NotEmpty
+    @NotBlank(message = "Please, insert a password")
     @Size(min = 6, max = 40)
     private String password;
 

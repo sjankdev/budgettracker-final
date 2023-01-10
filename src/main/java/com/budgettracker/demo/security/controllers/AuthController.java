@@ -48,81 +48,76 @@ public class AuthController {
 
     @PostMapping("/login")
     @Transactional
-    public ResponseEntity<?> login(@Valid @ModelAttribute("login") LoginRequest loginRequest, Model model) {
-        Authentication authentication = authenticationManager.
-                authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+    public String login(@Valid @ModelAttribute("login") LoginRequest loginRequest, BindingResult result, Model model) {
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
 
         ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(user);
 
-        String url = "/api/test/homePage";
+        long userId = user.getId();
+
+
+        boolean thereAreErrors = result.hasErrors();
+        if (thereAreErrors) {
+            model.addAttribute("login", loginRequest);
+            return "login_form";
+        }
 
         model.addAttribute("login", loginRequest);
 
-        return ResponseEntity
-                .status(HttpStatus.FOUND)
-                .location(URI.create(url))
-                .header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
-                .build();
+        ResponseEntity.status(HttpStatus.FOUND).header(HttpHeaders.SET_COOKIE, jwtCookie.toString()).build();
+
+        return "redirect:/api/wallet/userWallet/balance/" + userId;
+
 
     }
 
     @PostMapping("/signup")
     @Transactional
-    public ResponseEntity<?> signup(@Valid @ModelAttribute("signup") SignupRequest signupRequest, BindingResult result, Model model) throws Exception {
+    public String signup(@Valid @ModelAttribute("signup") SignupRequest signupRequest, BindingResult result, Model model) throws Exception {
 
-        if (userRepository.existsByUsername(signupRequest.getUsername())) {
+      /*  if (userRepository.existsByUsername(signupRequest.getUsername())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
         }
 
         if (userRepository.existsByEmail(signupRequest.getEmail())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
-        }
+        }*/
 
-        System.out.println(signupRequest);
         boolean thereAreErrors = result.hasErrors();
         if (thereAreErrors) {
-            model.addAttribute("user", signupRequest);
-            return ResponseEntity
-                    .status(HttpStatus.FOUND)
-                    .location(URI.create("/api/auth/loginAndRegisterForm"))
-                    .build();
+            model.addAttribute("signup", signupRequest);
+            return "register_form";
         }
 
-        User user = new User(signupRequest.getUsername(),
-                signupRequest.getFirstName(),
-                signupRequest.getLastName(),
-                signupRequest.getEmail(),
-                encoder.encode(signupRequest.getPassword()));
+        User user = new User(signupRequest.getUsername(), signupRequest.getFirstName(), signupRequest.getLastName(), signupRequest.getEmail(), encoder.encode(signupRequest.getPassword()));
 
         model.addAttribute("signup", signupRequest);
         userRepository.save(user);
 
-        return ResponseEntity
-                .status(HttpStatus.FOUND)
-                .location(URI.create("/api/auth/loginAndRegisterForm"))
-                .build();
+        return "redirect:/api/auth/loginForm";
+
     }
 
     @PostMapping("/signout")
     public ResponseEntity<?> logoutUser() {
         ResponseCookie cookie = jwtUtils.getCleanJwtCookie();
-        return ResponseEntity
-                .status(HttpStatus.FOUND)
-                .location(URI.create("/api/auth/loginAndRegisterForm"))
-                .header(HttpHeaders.SET_COOKIE, cookie.toString())
-                .build();
+        return ResponseEntity.status(HttpStatus.FOUND).location(URI.create("/api/auth/loginAndRegisterForm")).header(HttpHeaders.SET_COOKIE, cookie.toString()).build();
     }
 
-    @GetMapping("/loginAndRegisterForm")
-    public String showLoginForm(Model model) {
-        // create model object to store form data
-        LoginRequest loginRequest = new LoginRequest();
+    @GetMapping("/registerForm")
+    public String registerForm(Model model) {
         SignupRequest signupRequest = new SignupRequest();
+        model.addAttribute("signup", signupRequest);
+        return "register_form";
+    }
+
+    @GetMapping("/loginForm")
+    public String loginForm(Model model) {
+        LoginRequest loginRequest = new LoginRequest();
         model.addAttribute("login", loginRequest);
-        model.addAttribute("user", signupRequest);
-        return "login_and_registration";
+        return "login_form";
     }
 
 }
