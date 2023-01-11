@@ -1,13 +1,7 @@
 package com.budgettracker.demo.userProfile.controller;
 
-import com.budgettracker.demo.security.token.jwt.CurrentUserUtility;
 import com.budgettracker.demo.security.token.services.UserDetailsImpl;
-import com.budgettracker.demo.userProfile.models.Category;
-import com.budgettracker.demo.userProfile.models.Transaction;
-import com.budgettracker.demo.userProfile.models.Wallet;
-import com.budgettracker.demo.userProfile.repository.CategoryRepository;
-import com.budgettracker.demo.userProfile.repository.WalletRepository;
-import com.budgettracker.demo.userProfile.service.CategoryService;
+import com.budgettracker.demo.userProfile.models.*;
 import com.budgettracker.demo.userProfile.service.TransactionService;
 import com.budgettracker.demo.userProfile.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,17 +9,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/api/transaction")
 public class TransactionController {
-
-    @Autowired
-    WalletRepository walletRepository;
 
     @Autowired
     TransactionService transactionService;
@@ -33,28 +24,38 @@ public class TransactionController {
     @Autowired
     WalletService walletService;
 
-    @Autowired
-    CategoryService categoryService;
-
-
-    @GetMapping("/showNewTransactionForm/{id}")
-    public String showNewTransactionForm(@PathVariable(value = "id") long id, Transaction transaction, Model model) {
+    @GetMapping("/incomeTransaction/{walletId}")
+    public String incomeTransaction(@PathVariable(value = "walletId") long walletId, Transaction transaction, Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
         long userId = user.getId();
         model.addAttribute("userId", userId);
 
-        model.addAttribute("transaction", transaction);
-        List<Category> categories = categoryService.getAllCategories();
-        model.addAttribute("categories", categories);
 
-        return "new_transaction";
+        model.addAttribute("transaction", transaction);
+        model.addAttribute("incomeCategories", IncomeCategories.values());
+
+        return "income_transaction";
 
     }
 
-    @PostMapping("/saveTransaction/{walletId}")
-    public String saveTransaction(@PathVariable(value = "walletId") long walletId,
-                                  @ModelAttribute("wallets") Transaction transaction, Model model) {
+    @GetMapping("/expenseTransaction/{walletId}")
+    public String expenseTransaction(@PathVariable(value = "walletId") long walletId, Transaction transaction, Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
+        long userId = user.getId();
+        model.addAttribute("userId", userId);
+
+
+        model.addAttribute("transaction", transaction);
+        model.addAttribute("expenseCategories", ExpenseCategories.values());
+
+        return "expense_transaction";
+
+    }
+
+    @PostMapping("/saveExpense/{walletId}")
+    public String saveExpense(@PathVariable(value = "walletId") long walletId, @Valid Transaction transaction, BindingResult result, Model model) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
@@ -62,11 +63,37 @@ public class TransactionController {
 
         Wallet wallet = walletService.getWalletById(walletId);
 
-        double amount = transaction.getAmount();
+        boolean thereAreErrors = result.hasErrors();
+        if (thereAreErrors) {
+            model.addAttribute("expenseCategories", ExpenseCategories.values());
+            return "expense_transaction";
+        }
 
         transaction.setWallet(wallet);
-        transactionService.saveTransaction(transaction, walletId, userId, amount);
+        transactionService.saveExpense(transaction, walletId, userId);
+        return "redirect:/api/wallet/userWallet/balance/" + userId;
+
+    }
+
+    @PostMapping("/saveIncome/{walletId}")
+    public String saveIncome(@PathVariable(value = "walletId") long walletId, @Valid Transaction transaction, BindingResult result, Model model) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
+        long userId = user.getId();
+
+        Wallet wallet = walletService.getWalletById(walletId);
+
+        boolean thereAreErrors = result.hasErrors();
+        if (thereAreErrors) {
+            model.addAttribute("incomeCategories", IncomeCategories.values());
+            return "income_transaction";
+        }
+
+        transaction.setWallet(wallet);
+        transactionService.saveIncome(transaction, walletId, userId);
         return "redirect:/api/wallet/userWallet/balance/" + userId;
     }
+
 
 }

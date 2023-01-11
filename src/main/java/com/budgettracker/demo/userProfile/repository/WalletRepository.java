@@ -11,7 +11,6 @@ public interface WalletRepository extends JpaRepository<Wallet, Long> {
 
     long existsByUserIdAndWalletName(Long userId, Wallet wallet);
 
-
     List<Wallet> findDistinctIdByUserId(Long userId);
 
 

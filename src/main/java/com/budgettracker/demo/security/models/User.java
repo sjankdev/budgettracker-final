@@ -17,22 +17,19 @@ public class User {
     @Column(name = "user_id")
     private Long id;
 
-    @NotEmpty
-    @Size(min = 3, max = 20)
+    @Size(min = 3, max = 20, message = "Asdf")
     private String username;
 
-    @NotEmpty(message = "Please, insert a first name")
+    @NotBlank(message = "asdf")
     private String firstName;
 
-    @NotEmpty(message = "Please, insert a last name")
+    @NotBlank
     private String lastName;
 
-    @NotEmpty
     @Size(max = 50)
     @Email
     private String email;
 
-    @NotEmpty
     @Size(min = 6)
     private String password;
 

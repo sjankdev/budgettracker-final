@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
-
 import java.util.List;
 
 @Service
@@ -19,9 +17,6 @@ public class WalletServiceImpl implements WalletService {
 
     @Autowired
     WalletRepository walletRepository;
-/*
-    @Autowired
-    Wallet wallet;*/
 
     @Override
     public List<Wallet> findDistinctIdByUserId(Long userId) {

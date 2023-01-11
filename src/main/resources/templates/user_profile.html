@@ -40,7 +40,8 @@
                                 <th>Balance</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
-                                <th>New Transaction</th>
+                                <th>Income Transaction</th>
+                                <th>Expense Transaction</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -51,14 +52,16 @@
                                        class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
                                 <td><a th:href="@{/api/wallet/delete/{id}(id=${wallet.id})}" class="btn btn-primary"><i
                                         class="fas fa-user-times ml-2"></i></a></td>
-                                <td><a th:href="@{/api/transaction/showNewTransactionForm/{id}(id=${wallet.id})}" class="btn btn-primary"><i
+                                <td><a th:href="@{/api/transaction/incomeTransaction/{id}(id=${wallet.id})}"
+                                       class="btn btn-primary"><i
+                                        class="fas fa-user-times ml-2"></i></a></td>
+                                <td><a th:href="@{/api/transaction/expenseTransaction/{id}(id=${wallet.id})}"
+                                       class="btn btn-primary"><i
                                         class="fas fa-user-times ml-2"></i></a></td>
                             </tr>
                             </tbody>
                         </table>
-
                     </div>
-
                 </div>
             </div>
         </div>

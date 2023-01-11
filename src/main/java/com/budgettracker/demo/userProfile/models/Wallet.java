@@ -4,10 +4,8 @@ import com.budgettracker.demo.security.models.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -25,8 +23,6 @@ public class Wallet {
 
     @Transient
     private double totalBalance;
-
-
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "user_id", insertable = false, updatable = false)

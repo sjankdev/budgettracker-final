@@ -1,16 +1,17 @@
 package com.budgettracker.demo.userProfile.models;
 
-import org.hibernate.annotations.OnDelete;
 import org.springframework.format.annotation.DateTimeFormat;
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import org.springframework.lang.Nullable;
 
-import static javax.persistence.TemporalType.DATE;
+import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import java.util.Date;
+
 
 @Entity
-@Table(name = "transaction")//course
+@Table(name = "transaction")
 public class Transaction {
 
     @Id
@@ -18,6 +19,7 @@ public class Transaction {
     @Column(name = "transaction_id")
     private Long id;
 
+    @Min(value = 0, message = "Please, insert a positive amount")
     private double amount;
 
     private String note;
@@ -26,25 +28,37 @@ public class Transaction {
     @Column(name = "date")
     private Date date;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "category_name", referencedColumnName = "category_name")
-    private Category category;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="wallet_id", nullable=false)
+    @JoinColumn(name = "wallet_id", nullable = false)
     private Wallet wallet;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "transaction_type", columnDefinition = "ENUM('EXPENSE', 'INCOME')")
+    private TransactionType transactionType;
+
+    @Enumerated(EnumType.STRING)
+    @NotNull(message = "Choose")
+    @Column(name = "expense_categories", columnDefinition = "ENUM('FOOD_AND_DRINK', 'SHOPPING', 'TRANSPORT', 'HOME'," +
+            " 'BILLS_AND_FEES', 'ENTERTAINMENT', 'CAR', 'TRAVEL', 'FAMILY_AND_PERSONAL', 'HEALTHCARE'," +
+            " 'EDUCATION', 'GROCERIES', 'GIFTS', 'BEAUTY', 'WORK', 'SPORTS_AND_HOBBIES', 'OTHER')")
+    private ExpenseCategories expenseCategories;
+
+    @NotNull(message = "Choose")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "income_categories", columnDefinition = "ENUM('SALARY', 'BUSINESS', 'GIFTS', 'EXTRA_INCOME', 'LOAN', 'PARENTAL_LEAVE', 'INSURANCE_PAYOUT', 'OTHER')")
+    private IncomeCategories incomeCategories;
 
     public Transaction() {
     }
 
-    public Transaction(double amount, String note, Date date, Category category) {
+    public Transaction(double amount, String note, Date date, ExpenseCategories expenseCategories, IncomeCategories incomeCategories) {
         this.amount = amount;
         this.note = note;
         this.date = date;
-        this.category = category;
+        this.expenseCategories = expenseCategories;
+        this.incomeCategories = incomeCategories;
     }
-
 
     public Long getId() {
         return id;
@@ -78,13 +92,6 @@ public class Transaction {
         this.date = date;
     }
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
 
     public Wallet getWallet() {
         return wallet;
@@ -94,5 +101,27 @@ public class Transaction {
         this.wallet = wallet;
     }
 
+    public TransactionType getTransactionType() {
+        return transactionType;
+    }
 
+    public void setTransactionType(TransactionType transactionType) {
+        this.transactionType = transactionType;
+    }
+
+    public ExpenseCategories getExpenseCategories() {
+        return expenseCategories;
+    }
+
+    public void setExpenseCategories(ExpenseCategories expenseCategories) {
+        this.expenseCategories = expenseCategories;
+    }
+
+    public IncomeCategories getIncomeCategories() {
+        return incomeCategories;
+    }
+
+    public void setIncomeCategories(IncomeCategories incomeCategories) {
+        this.incomeCategories = incomeCategories;
+    }
 }
