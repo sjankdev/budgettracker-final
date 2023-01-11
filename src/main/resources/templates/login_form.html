@@ -10,8 +10,6 @@
 <body>
 <div class="main">
     <input type="checkbox" id="chk" aria-hidden="true">
-
-
     <div class="login">
         <form
                 method="post"
@@ -44,6 +42,14 @@
                th:if="${#fields.hasErrors('password')}"></p>
 
             <button>Login</button>
+        </form>
+    </div>
+    <div>
+        <form
+                method="GET"
+                role="form"
+                th:action="@{/api/auth/registerForm}">
+            <button id="registerButton">Register</button>
         </form>
     </div>
 </div>
