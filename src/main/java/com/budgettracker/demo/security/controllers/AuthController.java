@@ -23,6 +23,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
@@ -48,15 +49,12 @@ public class AuthController {
 
     @PostMapping("/login")
     @Transactional
-    public String login(@Valid @ModelAttribute("login") LoginRequest loginRequest, BindingResult result, Model model) {
+    public String login(@Valid @ModelAttribute("login") LoginRequest loginRequest, BindingResult result, HttpServletResponse response, Model model) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
 
         ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(user);
-
-        long userId = user.getId();
-
 
         boolean thereAreErrors = result.hasErrors();
         if (thereAreErrors) {
@@ -66,24 +64,15 @@ public class AuthController {
 
         model.addAttribute("login", loginRequest);
 
-        ResponseEntity.status(HttpStatus.FOUND).header(HttpHeaders.SET_COOKIE, jwtCookie.toString()).build();
+        response.addHeader(HttpHeaders.SET_COOKIE, jwtCookie.toString());
 
-        return "redirect:/api/wallet/userWallet/balance/" + userId;
-
+        return "redirect:/api/test/homePage";
 
     }
 
     @PostMapping("/signup")
     @Transactional
     public String signup(@Valid @ModelAttribute("signup") SignupRequest signupRequest, BindingResult result, Model model) throws Exception {
-
-      /*  if (userRepository.existsByUsername(signupRequest.getUsername())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
-        }
-
-        if (userRepository.existsByEmail(signupRequest.getEmail())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
-        }*/
 
         boolean thereAreErrors = result.hasErrors();
         if (thereAreErrors) {
@@ -101,9 +90,11 @@ public class AuthController {
     }
 
     @PostMapping("/signout")
-    public ResponseEntity<?> logoutUser() {
-        ResponseCookie cookie = jwtUtils.getCleanJwtCookie();
-        return ResponseEntity.status(HttpStatus.FOUND).location(URI.create("/api/auth/loginAndRegisterForm")).header(HttpHeaders.SET_COOKIE, cookie.toString()).build();
+    public String logoutUser(HttpServletResponse response) {
+        ResponseCookie jwtCookie = jwtUtils.getCleanJwtCookie();
+        response.addHeader(HttpHeaders.SET_COOKIE, jwtCookie.toString());
+
+        return "redirect:/api/auth/loginForm";
     }
 
     @GetMapping("/registerForm")
