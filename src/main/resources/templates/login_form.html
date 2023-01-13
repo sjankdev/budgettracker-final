@@ -4,14 +4,12 @@
 
 <head>
     <title>Spring Security Tutorial</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/loginAndRegistration.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}"/>
 </head>
 
 <body>
 <div class="main">
     <input type="checkbox" id="chk" aria-hidden="true">
-
-
     <div class="login">
         <form
                 method="post"
@@ -45,7 +43,16 @@
 
             <button>Login</button>
         </form>
+        <div>
+            <form
+                    method="GET"
+                    role="form"
+                    th:action="@{/api/auth/registerForm}">
+                <button id="registerButton">Register</button>
+            </form>
+        </div>
     </div>
+
 </div>
 </body>
 </html>

@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import java.util.Date;
 
 
@@ -37,14 +38,14 @@ public class Transaction {
     @Column(name = "transaction_type", columnDefinition = "ENUM('EXPENSE', 'INCOME')")
     private TransactionType transactionType;
 
+    @Nullable
     @Enumerated(EnumType.STRING)
-    @NotNull(message = "Choose")
     @Column(name = "expense_categories", columnDefinition = "ENUM('FOOD_AND_DRINK', 'SHOPPING', 'TRANSPORT', 'HOME'," +
             " 'BILLS_AND_FEES', 'ENTERTAINMENT', 'CAR', 'TRAVEL', 'FAMILY_AND_PERSONAL', 'HEALTHCARE'," +
             " 'EDUCATION', 'GROCERIES', 'GIFTS', 'BEAUTY', 'WORK', 'SPORTS_AND_HOBBIES', 'OTHER')")
     private ExpenseCategories expenseCategories;
 
-    @NotNull(message = "Choose")
+    @Nullable
     @Enumerated(EnumType.STRING)
     @Column(name = "income_categories", columnDefinition = "ENUM('SALARY', 'BUSINESS', 'GIFTS', 'EXTRA_INCOME', 'LOAN', 'PARENTAL_LEAVE', 'INSURANCE_PAYOUT', 'OTHER')")
     private IncomeCategories incomeCategories;
