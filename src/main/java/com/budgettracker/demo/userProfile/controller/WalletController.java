@@ -10,7 +10,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 
 @Controller
@@ -39,11 +42,17 @@ public class WalletController {
     }
 
     @PostMapping("/saveWallet")
-    public String saveWallet(@ModelAttribute("wallet") Wallet wallet) {
+    public String saveWallet(@Valid @ModelAttribute("wallet") Wallet wallet, BindingResult result, Model model) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
         long userId = user.getId();
+
+        if (result.hasErrors()) {
+            model.addAttribute("userId", userId);
+            return "new_wallet";
+        }
+
 
         wallet.setUserId(CurrentUserUtility.getCurrentUser().getId());
         walletService.saveWallet(wallet);

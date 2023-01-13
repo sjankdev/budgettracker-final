@@ -4,8 +4,13 @@ import com.budgettracker.demo.security.models.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.validator.constraints.Range;
+
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
@@ -16,9 +21,10 @@ public class Wallet {
     @Column(name = "wallet_id")
     private Long id;
 
-    @NotEmpty(message = "Please, insert a wallet name")
+    @NotBlank(message = "Please, insert a wallet name")
     private String walletName;
 
+    @Min(value = 0, message = "Initial balance must be positive")
     private double initialBalance;
 
     @Transient
