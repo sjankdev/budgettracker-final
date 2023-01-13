@@ -27,6 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.Optional;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @Controller
@@ -50,21 +51,29 @@ public class AuthController {
     @PostMapping("/login")
     @Transactional
     public String login(@Valid @ModelAttribute("login") LoginRequest loginRequest, BindingResult result, HttpServletResponse response, Model model) {
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
 
-        ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(user);
+        Optional<User> admin = userRepository.findByUsername(loginRequest.getUsername());
 
-        boolean thereAreErrors = result.hasErrors();
-        if (thereAreErrors) {
-            model.addAttribute("login", loginRequest);
+        if (admin.isEmpty()) {
+            admin = Optional.of(new User());
+            result.rejectValue("username", "error.adminUserModel", "Username doesn't exist.");
+        }
+        if (!encoder.matches(loginRequest.getPassword(), admin.get().getPassword())) {
+            result.rejectValue("password", "error.adminUserModel", "Wrong password, try again.");
+        }
+
+        if (result.hasErrors()) {
             return "login_form";
+        } else {
+            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
+            ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(user);
+            response.addHeader(HttpHeaders.SET_COOKIE, jwtCookie.toString());
         }
 
         model.addAttribute("login", loginRequest);
 
-        response.addHeader(HttpHeaders.SET_COOKIE, jwtCookie.toString());
 
         return "redirect:/api/test/homePage";
 
