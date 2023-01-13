@@ -75,7 +75,7 @@ button{
     background: #573b8a;
     font-size: 1em;
     font-weight: bold;
-    margin-top: -159px;
+    margin-top: 11x;
     outline: none;
     border: none;
     border-radius: 5px;
@@ -87,7 +87,6 @@ button:hover{
 }
 .login{
     height: 460px;
-    background: #eee;
     border-radius: 60% / 10%;
     transform: translateY(-180px);
     transition: .8s ease-in-out;

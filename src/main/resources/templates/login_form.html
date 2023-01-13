@@ -4,7 +4,7 @@
 
 <head>
     <title>Spring Security Tutorial</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/loginAndRegistration.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}"/>
 </head>
 
 <body>
@@ -43,15 +43,16 @@
 
             <button>Login</button>
         </form>
+        <div>
+            <form
+                    method="GET"
+                    role="form"
+                    th:action="@{/api/auth/registerForm}">
+                <button id="registerButton">Register</button>
+            </form>
+        </div>
     </div>
-    <div>
-        <form
-                method="GET"
-                role="form"
-                th:action="@{/api/auth/registerForm}">
-            <button id="registerButton">Register</button>
-        </form>
-    </div>
+
 </div>
 </body>
 </html>

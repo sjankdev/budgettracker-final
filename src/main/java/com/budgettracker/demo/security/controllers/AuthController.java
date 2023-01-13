@@ -54,6 +54,13 @@ public class AuthController {
 
         Optional<User> admin = userRepository.findByUsername(loginRequest.getUsername());
 
+
+        boolean thereAreErrors = result.hasErrors();
+        if (thereAreErrors) {
+            model.addAttribute("login", loginRequest);
+            return "login_form";
+        }
+
         if (admin.isEmpty()) {
             admin = Optional.of(new User());
             result.rejectValue("username", "error.adminUserModel", "Username doesn't exist.");
@@ -89,6 +96,19 @@ public class AuthController {
             return "register_form";
         }
 
+        Optional<User> userUsername = userRepository.findByUsername(signupRequest.getUsername());
+        Boolean userEmail = userRepository.existsByEmail(signupRequest.getEmail());
+
+        if (userUsername.isPresent()) {
+            userUsername = Optional.of(new User());
+            result.rejectValue("username", "error.adminUserModel", "Username already exist.");
+        }
+        if (userEmail) {
+            result.rejectValue("email", "error.adminUserModel", "Email already exist.");
+        }
+        if (result.hasErrors()) {
+            return "register_form";
+        }
         User user = new User(signupRequest.getUsername(), signupRequest.getFirstName(), signupRequest.getLastName(), signupRequest.getEmail(), encoder.encode(signupRequest.getPassword()));
 
         model.addAttribute("signup", signupRequest);
