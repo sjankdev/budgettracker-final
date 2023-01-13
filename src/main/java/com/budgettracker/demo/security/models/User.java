@@ -17,10 +17,10 @@ public class User {
     @Column(name = "user_id")
     private Long id;
 
-    @Size(min = 3, max = 20, message = "Asdf")
+    @Size(min = 3, max = 20)
     private String username;
 
-    @NotBlank(message = "asdf")
+    @NotBlank
     private String firstName;
 
     @NotBlank

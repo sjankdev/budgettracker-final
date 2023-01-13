@@ -54,13 +54,6 @@ public class AuthController {
 
         Optional<User> admin = userRepository.findByUsername(loginRequest.getUsername());
 
-
-        boolean thereAreErrors = result.hasErrors();
-        if (thereAreErrors) {
-            model.addAttribute("login", loginRequest);
-            return "login_form";
-        }
-
         if (admin.isEmpty()) {
             admin = Optional.of(new User());
             result.rejectValue("username", "error.adminUserModel", "Username doesn't exist.");

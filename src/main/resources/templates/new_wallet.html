@@ -12,9 +12,9 @@
     <h2>Save Employee</h2>
 
     <form action="#" th:action="@{/api/wallet/saveWallet}" th:object="${wallet}" method="POST">
-        <input type="text" th:field="*{walletName}" placeholder="Wallet name" class="form-control mb-4 col-4">
+        <input type="text" th:field="*{walletName}" required placeholder="Wallet name" class="form-control mb-4 col-4">
 
-        <input type="text" th:field="*{initialBalance}" placeholder="Enter balance" class="form-control mb-4 col-4">
+        <input type="text" th:field="*{initialBalance}" required placeholder="Enter balance" class="form-control mb-4 col-4">
 
 
         <button type="submit" class="btn btn-info col-2"> Save Wallet</button>

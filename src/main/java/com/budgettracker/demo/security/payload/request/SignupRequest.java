@@ -4,23 +4,23 @@ import javax.validation.constraints.*;
 import java.util.Set;
 
 public class SignupRequest {
-    @NotBlank(message = "Please, insert a username")
+    @NotBlank
     @Size(min = 3, max = 20, message = "Username must have at least 3 characters but no more than 20")
     private String username;
 
-    @NotBlank(message = "Please, insert a first name")
+    @NotBlank
     private String firstName;
 
 
-    @NotBlank(message = "Please, insert a last name")
+    @NotBlank
     private String lastName;
 
-    @NotBlank(message = "Please, insert a email")
+    @NotBlank
     @Size(max = 50)
     @Email
     private String email;
 
-    @NotBlank(message = "Please, insert a password")
+    @NotBlank
     @Size(min = 6, max = 40, message = "Password must have at least 6 characters but no more than 40")
     private String password;
 

@@ -3,10 +3,10 @@ package com.budgettracker.demo.security.payload.request;
 import javax.validation.constraints.NotBlank;
 
 public class LoginRequest {
-	@NotBlank(message = "Please, insert a username")
+	@NotBlank
 	private String username;
 
-	@NotBlank(message = "Please, insert a password")
+	@NotBlank
 	private String password;
 
 	public String getUsername() {
