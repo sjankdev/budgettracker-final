@@ -19,12 +19,18 @@
 
 <body>
 
+    <div id="inside-wallets">
+        <a th:href="@{/api/transaction/expenseTransaction/{walletId}(walletId=${walletId})}"
+           class="btn btn-primary"><i
+                class="fas fa-user-times ml-2">Expense </i></a>
+    </div>
+
 <div class="container my-5">
     <h3>Income transaction</h3>
     <div class="card">
         <div class="card-body">
             <div class="col-md-8">
-                <form action="#"
+                <form action="/"
                       th:action="@{/api/transaction/saveIncome/{walletId} (walletId=${walletId})}"
                       th:object="${transaction}" method="post">
                     <div class="row">
@@ -70,6 +76,7 @@
         </div>
     </div>
 </div>
+
 <script type="text/javascript" th:src="@{/js/transaction.js}"></script>
 
 </body>

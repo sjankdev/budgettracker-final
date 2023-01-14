@@ -46,8 +46,10 @@ public class TransactionController {
         long userId = user.getId();
         model.addAttribute("userId", userId);
 
+        Wallet wallet = walletService.getWalletById(walletId);
 
         model.addAttribute("transaction", transaction);
+        model.addAttribute("transaction", wallet);
         model.addAttribute("expenseCategories", ExpenseCategories.values());
 
         return "expense_transaction";
