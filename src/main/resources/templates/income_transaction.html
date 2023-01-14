@@ -19,12 +19,6 @@
 
 <body>
 
-    <div id="inside-wallets">
-        <a th:href="@{/api/transaction/expenseTransaction/{walletId}(walletId=${walletId})}"
-           class="btn btn-primary"><i
-                class="fas fa-user-times ml-2">Expense </i></a>
-    </div>
-
 <div class="container my-5">
     <h3>Income transaction</h3>
     <div class="card">
@@ -69,6 +63,8 @@
                         <div class="form-group col-md-8">
                             <input type="submit" class="btn btn-primary"
                                    value="Create transaction">
+                            <a th:href="@{/api/transaction/expenseTransaction/{walletId}(walletId=${walletId})}"
+                               class="btn btn-primary">Switch to expense transaction</a>
                         </div>
                     </div>
                 </form>

@@ -17,7 +17,6 @@
 
 
 </head>
-
 <body>
 
 <div class="container my-5">
@@ -64,6 +63,8 @@
                         <div class="form-group col-md-8">
                             <input type="submit" class="btn btn-primary"
                                    value="Create transaction">
+                            <a th:href="@{/api/transaction/incomeTransaction/{walletId}(walletId=${walletId})}"
+                               class="btn btn-primary">Switch to income transaction</a>
                         </div>
                     </div>
                 </form>
