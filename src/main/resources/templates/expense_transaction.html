@@ -65,6 +65,8 @@
                                    value="Create transaction">
                             <a th:href="@{/api/transaction/incomeTransaction/{walletId}(walletId=${walletId})}"
                                class="btn btn-primary">Switch to income transaction</a>
+                            <a th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}" class="btn btn-primary">Wallets</a>
+
                         </div>
                     </div>
                 </form>
