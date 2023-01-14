@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" th:href="@{/css/userProfile.css}"/>
+    <script src="http://localhost:35729/livereload.js"></script>
 
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Users</title>
@@ -16,7 +17,6 @@
 
 
 </head>
-
 <body>
 
 <div class="container my-5">
@@ -63,6 +63,10 @@
                         <div class="form-group col-md-8">
                             <input type="submit" class="btn btn-primary"
                                    value="Create transaction">
+                            <a th:href="@{/api/transaction/incomeTransaction/{walletId}(walletId=${walletId})}"
+                               class="btn btn-primary">Switch to income transaction</a>
+                            <a th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}" class="btn btn-primary">Wallets</a>
+
                         </div>
                     </div>
                 </form>

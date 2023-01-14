@@ -4,6 +4,9 @@
 
 <head>
     <title>Spring Security Tutorial</title>
+    <meta name="viewport" content="width=device-width"/>
+    <script src="http://localhost:35729/livereload.js"></script>
+
     <link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}"/>
 </head>
 
@@ -18,14 +21,15 @@
                 th:action="@{/api/auth/signup}"
                 th:object="${signup}">
 
-            <label for="chk" aria-hidden="true">Sign up</label>
+            <label for="chk" aria-hidden="true">Register</label>
             <input
                     class="form-control"
                     id="usernameSignUp"
                     name="username"
                     placeholder="Enter username"
                     th:field="*{username}"
-                    type="text"/>
+                    type="text" required
+            />
 
             <p th:errors="*{username}" class="text-danger"
                th:if="${#fields.hasErrors('username')}"></p>
@@ -36,7 +40,7 @@
                     name="firstName"
                     placeholder="Enter first name"
                     th:field="*{firstName}"
-                    type="text"/>
+                    type="text" required/>
 
             <p th:errors="*{firstName}" class="text-danger"
                th:if="${#fields.hasErrors('firstName')}"></p>
@@ -46,9 +50,9 @@
                     class="form-control"
                     id="lastName"
                     name="lastName"
-                    placeholder="Enter lastName"
+                    placeholder="Enter last name"
                     th:field="*{lastName}"
-                    type="text"/>
+                    type="text" required/>
 
             <p th:errors="*{lastName}" class="text-danger"
                th:if="${#fields.hasErrors('lastName')}"></p>
@@ -59,7 +63,7 @@
                     name="email"
                     placeholder="Enter email"
                     th:field="*{email}"
-                    type="email"/>
+                    type="email" required/>
 
             <p th:errors="*{email}" class="text-danger"
                th:if="${#fields.hasErrors('email')}"></p>
@@ -70,12 +74,12 @@
                     name="password"
                     placeholder="Enter password"
                     th:field="*{password}"
-                    type="password"/>
+                    type="password" required/>
 
             <p th:errors="*{password}" class="text-danger"
                th:if="${#fields.hasErrors('password')}"></p>
 
-            <button>Sign up</button>
+            <button>Register</button>
         </form>
         <div>
             <form
