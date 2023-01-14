@@ -4,6 +4,9 @@
 
 <head>
     <title>Spring Security Tutorial</title>
+    <meta name="viewport" content="width=device-width"/>
+    <script src="http://localhost:35729/livereload.js"></script>
+
     <link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}"/>
 </head>
 
@@ -18,14 +21,15 @@
                 th:action="@{/api/auth/signup}"
                 th:object="${signup}">
 
-            <label for="chk" aria-hidden="true">Sign up</label>
+            <label for="chk" aria-hidden="true">Register</label>
             <input
                     class="form-control"
                     id="usernameSignUp"
                     name="username"
                     placeholder="Enter username"
                     th:field="*{username}"
-                    type="text" required/>
+                    type="text" required
+            />
 
             <p th:errors="*{username}" class="text-danger"
                th:if="${#fields.hasErrors('username')}"></p>
@@ -46,7 +50,7 @@
                     class="form-control"
                     id="lastName"
                     name="lastName"
-                    placeholder="Enter lastName"
+                    placeholder="Enter last name"
                     th:field="*{lastName}"
                     type="text" required/>
 
@@ -75,7 +79,7 @@
             <p th:errors="*{password}" class="text-danger"
                th:if="${#fields.hasErrors('password')}"></p>
 
-            <button>Sign up</button>
+            <button>Register</button>
         </form>
         <div>
             <form

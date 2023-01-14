@@ -1,9 +1,12 @@
 <!DOCTYPE html>
+
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-
+<meta name="viewport" content="width=device-width"/>
 <head>
     <title>Spring Security Tutorial</title>
+    <script src="http://localhost:35729/livereload.js"></script>
+
     <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}"/>
 </head>
 
@@ -41,7 +44,7 @@
             <p th:errors="*{password}" class="text-danger"
                th:if="${#fields.hasErrors('password')}"></p>
 
-            <button>Login</button>
+            <button id="loginButton">Login</button>
         </form>
         <div>
             <form
