@@ -5,48 +5,33 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <meta name="viewport" content="width=device-width"/>
+    <script src="http://localhost:35729/livereload.js"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/newWallet.css}"/>
 
-    <script src="http://localhost:35729/livereload.js"></script>
 
 </head>
 <body>
-<div class="container">
-    <h1>Employee Management System</h1>
-    <hr>
-    <h2>Save Employee</h2>
-
+<div class="form">
     <form action="#" th:action="@{/api/wallet/saveWallet}" th:object="${wallet}" method="POST">
-        <input
-                class="form-control"
-                id="walletName"
-                name="walletName"
-                placeholder="Enter wallet name"
-                th:field="*{walletName}"
-                type="text" required/>
-
-        <p th:errors="*{walletName}" class="text-danger"
-           th:if="${#fields.hasErrors('walletName')}"></p>
-        <input
-                class="form-control"
-                id="initialBalance"
-                name="initialBalance"
-                placeholder="Enter initial balance"
-                th:field="*{initialBalance}"
-                type="text" required/>
-
-        <p th:errors="*{initialBalance}" class="text-danger"
-           th:if="${#fields.hasErrors('initialBalance')}"></p>
-
-
-
-
-        <button type="submit" class="btn btn-info col-2"> Save Wallet</button>
+        <div class="title">Welcome</div>
+        <div class="subtitle">Let's create your wallet!</div>
+        <div class="input-container ic1">
+            <input id="walletName" th:field="*{walletName}" required class="input" type="text" placeholder=" "/>
+            <div class="cut"></div>
+            <label for="walletName" class="placeholder">Wallet name</label>
+            <div class="error-message" th:errors="*{walletName}"
+                 th:if="${#fields.hasErrors('walletName')}"></div>
+        </div>
+        <br>
+        <div class="input-container ic2">
+            <input id="initialBalance" th:field="*{initialBalance}" required class="input" type="text" placeholder=" "/>
+            <div class="cut"></div>
+            <label for="initialBalance" class="placeholder">Initial balance</label>
+            <div class="error-message" th:errors="*{initialBalance}"
+                 th:if="${#fields.hasErrors('initialBalance')}"></div>
+        </div>
+        <button type="text" class="submit">Create</button>
     </form>
-
-    <hr>
-
-    <a th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Wallets</a>
 </div>
 </body>
 </html>
