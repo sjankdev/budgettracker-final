@@ -25,7 +25,7 @@ public class Wallet {
     private String walletName;
 
     @Min(value = 0, message = "Initial balance must be positive")
-    private double initialBalance;
+    private Double initialBalance;
 
     @Transient
     private double totalBalance;
@@ -47,7 +47,7 @@ public class Wallet {
     public Wallet() {
     }
 
-    public Wallet(String walletName, double initialBalance) {
+    public Wallet(String walletName, Double initialBalance) {
         this.walletName = walletName;
         this.initialBalance = initialBalance;
     }
@@ -68,11 +68,11 @@ public class Wallet {
         this.walletName = walletName;
     }
 
-    public double getInitialBalance() {
+    public Double getInitialBalance() {
         return initialBalance;
     }
 
-    public void setInitialBalance(double initialBalance) {
+    public void setInitialBalance(Double initialBalance) {
         this.initialBalance = initialBalance;
     }
 

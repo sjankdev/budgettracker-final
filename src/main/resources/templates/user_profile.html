@@ -15,7 +15,7 @@
 
 <div class="header" th:each="wallets : ${wallets}">
     <h1>Your net worth is <span th:text="${wallets.totalBalance}"></span></h1>
-    <h1><a  style="color: white" th:href="@{/api/wallet/showNewWalletForm}"> New Wallet</a></h1>
+    <h1><a style="color: white" th:href="@{/api/wallet/showNewWalletForm}"> New Wallet</a></h1>
     <h1><a style="color: white" th:href="@{/api/test/homePage}">Homepage</a></h1>
 </div>
 
@@ -24,13 +24,18 @@
     <div th:each="wallet : ${wallet}">
         <h1> Wallet name <span th:text="${wallet.walletName}"></span></h1>
         <h1> Wallet balance <span th:text="${wallet.initialBalance}"></span></h1>
-        <a  class="fa-solid fa-file-pen" style="color: white; font-size:30px; padding:10px;" th:href="@{/api/wallet/showFormForUpdate/{id}(id=${wallet.id})}"></a>
+        <a title="Edit transaction" class="fa-solid fa-file-pen" style="color: white; font-size:30px; padding:10px;"
+           th:href="@{/api/wallet/showFormForUpdate/{id}(id=${wallet.id})}"></a>
 
-        <a  class="fa-solid fa-trash" style="color: white; font-size:30px; padding:10px;" th:href="@{/api/wallet/delete/{id}(id=${wallet.id})}"></a>
+        <a title="Delete wallet" class="fa-solid fa-trash" style="color: white; font-size:30px; padding:10px;"
+           th:href="@{/api/wallet/delete/{id}(id=${wallet.id})}"></a>
 
-        <a class="fa-solid fa-piggy-bank" style="color: white; font-size:30px; padding:10px;" th:href="@{/api/transaction/incomeTransaction/{walletId}(walletId=${wallet.id})}"></a>
+        <a title="Income transaction" class="fa-solid fa-piggy-bank" style="color: white; font-size:30px; padding:10px;"
+           th:href="@{/api/transaction/incomeTransaction/{walletId}(walletId=${wallet.id})}"></a>
 
-        <a class="fa-solid fa-cart-shopping" style="color: white; font-size:30px; padding:10px;" th:href="@{/api/transaction/expenseTransaction/{walletId}(walletId=${wallet.id})}"></a>
+        <a title="Expense transaction" class="fa-solid fa-cart-shopping"
+           style="color: white; font-size:30px; padding:10px;"
+           th:href="@{/api/transaction/expenseTransaction/{walletId}(walletId=${wallet.id})}"></a>
     </div>
 
 </div>
