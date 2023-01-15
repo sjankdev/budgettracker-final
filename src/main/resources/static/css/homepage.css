@@ -1,56 +1,58 @@
-body {
-background-color: #90e0ef;
+body{
+  background-color: #1D1D1D;
+}
+.parent {
+    width:700px;
+    height:200px;
+    text-align:center;
+     display: block;
+      margin-left: auto;
+      margin-right: auto;
+          font-family: 'Roboto';
+
+}
+#kid {
+    width:110%; /* 70% of the parent*/
+    margin:10px auto;
+    color:white;
+    font-size:20px;
+    font-family: 'Roboto';
+
 }
 
-h1{
-text-align: center;
-  color: white;
-}
-#wrap-wallets {
-    /* Your styling. */
- margin: auto;
-   padding: 10px;
-    height: 5%;
-    text-align: center;
-
-    /* Solution part I. */
+.Row {
     display: table;
-    background:#03045e;
-}
+    width: 100%; /*Optional*/
+    table-layout: fixed; /*Optional*/
+    border-spacing: 10px; /*Optional*/
+    margin-top: 55px;
+    overflow-x: hidden;
 
-/* Solution part II. */
-#inside-wallets {
-    color: white;
-    width: 50%;
-    height: 50%;
+}
+.Column {
     display: table-cell;
-    vertical-align: middle;
+    background-color: white; /*Optional*/
+font-family: 'Roboto';
+    font-size:25px;
+    border-radius: 10px;
+
 }
 a {
-    color: white;
-    color: inherit;
-}
-a:link{
-  text-decoration: none!important;
-}
-#wrap-logout {
-    /* Your styling. */
-   position:fixed;
-   right:20px;
-   top:10px;
-    height: 5%;
-    text-align: center;
-
-    /* Solution part I. */
-    display: table;
-    background:#03045e;
+    color: black;
+    text-decoration: none;
 }
 
-/* Solution part II. */
-#inside-logout {
+a:hover {
+    text-decoration:none;
+    cursor:pointer;
+}
+.logout {
+    position: fixed;
+    width:100px;
+    border-radius: 10px;
+    top: 10px;
+    right: 10px;
+    margin: 5px;
+    background-color: white;
     color: white;
-    width: 50%;
-    height: 50%;
-    display: table-cell;
-    vertical-align: middle;
 }
