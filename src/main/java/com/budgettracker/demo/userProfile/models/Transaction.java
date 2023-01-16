@@ -21,7 +21,7 @@ public class Transaction {
     private Long id;
 
     @Min(value = 0, message = "Please, insert a positive amount")
-    private double amount;
+    private Double amount;
 
     private String note;
 
@@ -53,7 +53,7 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(double amount, String note, Date date, ExpenseCategories expenseCategories, IncomeCategories incomeCategories) {
+    public Transaction(Double amount, String note, Date date, ExpenseCategories expenseCategories, IncomeCategories incomeCategories) {
         this.amount = amount;
         this.note = note;
         this.date = date;
@@ -69,11 +69,11 @@ public class Transaction {
         this.id = id;
     }
 
-    public double getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 
