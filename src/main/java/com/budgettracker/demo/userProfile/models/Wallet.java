@@ -7,10 +7,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.Set;
 
 @Entity
@@ -24,6 +21,7 @@ public class Wallet {
     @NotBlank(message = "Please, insert a wallet name")
     private String walletName;
 
+    @NotNull(message = "Please, insert a amount")
     private Double initialBalance;
 
     @Transient
