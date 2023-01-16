@@ -24,7 +24,6 @@ public class Wallet {
     @NotBlank(message = "Please, insert a wallet name")
     private String walletName;
 
-    @Min(value = 0, message = "Initial balance must be positive")
     private Double initialBalance;
 
     @Transient

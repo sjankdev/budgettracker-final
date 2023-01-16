@@ -23,7 +23,7 @@
         <div class="card card-4">
             <div class="card-body">
                 <h2 class="title">Create new income transaction</h2>
-                <form action="/"
+                <form name="saveIncome" action="/"
                       th:action="@{/api/transaction/saveIncome/{walletId} (walletId=${walletId})}"
                       th:object="${transaction}" method="post">
                     <div class="row row-space">
@@ -72,18 +72,31 @@
                         <button class="submit" type="submit">Submit</button>
                     </div>
                 </form>
-                <form action="#" th:action="@{/api/transaction/expenseTransaction/{walletId}(walletId=${walletId})}" th:object="${wallet}"
-                      method="GET">
-                    <button type="submit" class="submit">Switch to expense transaction</button>
-                </form>
-                <form action="#" th:action="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}" th:object="${wallet}"
-                      method="GET">
-                    <button type="submit" class="submit">Cancel</button>
-                </form>
+                <div class="row">
+                    <div class="column"><a href="javascript: document.saveIncome.submit()"
+                                           role="menuitem">Create</a>
+                    </div>
+                    <div class="column"><a href="javascript: document.switchToExpenseTransaction.submit()"
+                                           role="menuitem">Switch to income transaction</a>
+                    </div>
+                    <div class="column"><a href="javascript: document.cancelTransaction.submit()" role="menuitem">Cancel</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<form name="switchToExpenseTransaction" action="#"
+      th:action="@{/api/transaction/expenseTransaction/{walletId}(walletId=${walletId})}"
+      th:object="${wallet}"
+      method="GET">
+</form>
+<form name="cancelTransaction" action="#"
+      th:action="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}" th:object="${wallet}"
+      method="GET">
+</form>
+
 <script type="text/javascript" th:src="@{/js/transaction.js}"></script>
 </body>
 </html>
