@@ -3,7 +3,7 @@
       xmlns:th="http://thymeleaf.org" lang="en">
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/incomeTransaction.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/transaction.css}"/>
     <script src="http://localhost:35729/livereload.js"></script>
 
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -18,6 +18,11 @@
     <div class="wrapper wrapper--w680">
         <div class="card card-4">
             <div class="card-body">
+                <h2 class="title" ><a th:href="@{/api/test/homePage}">Homepage</a></h2>
+                <h2 class="title" ><a th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Wallets</a></h2>
+                <h2 class="title" ><a th:href="@{/api/transaction/expenseTransaction/{walletId}(walletId=${walletId})}"
+                >Switch to expense transaction</a></h2>
+
                 <h2 class="title">Create new income transaction</h2>
                 <form action="/"
                       th:action="@{/api/transaction/saveIncome/{walletId} (walletId=${walletId})}"
