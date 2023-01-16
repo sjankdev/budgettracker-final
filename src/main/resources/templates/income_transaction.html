@@ -22,9 +22,6 @@
     <div class="wrapper wrapper--w680">
         <div class="card card-4">
             <div class="card-body">
-                <h2 class="title" ><a th:href="@{/api/transaction/expenseTransaction/{walletId}(walletId=${walletId})}"
-                >Switch to expense transaction</a></h2>
-
                 <h2 class="title">Create new income transaction</h2>
                 <form action="/"
                       th:action="@{/api/transaction/saveIncome/{walletId} (walletId=${walletId})}"
@@ -72,15 +69,21 @@
                         </div>
                     </div>
                     <div class="p-t-15">
-                        <button class="btn btn--radius-2 btn--blue" type="submit">Submit</button>
+                        <button class="submit" type="submit">Submit</button>
                     </div>
+                </form>
+                <form action="#" th:action="@{/api/transaction/expenseTransaction/{walletId}(walletId=${walletId})}" th:object="${wallet}"
+                      method="GET">
+                    <button type="submit" class="submit">Switch to expense transaction</button>
+                </form>
+                <form action="#" th:action="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}" th:object="${wallet}"
+                      method="GET">
+                    <button type="submit" class="submit">Cancel</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
 <script type="text/javascript" th:src="@{/js/transaction.js}"></script>
-
 </body>
 </html>
