@@ -126,18 +126,6 @@ body {
     justify-content: center;
   }
 }
-.logout {
- position: fixed;
-     width: 77px;
-     border-radius: 10px;
-     top: 10px;
-     right: 10px;
-     margin: 5px;
-     background-color: white;
-     color: white;
-     height: 23px;
-     text-align: center;
-}
 a {
     color: black;
     text-decoration: none;
@@ -146,4 +134,35 @@ a {
 a:hover {
     text-decoration:none;
     cursor:pointer;
+}
+nav {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 2rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.nav-underline {
+    position: absolute;
+    height: 5px;
+    background: #42c682;
+    left: 0;
+    bottom: -7px;
+    scale: 1.05;
+    border-radius: 1px;
+
+    transition: all 0.3s ease-in-out;
+}
+
+nav a.active {
+    color: #fff;
+    transition: all 0.3s ease-in-out;
 }

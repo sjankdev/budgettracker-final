@@ -13,15 +13,15 @@
 </head>
 
 <body>
-
+<nav>
+    <a th:href="@{/api/test/homePage}">Home</a>
+    <a th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Wallets</a>
+    <a href="javascript: document.logoutForm.submit()" role="menuitem">Logout</a>
+</nav>
 <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
     <div class="wrapper wrapper--w680">
         <div class="card card-4">
             <div class="card-body">
-                <h2 class="title" ><a th:href="@{/api/test/homePage}">Homepage</a></h2>
-                <h2 class="title" ><a th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Wallets</a></h2>
-                <h2 class="title" ><a th:href="@{/api/transaction/incomeTransaction/{walletId}(walletId=${walletId})}"
-                >Switch to income transaction</a></h2>
                 <h2 class="title">Create new expense transaction</h2>
                 <form action="/"
                       th:action="@{/api/transaction/saveExpense/{walletId} (walletId=${walletId})}"
@@ -30,7 +30,7 @@
                         <div class="col-2">
                             <div class="input-group">
                                 <label for="amount" class="label">Amount</label>
-                                <input class="input--style-4" type="text" th:field="*{amount}" id="amount" >
+                                <input class="input--style-4" type="text" th:field="*{amount}" id="amount">
                                 <span
                                         th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"
                                         class="text-danger"></span>
@@ -48,7 +48,8 @@
                             <div class="input-group">
                                 <label for="theDate" class="label">Date</label>
                                 <div class="input-group-icon">
-                                    <input class="input--style-4 js-datepicker" type="date" th:field="*{date}"  id="theDate">
+                                    <input class="input--style-4 js-datepicker" type="date" th:field="*{date}"
+                                           id="theDate">
                                     <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
                                 </div>
                             </div>
@@ -69,8 +70,16 @@
                         </div>
                     </div>
                     <div class="p-t-15">
-                        <button class="btn btn--radius-2 btn--blue" type="submit">Submit</button>
+                        <button class="submit" type="submit">Submit</button>
                     </div>
+                </form>
+                <form action="#" th:action="@{/api/transaction/incomeTransaction/{walletId}(walletId=${walletId})}" th:object="${wallet}"
+                      method="GET">
+                    <button type="submit" class="submit">Switch to income transaction</button>
+                </form>
+                <form action="#" th:action="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}" th:object="${wallet}"
+                      method="GET">
+                    <button type="submit" class="submit">Cancel</button>
                 </form>
             </div>
         </div>

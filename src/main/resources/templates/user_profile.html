@@ -13,12 +13,15 @@
 </head>
 <body>
 
+<nav>
+    <a th:href="@{/api/test/homePage}">Home</a>
+    <a href="javascript: document.logoutForm.submit()" role="menuitem">Logout</a>
+</nav>
 
 <div class="main-container">
     <div class="heading">
         <h1>Your net worth is <span th:text="${wallets.totalBalance}"></span></h1>
-        <p class="heading__credits"><a class="heading__link"  th:href="@{/api/wallet/showNewWalletForm}">New Wallet</a></p>
-        <p class="heading__credits"><a class="heading__link"  th:href="@{/api/test/homePage}">Homepage</a></p>
+        <p class="heading__credits"><a class="heading__link"  th:href="@{/api/wallet/showNewWalletForm}">Create New Wallet</a></p>
     </div>
     <div class="cards">
         <div class="card card-1" th:each="wallet : ${wallet}">
@@ -37,9 +40,6 @@
             </p>
         </div>
     </div>
-</div>
-<div class="logout">
-    <a href="javascript: document.logoutForm.submit()" role="menuitem">Logout</a>
 </div>
 
 

@@ -11,14 +11,18 @@
 
 </head>
 <body>
+<nav>
+    <a th:href="@{/api/test/homePage}">Home</a>
+    <a th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Wallets</a>
+    <a href="javascript: document.logoutForm.submit()" role="menuitem">Logout</a>
+</nav>
 
 <div class="form">
     <form action="#" th:action="@{/api/wallet/saveWallet}" th:object="${wallet}" method="POST">
-        <p class="heading__credits"><a class="heading__link"  th:href="@{/api/test/homePage}">Homepage</a></p>
-        <p class="heading__credits"><a class="heading__link"  th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Wallets</a></p>
         <div class="title">Welcome</div>
         <div class="subtitle">
-            Let's create your wallet!</div>
+            Let's create your wallet!
+        </div>
         <div class="input-container ic1">
             <input id="walletName" th:field="*{walletName}" required class="input" type="text" placeholder=" "/>
             <div class="cut"></div>
@@ -34,8 +38,17 @@
             <div class="error-message" th:errors="*{initialBalance}"
                  th:if="${#fields.hasErrors('initialBalance')}"></div>
         </div>
+
         <button type="text" class="submit">Create</button>
+
+
+    </form>
+    <form action="#" th:action="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}" th:object="${wallet}"
+          method="GET">
+        <button type="text" class="submit">Cancel</button>
     </form>
 </div>
+
+
 </body>
 </html>

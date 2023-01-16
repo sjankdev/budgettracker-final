@@ -9,17 +9,17 @@
 
 </head>
 <body>
+<nav>
+    <a th:href="@{/api/test/homePage}">Home</a>
+    <a th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Wallets</a>
+    <a href="javascript: document.logoutForm.submit()" role="menuitem">Logout</a>
+</nav>
 
 <div class="form">
     <form action="#" th:action="@{/api/wallet/saveWallet}" th:object="${wallet}" method="POST">
-
         <input type="hidden" th:field="*{id}"/>
-
         <input type="hidden" th:field="*{user}"/>
 
-
-        <p class="heading__credits"><a class="heading__link"  th:href="@{/api/test/homePage}">Homepage</a></p>
-        <p class="heading__credits"><a class="heading__link"  th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Wallets</a></p>
         <div class="title">Welcome</div>
         <div class="subtitle">
             Let's update your wallet!</div>
@@ -39,6 +39,10 @@
                  th:if="${#fields.hasErrors('initialBalance')}"></div>
         </div>
         <button type="text" class="submit">Create</button>
+    </form>
+    <form action="#" th:action="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}" th:object="${wallet}"
+          method="GET">
+        <button type="text" class="submit">Cancel</button>
     </form>
 </div>
 </body>
