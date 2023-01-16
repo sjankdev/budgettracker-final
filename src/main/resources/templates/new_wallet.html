@@ -11,6 +11,13 @@
 
 </head>
 <body>
+
+<div class="header">
+    <h1><a style="color: white" th:href="@{/api/test/homePage}">Homepage</a></h1>
+    <a id="wallets" th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Wallets</a>
+</div>
+
+
 <div class="form">
     <form action="#" th:action="@{/api/wallet/saveWallet}" th:object="${wallet}" method="POST">
         <div class="title">Welcome</div>

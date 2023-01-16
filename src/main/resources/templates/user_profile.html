@@ -28,7 +28,11 @@
            th:href="@{/api/wallet/showFormForUpdate/{id}(id=${wallet.id})}"></a>
 
         <a title="Delete wallet" class="fa-solid fa-trash" style="color: white; font-size:30px; padding:10px;"
-           th:href="@{/api/wallet/delete/{id}(id=${wallet.id})}"></a>
+           th:href="@{/api/wallet/delete/{id}(id=${wallet.id})}"
+           th:data-confirm-delete="|Are you sure you want to delete ${wallet.walletName} wallet?|"
+           onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false"
+
+        ></a>
 
         <a title="Income transaction" class="fa-solid fa-piggy-bank" style="color: white; font-size:30px; padding:10px;"
            th:href="@{/api/transaction/incomeTransaction/{walletId}(walletId=${wallet.id})}"></a>
