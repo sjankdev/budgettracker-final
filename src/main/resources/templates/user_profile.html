@@ -13,35 +13,30 @@
 </head>
 <body>
 
-<div class="header" th:each="wallets : ${wallets}">
-    <h1>Your net worth is <span th:text="${wallets.totalBalance}"></span></h1>
-    <h1><a style="color: white" th:href="@{/api/wallet/showNewWalletForm}"> New Wallet</a></h1>
-    <h1><a style="color: white" th:href="@{/api/test/homePage}">Homepage</a></h1>
-</div>
 
-
-<div class="container">
-    <div th:each="wallet : ${wallet}">
-        <h1> Wallet name <span th:text="${wallet.walletName}"></span></h1>
-        <h1> Wallet balance <span th:text="${wallet.initialBalance}"></span></h1>
-        <a title="Edit transaction" class="fa-solid fa-file-pen" style="color: white; font-size:30px; padding:10px;"
-           th:href="@{/api/wallet/showFormForUpdate/{id}(id=${wallet.id})}"></a>
-
-        <a title="Delete wallet" class="fa-solid fa-trash" style="color: white; font-size:30px; padding:10px;"
-           th:href="@{/api/wallet/delete/{id}(id=${wallet.id})}"
-           th:data-confirm-delete="|Are you sure you want to delete ${wallet.walletName} wallet?|"
-           onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false"
-
-        ></a>
-
-        <a title="Income transaction" class="fa-solid fa-piggy-bank" style="color: white; font-size:30px; padding:10px;"
-           th:href="@{/api/transaction/incomeTransaction/{walletId}(walletId=${wallet.id})}"></a>
-
-        <a title="Expense transaction" class="fa-solid fa-cart-shopping"
-           style="color: white; font-size:30px; padding:10px;"
-           th:href="@{/api/transaction/expenseTransaction/{walletId}(walletId=${wallet.id})}"></a>
+<div class="main-container">
+    <div class="heading">
+        <h1>Your net worth is <span th:text="${wallets.totalBalance}"></span></h1>
+        <p class="heading__credits"><a class="heading__link"  th:href="@{/api/wallet/showNewWalletForm}">New Wallet</a></p>
+        <p class="heading__credits"><a class="heading__link"  th:href="@{/api/test/homePage}">Homepage</a></p>
     </div>
-
+    <div class="cards">
+        <div class="card card-1" th:each="wallet : ${wallet}">
+            <div class="card__icon"><i class="fa-solid fa-wallet"></i></div>
+            <h2 class="card__title">Wallet name <span th:text="${wallet.walletName}"></span>
+                <br>
+                Wallet balance <span th:text="${wallet.initialBalance}"></span>
+            </h2>
+            <p class="card__apply">
+                <a class="card__link" th:href="@{/api/wallet/delete/{id}(id=${wallet.id})}"
+                   th:data-confirm-delete="|Are you sure you want to delete ${wallet.walletName} wallet?|"
+                   onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false">Delete</a>
+                <a class="card__link" th:href="@{/api/wallet/showFormForUpdate/{id}(id=${wallet.id})}">Update</a>
+                <a class="card__link" th:href="@{/api/transaction/incomeTransaction/{walletId}(walletId=${wallet.id})}">Income</a>
+                <a class="card__link" th:href="@{/api/transaction/expenseTransaction/{walletId}(walletId=${wallet.id})}">Expense</a>
+            </p>
+        </div>
+    </div>
 </div>
 <div class="logout">
     <a href="javascript: document.logoutForm.submit()" role="menuitem">Logout</a>
