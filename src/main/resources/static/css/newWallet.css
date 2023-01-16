@@ -129,3 +129,31 @@ top: -23px;
   line-height: 15px;
   margin: 5px 0 0;
 }
+.heading {
+  text-align: center;
+    color:white;
+
+}
+
+.heading__title {
+  font-weight: 600;
+    color:white;
+
+}
+
+.heading__credits {
+  margin: 10px 0px;
+  color: #888888;
+  font-size: 25px;
+  transition: all 0.5s;
+    color:white;
+
+}
+
+.heading__link {
+  text-decoration: none;
+}
+
+.heading__credits .heading__link {
+  color: inherit;
+}

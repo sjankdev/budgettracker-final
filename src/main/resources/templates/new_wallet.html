@@ -12,16 +12,13 @@
 </head>
 <body>
 
-<div class="header">
-    <h1><a style="color: white" th:href="@{/api/test/homePage}">Homepage</a></h1>
-    <a id="wallets" th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Wallets</a>
-</div>
-
-
 <div class="form">
     <form action="#" th:action="@{/api/wallet/saveWallet}" th:object="${wallet}" method="POST">
+        <p class="heading__credits"><a class="heading__link"  th:href="@{/api/test/homePage}">Homepage</a></p>
+        <p class="heading__credits"><a class="heading__link"  th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Wallets</a></p>
         <div class="title">Welcome</div>
-        <div class="subtitle">Let's create your wallet!</div>
+        <div class="subtitle">
+            Let's create your wallet!</div>
         <div class="input-container ic1">
             <input id="walletName" th:field="*{walletName}" required class="input" type="text" placeholder=" "/>
             <div class="cut"></div>
