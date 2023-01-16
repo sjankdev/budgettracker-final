@@ -4,10 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
+import javax.validation.constraints.*;
 import java.util.Date;
 
 
@@ -20,8 +17,9 @@ public class Transaction {
     @Column(name = "transaction_id")
     private Long id;
 
+    @NotNull(message = "Please, insert a amount")
     @Min(value = 0, message = "Please, insert a positive amount")
-    private double amount;
+    private Double amount;
 
     private String note;
 
@@ -53,7 +51,7 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(double amount, String note, Date date, ExpenseCategories expenseCategories, IncomeCategories incomeCategories) {
+    public Transaction(Double amount, String note, Date date, ExpenseCategories expenseCategories, IncomeCategories incomeCategories) {
         this.amount = amount;
         this.note = note;
         this.date = date;
@@ -69,11 +67,11 @@ public class Transaction {
         this.id = id;
     }
 
-    public double getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 

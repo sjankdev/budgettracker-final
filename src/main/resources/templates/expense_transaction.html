@@ -3,77 +3,97 @@
       xmlns:th="http://thymeleaf.org" lang="en">
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/userProfile.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/transaction.css}"/>
     <script src="http://localhost:35729/livereload.js"></script>
 
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Users</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
-          integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
-    <!-- <link rel="stylesheet" href="../css/shards.min.css"> -->
-
 
 </head>
-<body>
 
-<div class="container my-5">
-    <h3>Expense transaction</h3>
-    <div class="card">
-        <div class="card-body">
-            <div class="col-md-8">
-                <form action="#"
+<body>
+<nav>
+    <a th:href="@{/api/test/homePage}">Home</a>
+    <a th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Wallets</a>
+    <a href="javascript: document.logoutForm.submit()" role="menuitem">Logout</a>
+</nav>
+<div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+    <div class="wrapper wrapper--w680">
+        <div class="card card-4">
+            <div class="card-body">
+                <h2 class="title">Create new expense transaction</h2>
+                <form name="saveExpense" action="/"
                       th:action="@{/api/transaction/saveExpense/{walletId} (walletId=${walletId})}"
                       th:object="${transaction}" method="post">
+                    <div class="row row-space">
+                        <div class="col-2">
+                            <div class="input-group">
+                                <label for="amount" class="label">Amount</label>
+                                <input class="input--style-4" type="text" th:field="*{amount}" id="amount">
+                                <span
+                                        th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"
+                                        class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="input-group">
+                                <label for="note" class="label">Note</label>
+                                <input class="input--style-4" type="text" th:field="*{note}" id="note">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-space">
+                        <div class="col-2">
+                            <div class="input-group">
+                                <label for="theDate" class="label">Date</label>
+                                <div class="input-group-icon">
+                                    <input class="input--style-4 js-datepicker" type="date" th:field="*{date}"
+                                           id="theDate">
+                                    <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label class="label">Category</label>
+                            <div class="rs-select2 js-select-simple select--no-search">
+                                <select th:field="${transaction.expenseCategories}">
+                                    <option value="0">Select expense category</option>
+                                    <option
+                                            th:each="expenseCategories : ${expenseCategories}"
+                                            th:value="${expenseCategories}"
+                                            th:text="${expenseCategories.displayName}"
+                                    ></option>
+                                </select>
+                                <div class="select-dropdown"></div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
-                        <div class="form-group col-md-6">
-                            <label for="amount" class="col-form-label">Amount</label> <input
-                                type="text" th:field="*{amount}" class="form-control" id="amount"
-                                placeholder="amount"> <span
-                                th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"
-                                class="text-danger"></span>
+                        <div class="column"><a href="javascript: document.saveExpense.submit()"
+                                               role="menuitem">Create</a>
                         </div>
-                        <div class="form-group col-md-8">
-                            <label for="note" class="col-form-label">Note</label> <input
-                                type="text" th:field="*{note}" class="form-control" id="note"
-                                placeholder="note"> <span
-                                th:if="${#fields.hasErrors('note')}" th:errors="*{note}"
-                                class="text-danger"></span>
+                        <div class="column"><a href="javascript: document.switchToIncomeTransaction.submit()"
+                                               role="menuitem">Switch to income transaction</a>
                         </div>
-                        <div class="form-group col-md-8">
-                            <label for="theDate" class="col-form-label">Date</label> <input
-                                type="date" th:field="*{date}" class="form-control"
-                                id="theDate" placeholder="date"> <span
-                                th:if="${#fields.hasErrors('date')}" th:errors="date"
-                                class="text-danger"></span>
-                        </div>
-                        <div class="form-group col-md-8">
-                            <select th:field="${transaction.expenseCategories}">
-                                <option value="0">Select expense category</option>
-                                <option
-                                        th:each="expenseCategories : ${expenseCategories}"
-                                        th:value="${expenseCategories}"
-                                        th:text="${expenseCategories.displayName}"
-                                ></option>
-                            </select>
-                        </div>
-
-                        <div class="form-group col-md-8">
-                            <input type="submit" class="btn btn-primary"
-                                   value="Create transaction">
-                            <a th:href="@{/api/transaction/incomeTransaction/{walletId}(walletId=${walletId})}"
-                               class="btn btn-primary">Switch to income transaction</a>
-                            <a th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}" class="btn btn-primary">Wallets</a>
-
+                        <div class="column"><a href="javascript: document.cancelTransaction.submit()" role="menuitem">Cancel</a>
                         </div>
                     </div>
                 </form>
+
             </div>
         </div>
     </div>
 </div>
+<form name="switchToIncomeTransaction" action="#"
+      th:action="@{/api/transaction/incomeTransaction/{walletId}(walletId=${walletId})}"
+      th:object="${wallet}"
+      method="GET">
+</form>
+<form name="cancelTransaction" action="#"
+      th:action="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}" th:object="${wallet}"
+      method="GET">
+</form>
 <script type="text/javascript" th:src="@{/js/transaction.js}"></script>
 
 </body>

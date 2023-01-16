@@ -7,10 +7,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.Set;
 
 @Entity
@@ -24,8 +21,8 @@ public class Wallet {
     @NotBlank(message = "Please, insert a wallet name")
     private String walletName;
 
-    @Min(value = 0, message = "Initial balance must be positive")
-    private double initialBalance;
+    @NotNull(message = "Please, insert a amount")
+    private Double initialBalance;
 
     @Transient
     private double totalBalance;
@@ -47,7 +44,7 @@ public class Wallet {
     public Wallet() {
     }
 
-    public Wallet(String walletName, double initialBalance) {
+    public Wallet(String walletName, Double initialBalance) {
         this.walletName = walletName;
         this.initialBalance = initialBalance;
     }
@@ -68,11 +65,11 @@ public class Wallet {
         this.walletName = walletName;
     }
 
-    public double getInitialBalance() {
+    public Double getInitialBalance() {
         return initialBalance;
     }
 
-    public void setInitialBalance(double initialBalance) {
+    public void setInitialBalance(Double initialBalance) {
         this.initialBalance = initialBalance;
     }
 
