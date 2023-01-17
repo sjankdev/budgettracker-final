@@ -10,11 +10,19 @@
 
 </head>
 <body>
-<nav>
-    <a th:href="@{/api/test/homePage}">Home</a>
-    <a th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Wallets</a>
-    <a href="javascript: document.logoutForm.submit()" role="menuitem">Logout</a>
-</nav>
+<header>
+    <h1 class="logo">Spender</h1>
+    <input type="checkbox" class="nav-toggle" id="nav-toggle">
+    <nav>
+        <ul>
+            <li> <a  th:href="@{/api/test/homePage}">Homepage</a></li>
+            <li> <a  th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Wallets</a></li>
+        </ul>
+    </nav>
+    <label for="nav-toggle" class="nav-toggle-label">
+        <span></span>
+    </label>
+</header>
 
 <div class="form">
     <form action="#" th:action="@{/api/wallet/saveWallet}" th:object="${wallet}" method="POST">
