@@ -13,15 +13,26 @@
 </head>
 <body>
 
-<nav>
-    <a th:href="@{/api/test/homePage}">Home</a>
-    <a href="javascript: document.logoutForm.submit()" role="menuitem">Logout</a>
-</nav>
+<header>
+    <h1 class="logo">Spender</h1>
+    <input type="checkbox" class="nav-toggle" id="nav-toggle">
+    <nav>
+        <ul>
+            <li> <a id="wallets" th:href="@{/api/test/homePage}">Home</a></li>
+            <li> <a th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Transactions</a></li>
+            <li> <a href="javascript: document.logoutForm.submit()" role="menuitem">Logout</a></li>
+        </ul>
+    </nav>
+    <label for="nav-toggle" class="nav-toggle-label">
+        <span></span>
+    </label>
+</header>
 
 <div class="main-container">
     <div class="heading">
         <h1>Your net worth is <span th:text="${wallets.totalBalance}"></span></h1>
-        <p class="heading__credits"><a class="heading__link"  th:href="@{/api/wallet/showNewWalletForm}">Create New Wallet</a></p>
+        <br>
+        <a class="learn-more-btn" th:href="@{/api/wallet/showNewWalletForm}">New wallet</a>
     </div>
     <div class="cards">
         <div class="card card-1" th:each="wallet : ${wallet}">
