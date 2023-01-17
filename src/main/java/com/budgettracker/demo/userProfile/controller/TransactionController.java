@@ -32,6 +32,7 @@ public class TransactionController {
         model.addAttribute("userId", userId);
 
 
+        model.addAttribute("wallet", walletService.getWalletById(walletId));
         model.addAttribute("transaction", transaction);
         model.addAttribute("incomeCategories", IncomeCategories.values());
 
@@ -40,13 +41,13 @@ public class TransactionController {
     }
 
     @GetMapping("/expenseTransaction/{walletId}")
-    public String expenseTransaction(@PathVariable(value = "walletId") long walletId, Transaction transaction, Model model) {
+    public String expenseTransaction(@PathVariable(value = "walletId") long walletId, Transaction transaction, Wallet wallet, Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
         long userId = user.getId();
         model.addAttribute("userId", userId);
 
-
+        model.addAttribute("wallet", walletService.getWalletById(walletId));
         model.addAttribute("transaction", transaction);
         model.addAttribute("expenseCategories", ExpenseCategories.values());
 

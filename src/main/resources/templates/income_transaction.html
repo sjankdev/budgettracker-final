@@ -11,18 +11,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
-
+<header>
+    <h1 class="logo">Spender</h1>
+    <input type="checkbox" class="nav-toggle" id="nav-toggle">
+    <nav>
+        <ul>
+            <li><a th:href="@{/api/test/homePage}">Homepage</a></li>
+            <li><a th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Wallets</a></li>
+        </ul>
+    </nav>
+    <label for="nav-toggle" class="nav-toggle-label">
+        <span></span>
+    </label>
+</header>
 <body>
-<nav>
-    <a th:href="@{/api/test/homePage}">Home</a>
-    <a th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Wallets</a>
-    <a href="javascript: document.logoutForm.submit()" role="menuitem">Logout</a>
-</nav>
 <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
     <div class="wrapper wrapper--w680">
         <div class="card card-4">
             <div class="card-body">
-                <h2 class="title">Create new income transaction</h2>
+                <h2 class="title">New income transaction for wallet <span style="color:red"
+                                                                          th:text="${wallet.walletName}"></span></h2>
+                <h2 class="title">Balance is: <span style="color:red" th:text="${wallet.initialBalance}"></span></h2>
                 <form name="saveIncome" action="/"
                       th:action="@{/api/transaction/saveIncome/{walletId} (walletId=${walletId})}"
                       th:object="${transaction}" method="post">
@@ -30,7 +39,7 @@
                         <div class="col-2">
                             <div class="input-group">
                                 <label for="amount" class="label">Amount</label>
-                                <input class="input--style-4" type="text" th:field="*{amount}" id="amount" >
+                                <input class="input--style-4" type="text" th:field="*{amount}" id="amount">
                                 <span
                                         th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"
                                         class="text-danger"></span>
@@ -48,7 +57,8 @@
                             <div class="input-group">
                                 <label for="theDate" class="label">Date</label>
                                 <div class="input-group-icon">
-                                    <input class="input--style-4 js-datepicker" type="date" th:field="*{date}"  id="theDate">
+                                    <input class="input--style-4 js-datepicker" type="date" th:field="*{date}"
+                                           id="theDate">
                                     <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
                                 </div>
                             </div>
@@ -68,18 +78,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="p-t-15">
-                        <button class="submit" type="submit">Submit</button>
-                    </div>
                 </form>
                 <div class="row">
                     <div class="column"><a href="javascript: document.saveIncome.submit()"
                                            role="menuitem">Create</a>
                     </div>
                     <div class="column"><a href="javascript: document.switchToExpenseTransaction.submit()"
-                                           role="menuitem">Switch to income transaction</a>
+                                           role="menuitem">Switch to expense transaction</a>
                     </div>
-                    <div class="column"><a href="javascript: document.cancelTransaction.submit()" role="menuitem">Cancel</a>
+                    <div class="column"><a href="javascript: document.cancelTransaction.submit()"
+                                           role="menuitem">Cancel</a>
                     </div>
                 </div>
             </div>
