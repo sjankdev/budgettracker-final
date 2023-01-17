@@ -821,3 +821,7 @@ a:hover {
     text-decoration:none;
     cursor:pointer;
 }
+.text-danger{
+color:red;
+}
+
