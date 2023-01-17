@@ -7,15 +7,22 @@ I implemented token-based authentication with Spring Security & JWT. Users have 
 ![image](https://user-images.githubusercontent.com/120321222/212981035-4fe4e137-7bff-46a6-a737-731b90788a28.png)
 ![image](https://user-images.githubusercontent.com/120321222/212980990-6405946a-1f12-4f0b-b07e-6c97ecc9944e.png)
 
-I added validation for all fields during registration and login. 
-
 After the user has successfully logged in, he is forwarded to the home page.
 
 ![image](https://user-images.githubusercontent.com/120321222/212981323-15e63bc0-e67a-4c5a-bd71-90224f9277c9.png)
 
 The home page has a logo, navigation menu, header and two buttons for quick user navigation through the pages.
 
-The user also has a wallets page. On that page, user can see the total balance calculated from all the wallets. He can delete each of the wallets as well as update them, and also has the option to add a new wallet. 
+The user also has a wallets page. 
+
+
+
+![image](https://user-images.githubusercontent.com/120321222/213028649-ccac0a95-5418-4a63-a4d6-63bc71c1305d.png)
+
+On that page, user can see the total balance calculated from all the wallets. He can delete each of the wallets as well as update them, and also has the option to add a new wallet. 
+
+This is form to update wallet:
+
 
 ![image](https://user-images.githubusercontent.com/120321222/212983172-857cd025-b028-41a5-9c2b-de0a111d6339.png)
 
@@ -25,7 +32,7 @@ This is form to update wallet:
 
 The user can also create transactions for each wallet separately, i.e. spending. Each wallet contains an option for income and expense transaction.
 
-Tis is form for income transaction:
+This is form for income transaction:
 
 ![image](https://user-images.githubusercontent.com/120321222/212982661-4968e1c9-cb1a-4778-a198-9c6dc0545b06.png)
 
@@ -36,5 +43,8 @@ Finally, there is a button to confirm the transaction, to switch to the expense 
 
 Here is the form for expense transaction:
 
-
 ![image](https://user-images.githubusercontent.com/120321222/212982987-7c06bed4-1608-49c7-afc8-f8f59e30dd20.png)
+
+After the user makes a transaction, the wallet is updated as well as the user's total balance.
+
+
