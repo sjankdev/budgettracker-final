@@ -11,33 +11,35 @@
 
 </head>
 <body>
-
 <form name="logoutForm" th:action="@{/api/auth/signout}" method="post" th:hidden="true">
     <input hidden type="submit" value="Sign Out"/>
 </form>
+<header>
+    <h1 class="logo">Spender</h1>
+    <input type="checkbox" class="nav-toggle" id="nav-toggle">
+    <nav>
+        <ul>
+            <li> <a id="wallets" th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Wallets</a></li>
+            <li> <a th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Transactions</a></li>
+            <li> <a href="javascript: document.logoutForm.submit()" role="menuitem">Logout</a></li>
+        </ul>
+    </nav>
+    <label for="nav-toggle" class="nav-toggle-label">
+        <span></span>
+    </label>
+</header>
 
 
-<div class="parent">
-    <div id="kid">
-        <h1> Welcome to Spender, <span th:text="${#authentication.getPrincipal().getFirstName()}"></span> <span>👋</span>
-        </h1>
-        <p>Save money effortlessly. Spender is a free budgeting application. Seeing all your financial habits
-            enables
-            you to stick to your goals and be organized in what’s important.</p>
+<section class="section-one">
+    <h2 class="header">Earn. Save. Spend</h2>
+    <p class="section-one-paragraph">Save money effortlessly. Spender is a free budgeting application. Seeing all your financial habits
+        enables
+        you to stick to your goals and be organized in what’s important.</p>
+    <a class="learn-more-btn" th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Wallets</a>
+    <a class="learn-more-btn" th:href="@{/api/wallet/showNewWalletForm}">New wallet</a>
+</section>
 
-        <div class="Row">
-            <div class="Column">
-                <a id="wallets" th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Wallets</a>
-            </div>
-            <div class="Column">
-                <a th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Transactions</a>
-            </div>
-        </div>
-        <div class="logout">
-            <a href="javascript: document.logoutForm.submit()" role="menuitem">Logout</a>
-        </div>
-    </div>
-</div>
+
 
 
 </body>
