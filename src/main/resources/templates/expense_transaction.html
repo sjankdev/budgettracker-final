@@ -16,8 +16,8 @@
     <input type="checkbox" class="nav-toggle" id="nav-toggle">
     <nav>
         <ul>
-            <li> <a  th:href="@{/api/test/homePage}">Homepage</a></li>
-            <li> <a  th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Wallets</a></li>
+            <li><a th:href="@{/api/test/homePage}">Homepage</a></li>
+            <li><a th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Wallets</a></li>
         </ul>
     </nav>
     <label for="nav-toggle" class="nav-toggle-label">
@@ -29,7 +29,8 @@
     <div class="wrapper wrapper--w680">
         <div class="card card-4">
             <div class="card-body">
-                <h2 class="title">Create new expense transaction</h2>
+                <h2 class="title">New expense transaction for wallet <span style="color:red" th:text="${wallet.walletName}"></span></h2>
+                <h2 class="title">Balance is: <span style="color:red" th:text="${wallet.initialBalance}"></span></h2>
                 <form name="saveExpense" action="/"
                       th:action="@{/api/transaction/saveExpense/{walletId} (walletId=${walletId})}"
                       th:object="${transaction}" method="post">

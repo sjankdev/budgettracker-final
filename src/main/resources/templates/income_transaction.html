@@ -29,8 +29,8 @@
     <div class="wrapper wrapper--w680">
         <div class="card card-4">
             <div class="card-body">
-                <h2 class="title">Create new income transaction</h2>
-                <form name="saveIncome" action="/"
+                <h2 class="title">New income transaction for wallet <span style="color:red" th:text="${wallet.walletName}"></span></h2>
+                <h2 class="title">Balance is: <span style="color:red" th:text="${wallet.initialBalance}"></span></h2>                <form name="saveIncome" action="/"
                       th:action="@{/api/transaction/saveIncome/{walletId} (walletId=${walletId})}"
                       th:object="${transaction}" method="post">
                     <div class="row row-space">
