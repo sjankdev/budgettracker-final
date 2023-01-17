@@ -36,6 +36,8 @@ header {
 }
 
 .logo {
+    font-family: Arial;
+
   font-size: 1.25rem;
   margin: 1rem;
   text-transform: uppercase;
@@ -105,6 +107,8 @@ nav li {
 }
 
 nav a {
+    font-family: Arial;
+
   color: white;
   text-decoration: none;
   text-transform: uppercase;
@@ -155,6 +159,8 @@ nav a:hover {
 
 .section-one {
   margin: 11rem 2rem 0;
+    font-family: Arial;
+
 }
 
 .header {
@@ -166,16 +172,20 @@ nav a:hover {
   width: 70%;
   max-width: 500px;
   line-height: 1.5rem;
+    font-family: Arial;
+
 }
 
 
 .learn-more-btn {
   background: white;
-  padding: 10px 20px;
+  padding: 10px 50px;
   border-radius: 50px;
   font-size: .8rem;
   text-decoration: none;
   color: black;
+      font-family: Arial;
+
 }
 
 .learn-more-btn:hover {
