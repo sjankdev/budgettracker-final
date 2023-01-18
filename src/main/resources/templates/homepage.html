@@ -20,7 +20,7 @@
     <nav>
         <ul>
             <li> <a id="wallets" th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Wallets</a></li>
-            <li> <a th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Transactions</a></li>
+            <li> <a th:href="@{/api/transaction/userTransactions/{userId} (userId=${userId})}">Transactions</a></li>
             <li> <a href="javascript: document.logoutForm.submit()" role="menuitem">Logout</a></li>
         </ul>
     </nav>

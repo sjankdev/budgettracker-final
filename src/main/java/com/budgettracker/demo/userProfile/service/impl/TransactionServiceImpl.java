@@ -11,6 +11,8 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 @Component
@@ -47,5 +49,9 @@ public class TransactionServiceImpl implements TransactionService {
         this.transactionRepository.save(transaction);
     }
 
+    @Override
+    public List<Transaction> findDistinctIdByUserId(Long userId) {
+        return transactionRepository.findDistinctIdByUserId(userId);
+    }
 }
 

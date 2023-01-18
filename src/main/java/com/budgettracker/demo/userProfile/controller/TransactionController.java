@@ -5,6 +5,7 @@ import com.budgettracker.demo.userProfile.models.*;
 import com.budgettracker.demo.userProfile.service.TransactionService;
 import com.budgettracker.demo.userProfile.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -71,6 +72,7 @@ public class TransactionController {
         }
 
         transaction.setWallet(wallet);
+        transaction.setUserId(userId);
         transactionService.saveExpense(transaction, walletId, userId);
         return "redirect:/api/wallet/userWallet/balance/" + userId;
 
@@ -92,8 +94,15 @@ public class TransactionController {
         }
 
         transaction.setWallet(wallet);
+        transaction.setUserId(userId);
         transactionService.saveIncome(transaction, walletId, userId);
         return "redirect:/api/wallet/userWallet/balance/" + userId;
+    }
+
+    @GetMapping("/userTransactions/{user_id}")
+    public String getUserTransactions(@PathVariable("user_id") long user_id, Model model) {
+        model.addAttribute("transactions", transactionService.findDistinctIdByUserId(user_id));
+        return "transactions";
     }
 
 

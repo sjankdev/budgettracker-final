@@ -17,6 +17,9 @@ public class Transaction {
     @Column(name = "transaction_id")
     private Long id;
 
+    @Column(name = "user_id", nullable = false)
+    private Long userId;
+
     @NotNull(message = "Please, insert a amount")
     @Min(value = 0, message = "Please, insert a positive amount")
     private Double amount;
@@ -26,7 +29,6 @@ public class Transaction {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "date")
     private Date date;
-
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "wallet_id", nullable = false)
@@ -122,5 +124,13 @@ public class Transaction {
 
     public void setIncomeCategories(IncomeCategories incomeCategories) {
         this.incomeCategories = incomeCategories;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

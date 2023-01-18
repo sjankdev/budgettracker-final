@@ -18,9 +18,9 @@
     <input type="checkbox" class="nav-toggle" id="nav-toggle">
     <nav>
         <ul>
-            <li> <a id="wallets" th:href="@{/api/test/homePage}">Home</a></li>
-            <li> <a th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Transactions</a></li>
-            <li> <a href="javascript: document.logoutForm.submit()" role="menuitem">Logout</a></li>
+            <li> <a th:href="@{/api/test/homePage}">Homepage</a></li>
+            <li> <a th:href="@{/api/transaction/userTransactions/{userId} (userId=${userId})}">Transactions</a</li>
+            <li><a href="javascript: document.logoutForm.submit()" role="menuitem">Logout</a></li>
         </ul>
     </nav>
     <label for="nav-toggle" class="nav-toggle-label">
@@ -47,7 +47,8 @@
                    onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false">Delete</a>
                 <a class="card__link" th:href="@{/api/wallet/showFormForUpdate/{id}(id=${wallet.id})}">Update</a>
                 <a class="card__link" th:href="@{/api/transaction/incomeTransaction/{walletId}(walletId=${wallet.id})}">Income</a>
-                <a class="card__link" th:href="@{/api/transaction/expenseTransaction/{walletId}(walletId=${wallet.id})}">Expense</a>
+                <a class="card__link"
+                   th:href="@{/api/transaction/expenseTransaction/{walletId}(walletId=${wallet.id})}">Expense</a>
             </p>
         </div>
     </div>
