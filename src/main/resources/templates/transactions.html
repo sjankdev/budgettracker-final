@@ -37,15 +37,17 @@
 <br>
 <div>
     <div th:each="transactions : ${transactions}">
-        <h2>Amount:<span th:text="${transactions.amount}"></span></h2>
+        <h2>Amount: <span th:text="${transactions.amount}"></span></h2>
         <br>
-        <h2>Note:<span th:text="${transactions.note}"></span></h2>
+        <h2>Note: <span th:text="${transactions.note}"></span></h2>
         <br>
-        <h2>Date:<span th:text="${transactions.date}"></span></h2>
+        <h2>Date: <span th:text="${transactions.date}"></span></h2>
         <br>
-        <h2>Expense Category:<span th:text="${transactions.expenseCategories}"></span></h2>
+        <h2>Wallet name: <span th:text="${transactions.walletName}"></span></h2>
         <br>
-        <h2>IncomeCategory:<span th:text="${transactions.incomeCategories}"></span></h2>
+        <h2>Expense Category: <span th:text="${transactions.expenseCategories}"></span></h2>
+        <br>
+        <h2>IncomeCategory: <span th:text="${transactions.incomeCategories}"></span></h2>
     </div>
 </div>
 

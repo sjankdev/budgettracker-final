@@ -95,6 +95,7 @@ public class TransactionController {
 
         transaction.setWallet(wallet);
         transaction.setUserId(userId);
+        transaction.setWalletName(wallet.getWalletName());
         transactionService.saveIncome(transaction, walletId, userId);
         return "redirect:/api/wallet/userWallet/balance/" + userId;
     }

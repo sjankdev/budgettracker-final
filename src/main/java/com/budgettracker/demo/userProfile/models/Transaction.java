@@ -5,7 +5,7 @@ import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 
 @Entity
@@ -20,6 +20,9 @@ public class Transaction {
     @Column(name = "user_id", nullable = false)
     private Long userId;
 
+    @Column(name = "wallet_name", nullable = false)
+    private String walletName;
+
     @NotNull(message = "Please, insert a amount")
     @Min(value = 0, message = "Please, insert a positive amount")
     private Double amount;
@@ -28,7 +31,7 @@ public class Transaction {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "date")
-    private Date date;
+    private LocalDate date;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "wallet_id", nullable = false)
@@ -53,7 +56,7 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(Double amount, String note, Date date, ExpenseCategories expenseCategories, IncomeCategories incomeCategories) {
+    public Transaction(Double amount, String note, LocalDate  date, ExpenseCategories expenseCategories, IncomeCategories incomeCategories) {
         this.amount = amount;
         this.note = note;
         this.date = date;
@@ -85,11 +88,11 @@ public class Transaction {
         this.note = note;
     }
 
-    public Date getDate() {
+    public LocalDate  getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate  date) {
         this.date = date;
     }
 
@@ -132,5 +135,13 @@ public class Transaction {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public String getWalletName() {
+        return walletName;
+    }
+
+    public void setWalletName(String walletName) {
+        this.walletName = walletName;
     }
 }
