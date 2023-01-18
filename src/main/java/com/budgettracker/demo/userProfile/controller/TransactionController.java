@@ -101,6 +101,10 @@ public class TransactionController {
 
     @GetMapping("/userTransactions/{user_id}")
     public String getUserTransactions(@PathVariable("user_id") long user_id, Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
+        long userId = user.getId();
+        model.addAttribute("userId", userId);
         model.addAttribute("transactions", transactionService.findDistinctIdByUserId(user_id));
         return "transactions";
     }
