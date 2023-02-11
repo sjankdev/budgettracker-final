@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/userProfile.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/transaction.css}"/>
     <meta name="viewport" content="width=device-width"/>
     <script src="http://localhost:35729/livereload.js"></script>
     <script src="https://kit.fontawesome.com/9ab80cc16b.js" crossorigin="anonymous"></script>
@@ -35,27 +35,23 @@
 <br>
 <br>
 <br>
-<div>
-    <div th:each="transactions : ${transactions}">
-        <h2>Amount: <span th:text="${transactions.amount}"></span></h2>
-        <br>
-        <h2>Note: <span th:text="${transactions.note}"></span></h2>
-        <br>
-        <h2>Date: <span th:text="${transactions.date}"></span></h2>
-        <br>
-        <h2>Wallet name: <span th:text="${transactions.walletName}"></span></h2>
-        <br>
-        <h2>Expense Category: <span th:text="${transactions.expenseCategories}"></span></h2>
-        <br>
-        <h2>IncomeCategory: <span th:text="${transactions.incomeCategories}"></span></h2>
+<div class="date" th:each="singleGroup  : ${transactionGroup}">
+    <h1 th:text="${singleGroup .date}"></h1>
+    <div class="transaction" th:each="singleTrans  : ${singleGroup.transactions}">
+        <h2>Amount: <span th:text="${singleTrans .amount}"></span></h2><br>
+        <h2>Note: <span th:text="${singleTrans .note}"></span></h2><br>
+        <h2>Wallet name: <span th:text="${singleTrans .walletName}"></span></h2><br>
+        <h2>Expense Category: <span th:text="${singleTrans .expenseCategories}"></span></h2><br>
+        <h2>IncomeCategory: <span th:text="${singleTrans .incomeCategories}"></span></h2>
+        <hr>
+        <div>
+        </div>
     </div>
 </div>
-
 
 <form name="logoutForm" th:action="@{/api/auth/signout}" method="post" th:hidden="true">
     <input hidden type="submit" value="Sign Out"/>
 </form>
-
 
 </body>
 

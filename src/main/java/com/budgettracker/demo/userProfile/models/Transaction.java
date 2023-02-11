@@ -144,4 +144,20 @@ public class Transaction {
     public void setWalletName(String walletName) {
         this.walletName = walletName;
     }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", walletName='" + walletName + '\'' +
+                ", amount=" + amount +
+                ", note='" + note + '\'' +
+                ", date=" + date +
+                ", wallet=" + wallet +
+                ", transactionType=" + transactionType +
+                ", expenseCategories=" + expenseCategories +
+                ", incomeCategories=" + incomeCategories +
+                '}';
+    }
 }
