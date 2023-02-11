@@ -36,6 +36,10 @@ public class WalletController {
     @GetMapping("/userWallet/balance/{user_id}")
     @PreAuthorize("#user_id == authentication.principal.id")
     public String getUserWallet(@PathVariable(value = "user_id") Long user_id, Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
+        long userId = user.getId();
+        model.addAttribute("userId", userId);
         model.addAttribute("wallet", walletService.findDistinctIdByUserId(user_id));
         model.addAttribute("wallets", walletService.netWorth(user_id));
         return "user_profile";

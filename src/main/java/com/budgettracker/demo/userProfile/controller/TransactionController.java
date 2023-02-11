@@ -2,9 +2,11 @@ package com.budgettracker.demo.userProfile.controller;
 
 import com.budgettracker.demo.security.token.services.UserDetailsImpl;
 import com.budgettracker.demo.userProfile.models.*;
+import com.budgettracker.demo.userProfile.repository.TransactionRepository;
 import com.budgettracker.demo.userProfile.service.TransactionService;
 import com.budgettracker.demo.userProfile.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/api/transaction")
@@ -23,6 +28,9 @@ public class TransactionController {
 
     @Autowired
     WalletService walletService;
+
+    @Autowired
+    TransactionRepository transactionRepository;
 
     @GetMapping("/incomeTransaction/{walletId}")
     public String incomeTransaction(@PathVariable(value = "walletId") long walletId, Transaction transaction, Model model) {
@@ -71,6 +79,7 @@ public class TransactionController {
         }
 
         transaction.setWallet(wallet);
+        transaction.setUserId(userId);
         transactionService.saveExpense(transaction, walletId, userId);
         return "redirect:/api/wallet/userWallet/balance/" + userId;
 
@@ -92,9 +101,41 @@ public class TransactionController {
         }
 
         transaction.setWallet(wallet);
+        transaction.setUserId(userId);
+        transaction.setWalletName(wallet.getWalletName());
         transactionService.saveIncome(transaction, walletId, userId);
         return "redirect:/api/wallet/userWallet/balance/" + userId;
     }
 
+    @GetMapping("/userTransactions/{user_id}")
+    public String getUserTransactions(@PathVariable("user_id") long user_id, TransactionGroup transactionGroup, Model model) {
+        List<Transaction> transactions = transactionRepository.getTransactionsByUserId(user_id);
+        List<TransactionGroup> transactionByDate = new ArrayList<>();
+        List<Transaction> transOnSingleDate = new ArrayList<>();
+        LocalDate currDate = transactions.get(0).getDate();
 
+        TransactionGroup transGroup = new TransactionGroup();
+
+        for (Transaction t : transactions) {
+            if (!currDate.isEqual(t.getDate())) {
+                transGroup.setDate(currDate);
+                transGroup.setTransactions(transOnSingleDate);
+                transactionByDate.add(transGroup);
+                transGroup = new TransactionGroup();
+                transOnSingleDate = new ArrayList<>();
+            }
+
+            transOnSingleDate.add(t);
+            currDate = t.getDate();
+        }
+        transGroup.setDate(currDate);
+        transGroup.setTransactions(transOnSingleDate);
+
+        transactionByDate.add(transGroup);
+
+        model.addAttribute("transactionGroup", transactionByDate);
+        return "transactions";
+    }
 }
+
+
