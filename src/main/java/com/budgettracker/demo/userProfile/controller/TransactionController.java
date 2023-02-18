@@ -80,6 +80,7 @@ public class TransactionController {
 
         transaction.setWallet(wallet);
         transaction.setUserId(userId);
+        transaction.setWalletName(wallet.getWalletName());
         transactionService.saveExpense(transaction, walletId, userId);
         return "redirect:/api/wallet/userWallet/balance/" + userId;
 
@@ -109,6 +110,11 @@ public class TransactionController {
 
     @GetMapping("/userTransactions/{user_id}")
     public String getUserTransactions(@PathVariable("user_id") long user_id, TransactionGroup transactionGroup, Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
+        long userId = user.getId();
+        model.addAttribute("userId", userId);
+
         List<Transaction> transactions = transactionRepository.getTransactionsByUserId(user_id);
         List<TransactionGroup> transactionByDate = new ArrayList<>();
         List<Transaction> transOnSingleDate = new ArrayList<>();
