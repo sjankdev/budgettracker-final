@@ -1,5 +1,7 @@
 package com.budgettracker.demo.userProfile.models;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.lang.Nullable;
 
@@ -33,7 +35,8 @@ public class Transaction {
     @Column(name = "date")
     private LocalDate date;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     @JoinColumn(name = "wallet_id", nullable = false)
     private Wallet wallet;
 
@@ -52,6 +55,7 @@ public class Transaction {
     @Enumerated(EnumType.STRING)
     @Column(name = "income_categories", columnDefinition = "ENUM('SALARY', 'BUSINESS', 'GIFTS', 'EXTRA_INCOME', 'LOAN', 'PARENTAL_LEAVE', 'INSURANCE_PAYOUT', 'OTHER')")
     private IncomeCategories incomeCategories;
+
 
     public Transaction() {
     }

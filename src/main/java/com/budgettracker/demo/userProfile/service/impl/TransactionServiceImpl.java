@@ -53,5 +53,10 @@ public class TransactionServiceImpl implements TransactionService {
     public List<Transaction> findDistinctIdByUserId(Long userId) {
         return transactionRepository.findDistinctIdByUserId(userId);
     }
+
+    @Override
+    public void deleteTransactionById(Long id) {
+        this.transactionRepository.deleteById(id);
+    }
 }
 

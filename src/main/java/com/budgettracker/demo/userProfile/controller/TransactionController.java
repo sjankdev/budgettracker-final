@@ -118,29 +118,45 @@ public class TransactionController {
         List<Transaction> transactions = transactionRepository.getTransactionsByUserId(user_id);
         List<TransactionGroup> transactionByDate = new ArrayList<>();
         List<Transaction> transOnSingleDate = new ArrayList<>();
-        LocalDate currDate = transactions.get(0).getDate();
+        boolean currDates = transactions.stream().findFirst().isPresent();
 
-        TransactionGroup transGroup = new TransactionGroup();
+        if(currDates){
+            LocalDate currDate = transactions.get(0).getDate();
 
-        for (Transaction t : transactions) {
-            if (!currDate.isEqual(t.getDate())) {
-                transGroup.setDate(currDate);
-                transGroup.setTransactions(transOnSingleDate);
-                transactionByDate.add(transGroup);
-                transGroup = new TransactionGroup();
-                transOnSingleDate = new ArrayList<>();
+            TransactionGroup transGroup = new TransactionGroup();
+
+            for (Transaction t : transactions) {
+                if (!currDate.isEqual(t.getDate())) {
+                    transGroup.setDate(currDate);
+                    transGroup.setTransactions(transOnSingleDate);
+                    transactionByDate.add(transGroup);
+                    transGroup = new TransactionGroup();
+                    transOnSingleDate = new ArrayList<>();
+                }
+
+                transOnSingleDate.add(t);
+                currDate = t.getDate();
             }
+            transGroup.setDate(currDate);
+            transGroup.setTransactions(transOnSingleDate);
 
-            transOnSingleDate.add(t);
-            currDate = t.getDate();
+            transactionByDate.add(transGroup);
+        }else{
+            System.out.println("Empty");
         }
-        transGroup.setDate(currDate);
-        transGroup.setTransactions(transOnSingleDate);
 
-        transactionByDate.add(transGroup);
 
         model.addAttribute("transactionGroup", transactionByDate);
         return "transactions";
+    }
+    @GetMapping("/delete/{id}")
+    public String deleteTransaction(@PathVariable("id") long id, Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
+        long userId = user.getId();
+
+        transactionService.deleteTransactionById(id);
+        return "redirect:/api/wallet/userWallet/balance/" + userId;
     }
 }
 

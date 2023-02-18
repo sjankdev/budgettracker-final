@@ -12,4 +12,6 @@ public interface TransactionService {
     public void saveExpense(Transaction transaction, Long walletId, Long userId);
 
     public void saveIncome(Transaction transaction, Long walletId, Long userId);
+
+    void deleteTransactionById(Long id);
 }
