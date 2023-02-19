@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -58,5 +59,18 @@ public class TransactionServiceImpl implements TransactionService {
     public void deleteTransactionById(Long id) {
         this.transactionRepository.deleteById(id);
     }
+
+    @Override
+    public Transaction getTransactionById(Long id) {
+        Optional<Transaction> optional = transactionRepository.findById(id);
+        Transaction transaction = null;
+        if (optional.isPresent()) {
+            transaction = optional.get();
+        } else {
+            throw new RuntimeException(" Transaction not found for id :: " + id);
+        }
+        return transaction;
+    }
 }
+
 

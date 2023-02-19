@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <meta name="viewport" content="width=device-width"/>
+  <script src="http://localhost:35729/livereload.js"></script>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/updateWallet.css}"/>
+
+</head>
+<body>
+<header>
+  <h1 class="logo">Spender</h1>
+  <input type="checkbox" class="nav-toggle" id="nav-toggle">
+  <nav>
+    <ul>
+      <li> <a  th:href="@{/api/test/homePage}">Homepage</a></li>
+      <li> <a  th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Wallets</a></li>
+    </ul>
+  </nav>
+  <label for="nav-toggle" class="nav-toggle-label">
+    <span></span>
+  </label>
+</header>
+
+<div class="form">
+  <form action="#" th:action="@{/api/wallet/saveWallet}" th:object="${transaction}" method="POST">
+    <input type="hidden" th:field="*{id}"/>
+    <input type="hidden" th:field="*{userId}"/>
+    <input type="hidden" th:field="*{transactionType}"/>
+
+   <div th:if="${transaction.incomeCategories != null}">
+
+    <div class="row row-space">
+      <div class="col-2">
+        <div class="input-group">
+          <label for="amount" class="label">Amount</label>
+          <input class="input--style-4" type="text" th:field="*{amount}" id="amount">
+          <span
+                  th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"
+                  class="text-danger"></span>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="input-group">
+          <label for="note" class="label">Note</label>
+          <input class="input--style-4" type="text" th:field="*{note}" id="note">
+        </div>
+      </div>
+    </div>
+    <div class="row row-space">
+      <div class="col-2">
+        <div class="input-group">
+          <label for="theDate" class="label">Date</label>
+          <div class="input-group-icon">
+            <input class="input--style-4 js-datepicker" type="date" th:field="*{date}"
+                   id="theDate">
+            <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+          </div>
+        </div>
+      </div>
+      <div class="input-group">
+        <label class="label">Category</label>
+        <div class="rs-select2 js-select-simple select--no-search">
+          <select th:field="${transaction.incomeCategories}">
+            <option value="0">Select income category</option>
+            <option
+                    th:each="incomeCategories : ${incomeCategories}"
+                    th:value="${incomeCategories}"
+                    th:text="${incomeCategories.displayName}"
+            ></option>
+          </select>
+          <div class="select-dropdown"></div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div th:unless="${transaction.incomeCategories != null}">
+      <div class="row row-space">
+        <div class="col-2">
+          <div class="input-group">
+            <label for="amount" class="label">Amount</label>
+            <input class="input--style-4" type="text" th:field="*{amount}" id="amount1">
+            <span
+                    th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"
+                    class="text-danger"></span>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="input-group">
+            <label for="note" class="label">Note</label>
+            <input class="input--style-4" type="text" th:field="*{note}" id="note1">
+          </div>
+        </div>
+      </div>
+      <div class="row row-space">
+        <div class="col-2">
+          <div class="input-group">
+            <label for="theDate" class="label">Date</label>
+            <div class="input-group-icon">
+              <input class="input--style-4 js-datepicker" type="date" th:field="*{date}"
+                     id="theDate1">
+              <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+            </div>
+          </div>
+        </div>
+        <div class="input-group">
+          <label class="label">Category</label>
+          <div class="rs-select2 js-select-simple select--no-search">
+            <select th:field="${transaction.expenseCategories}">
+              <option value="0">Select expense category</option>
+              <option
+                      th:each="expenseCategories : ${expenseCategories}"
+                      th:value="${expenseCategories}"
+                      th:text="${expenseCategories.displayName}"
+              ></option>
+            </select>
+            <div class="select-dropdown"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</body>
+</html>

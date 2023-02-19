@@ -158,6 +158,22 @@ public class TransactionController {
         transactionService.deleteTransactionById(id);
         return "redirect:/api/wallet/userWallet/balance/" + userId;
     }
+    @GetMapping("/showFormForUpdate/{id}")
+    public String showFormForUpdate(@PathVariable(value = "id") long id, Model model) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
+        long userId = user.getId();
+        model.addAttribute("userId", userId);
+
+        Transaction transaction = transactionService.getTransactionById(id);
+
+        model.addAttribute("incomeCategories", IncomeCategories.values());
+        model.addAttribute("expenseCategories", ExpenseCategories.values());
+
+        model.addAttribute("transaction", transaction);
+        return "update_transaction";
+    }
 }
 
 
