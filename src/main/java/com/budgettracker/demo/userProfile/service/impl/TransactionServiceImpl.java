@@ -1,5 +1,6 @@
 package com.budgettracker.demo.userProfile.service.impl;
 
+import com.budgettracker.demo.userProfile.models.IncomeCategories;
 import com.budgettracker.demo.userProfile.models.Transaction;
 import com.budgettracker.demo.userProfile.models.TransactionType;
 import com.budgettracker.demo.userProfile.models.Wallet;
@@ -11,6 +12,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,8 +55,15 @@ public class TransactionServiceImpl implements TransactionService {
     public void updateIncome(Transaction transaction, Long transactionId) {
         Transaction existingTransactionInDb = getTransactionById(transactionId);
         double amount = transaction.getAmount();
+        String note = transaction.getNote();
+        LocalDate date = transaction.getDate();
+        String income = String.valueOf(transaction.getIncomeCategories());
         System.out.println(transaction.getAmount());
         existingTransactionInDb.getWallet().setInitialBalance(existingTransactionInDb.getWallet().getInitialBalance() + amount);
+        existingTransactionInDb.setNote(note);
+        existingTransactionInDb.setAmount(amount);
+        existingTransactionInDb.setDate(date);
+        existingTransactionInDb.setIncomeCategories(IncomeCategories.valueOf(income));
         this.transactionRepository.save(existingTransactionInDb);
     }
 
