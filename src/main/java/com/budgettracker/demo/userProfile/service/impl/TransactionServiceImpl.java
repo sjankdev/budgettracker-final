@@ -82,14 +82,12 @@ public class TransactionServiceImpl implements TransactionService {
         String expense = String.valueOf(transaction.getExpenseCategories());
         System.out.println(transaction.getAmount());
 
-
-        if (amount < existingTransactionInDb.getAmount()) {
-            existingTransactionInDb.getWallet().setInitialBalance
-                    (existingTransactionInDb.getWallet().getInitialBalance() + (amount - existingTransactionInDb.getAmount()));
-        } else {
-            existingTransactionInDb.getWallet().setInitialBalance
-                    (existingTransactionInDb.getWallet().getInitialBalance() + (amount - existingTransactionInDb.getAmount()));
-        }
+        System.out.println("Amount is " + amount);
+        System.out.println("Existing amount is " + existingTransactionInDb.getAmount());
+        existingTransactionInDb.getWallet().setInitialBalance
+                (existingTransactionInDb.getWallet().getInitialBalance() - (amount - existingTransactionInDb.getAmount()));
+        System.out.println("New Amount is " + amount);
+        System.out.println("New Existing amount is " + existingTransactionInDb.getAmount());
         existingTransactionInDb.setNote(note);
         existingTransactionInDb.setAmount(amount);
         existingTransactionInDb.setDate(date);
