@@ -1,9 +1,6 @@
 package com.budgettracker.demo.userProfile.service.impl;
 
-import com.budgettracker.demo.userProfile.models.IncomeCategories;
-import com.budgettracker.demo.userProfile.models.Transaction;
-import com.budgettracker.demo.userProfile.models.TransactionType;
-import com.budgettracker.demo.userProfile.models.Wallet;
+import com.budgettracker.demo.userProfile.models.*;
 import com.budgettracker.demo.userProfile.repository.TransactionRepository;
 import com.budgettracker.demo.userProfile.service.TransactionService;
 import com.budgettracker.demo.userProfile.service.WalletService;
@@ -51,6 +48,7 @@ public class TransactionServiceImpl implements TransactionService {
 
         this.transactionRepository.save(transaction);
     }
+
     @Override
     public void updateIncome(Transaction transaction, Long transactionId) {
         Transaction existingTransactionInDb = getTransactionById(transactionId);
@@ -59,11 +57,43 @@ public class TransactionServiceImpl implements TransactionService {
         LocalDate date = transaction.getDate();
         String income = String.valueOf(transaction.getIncomeCategories());
         System.out.println(transaction.getAmount());
-        existingTransactionInDb.getWallet().setInitialBalance(existingTransactionInDb.getWallet().getInitialBalance() + amount);
+
+
+        if (amount < existingTransactionInDb.getAmount()) {
+            existingTransactionInDb.getWallet().setInitialBalance
+                    (existingTransactionInDb.getWallet().getInitialBalance() + (amount - existingTransactionInDb.getAmount()));
+        } else {
+            existingTransactionInDb.getWallet().setInitialBalance
+                    (existingTransactionInDb.getWallet().getInitialBalance() + (amount - existingTransactionInDb.getAmount()));
+        }
         existingTransactionInDb.setNote(note);
         existingTransactionInDb.setAmount(amount);
         existingTransactionInDb.setDate(date);
         existingTransactionInDb.setIncomeCategories(IncomeCategories.valueOf(income));
+        this.transactionRepository.save(existingTransactionInDb);
+    }
+
+    @Override
+    public void updateExpense(Transaction transaction, Long transactionId) {
+        Transaction existingTransactionInDb = getTransactionById(transactionId);
+        double amount = transaction.getAmount();
+        String note = transaction.getNote();
+        LocalDate date = transaction.getDate();
+        String expense = String.valueOf(transaction.getExpenseCategories());
+        System.out.println(transaction.getAmount());
+
+
+        if (amount < existingTransactionInDb.getAmount()) {
+            existingTransactionInDb.getWallet().setInitialBalance
+                    (existingTransactionInDb.getWallet().getInitialBalance() + (amount - existingTransactionInDb.getAmount()));
+        } else {
+            existingTransactionInDb.getWallet().setInitialBalance
+                    (existingTransactionInDb.getWallet().getInitialBalance() + (amount - existingTransactionInDb.getAmount()));
+        }
+        existingTransactionInDb.setNote(note);
+        existingTransactionInDb.setAmount(amount);
+        existingTransactionInDb.setDate(date);
+        existingTransactionInDb.setExpenseCategories(ExpenseCategories.valueOf(expense));
         this.transactionRepository.save(existingTransactionInDb);
     }
 

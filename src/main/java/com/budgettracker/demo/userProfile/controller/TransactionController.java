@@ -193,6 +193,22 @@ public class TransactionController {
         transactionService.updateIncome(transaction, transactionId);
         return "redirect:/api/wallet/userWallet/balance/" + userId;
     }
+    @PostMapping("/updateExpense/{transactionId}")
+    public String updateExpense(@PathVariable(value = "transactionId") long transactionId, @Valid Transaction transaction, BindingResult result, Model model) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
+        long userId = user.getId();
+
+        boolean thereAreErrors = result.hasErrors();
+        if (thereAreErrors) {
+            model.addAttribute("expenseCategories", ExpenseCategories.values());
+            return "income_transaction";
+        }
+
+        transactionService.updateExpense(transaction, transactionId);
+        return "redirect:/api/wallet/userWallet/balance/" + userId;
+    }
 }
 
 

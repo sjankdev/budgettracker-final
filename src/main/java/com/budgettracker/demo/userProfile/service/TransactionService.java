@@ -15,6 +15,8 @@ public interface TransactionService {
 
     public void updateIncome(Transaction transaction, Long transactionId);
 
+    public void updateExpense(Transaction transaction, Long transactionId);
+
     void deleteTransactionById(Long id);
 
     Transaction getTransactionById(Long id);
