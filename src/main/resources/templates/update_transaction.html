@@ -25,10 +25,7 @@
 </header>
 
 <div class="form">
-  <form action="#" th:action="@{/api/wallet/saveWallet}" th:object="${transaction}" method="POST">
-    <input type="hidden" th:field="*{id}"/>
-    <input type="hidden" th:field="*{userId}"/>
-    <input type="hidden" th:field="*{transactionType}"/>
+  <form action="#" th:action="@{/api/transaction/updateIncome/{transactionId} (transactionId=${transactionId})}" th:object="${transaction}" method="POST">
 
    <div th:if="${transaction.incomeCategories != null}">
 
@@ -121,7 +118,11 @@
         </div>
       </div>
     </div>
+    <button type="text" class="submit">Create</button>
   </form>
-</div>
+  <form action="#" th:action="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}" th:object="${wallet}"
+        method="GET">
+    <button type="text" class="submit">Cancel</button>
+  </form></div>
 </body>
 </html>

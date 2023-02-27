@@ -25,10 +25,12 @@ public class Transaction {
     @Column(name = "wallet_name", nullable = false)
     private String walletName;
 
+    @Column
     @NotNull(message = "Please, insert a amount")
     @Min(value = 0, message = "Please, insert a positive amount")
     private Double amount;
 
+    @Column
     private String note;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")

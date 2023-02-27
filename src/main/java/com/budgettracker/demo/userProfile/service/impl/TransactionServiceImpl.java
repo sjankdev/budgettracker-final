@@ -49,6 +49,14 @@ public class TransactionServiceImpl implements TransactionService {
 
         this.transactionRepository.save(transaction);
     }
+    @Override
+    public void updateIncome(Transaction transaction, Long transactionId) {
+        Transaction existingTransactionInDb = getTransactionById(transactionId);
+        double amount = transaction.getAmount();
+        System.out.println(transaction.getAmount());
+        existingTransactionInDb.getWallet().setInitialBalance(existingTransactionInDb.getWallet().getInitialBalance() + amount);
+        this.transactionRepository.save(existingTransactionInDb);
+    }
 
     @Override
     public List<Transaction> findDistinctIdByUserId(Long userId) {
