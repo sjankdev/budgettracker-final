@@ -118,29 +118,96 @@ public class TransactionController {
         List<Transaction> transactions = transactionRepository.getTransactionsByUserId(user_id);
         List<TransactionGroup> transactionByDate = new ArrayList<>();
         List<Transaction> transOnSingleDate = new ArrayList<>();
-        LocalDate currDate = transactions.get(0).getDate();
+        boolean currDates = transactions.stream().findFirst().isPresent();
 
-        TransactionGroup transGroup = new TransactionGroup();
+        if (currDates) {
+            LocalDate currDate = transactions.get(0).getDate();
 
-        for (Transaction t : transactions) {
-            if (!currDate.isEqual(t.getDate())) {
-                transGroup.setDate(currDate);
-                transGroup.setTransactions(transOnSingleDate);
-                transactionByDate.add(transGroup);
-                transGroup = new TransactionGroup();
-                transOnSingleDate = new ArrayList<>();
+            TransactionGroup transGroup = new TransactionGroup();
+
+            for (Transaction t : transactions) {
+                if (!currDate.isEqual(t.getDate())) {
+                    transGroup.setDate(currDate);
+                    transGroup.setTransactions(transOnSingleDate);
+                    transactionByDate.add(transGroup);
+                    transGroup = new TransactionGroup();
+                    transOnSingleDate = new ArrayList<>();
+                }
+
+                transOnSingleDate.add(t);
+                currDate = t.getDate();
             }
+            transGroup.setDate(currDate);
+            transGroup.setTransactions(transOnSingleDate);
 
-            transOnSingleDate.add(t);
-            currDate = t.getDate();
+            transactionByDate.add(transGroup);
+        } else {
+            System.out.println("Empty");
         }
-        transGroup.setDate(currDate);
-        transGroup.setTransactions(transOnSingleDate);
 
-        transactionByDate.add(transGroup);
 
         model.addAttribute("transactionGroup", transactionByDate);
         return "transactions";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteTransaction(@PathVariable("id") long id, Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
+        long userId = user.getId();
+
+        transactionService.deleteTransactionById(id);
+        return "redirect:/api/wallet/userWallet/balance/" + userId;
+    }
+
+    @GetMapping("/showFormForUpdate/{transactionId}")
+    public String showFormForUpdate(@PathVariable(value = "transactionId") long transactionId, Model model) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
+        long userId = user.getId();
+        model.addAttribute("userId", userId);
+
+        Transaction transaction = transactionService.getTransactionById(transactionId);
+
+        model.addAttribute("incomeCategories", IncomeCategories.values());
+        model.addAttribute("expenseCategories", ExpenseCategories.values());
+
+        model.addAttribute("transaction", transaction);
+        return "update_transaction";
+    }
+
+    @PostMapping("/updateIncome/{transactionId}")
+    public String updateIncome(@PathVariable(value = "transactionId") long transactionId, @Valid Transaction transaction, BindingResult result, Model model) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
+        long userId = user.getId();
+
+        boolean thereAreErrors = result.hasErrors();
+        if (thereAreErrors) {
+            model.addAttribute("incomeCategories", IncomeCategories.values());
+            return "income_transaction";
+        }
+
+        transactionService.updateIncome(transaction, transactionId);
+        return "redirect:/api/wallet/userWallet/balance/" + userId;
+    }
+    @PostMapping("/updateExpense/{transactionId}")
+    public String updateExpense(@PathVariable(value = "transactionId") long transactionId, @Valid Transaction transaction, BindingResult result, Model model) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
+        long userId = user.getId();
+
+        boolean thereAreErrors = result.hasErrors();
+        if (thereAreErrors) {
+            model.addAttribute("expenseCategories", ExpenseCategories.values());
+            return "income_transaction";
+        }
+
+        transactionService.updateExpense(transaction, transactionId);
+        return "redirect:/api/wallet/userWallet/balance/" + userId;
     }
 }
 

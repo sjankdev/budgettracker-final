@@ -86,4 +86,5 @@ public class WalletController {
         walletService.deleteWalletById(id);
         return "redirect:/api/wallet/userWallet/balance/" + userId;
     }
+
 }
