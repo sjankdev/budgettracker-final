@@ -139,8 +139,30 @@ public class TransactionController {
             }
             transGroup.setDate(currDate);
             transGroup.setTransactions(transOnSingleDate);
-
             transactionByDate.add(transGroup);
+
+            double incomeSum = transGroup.getIncomeSum();
+            for (int i = 0; i < transGroup.getTransactions().size(); i++) {
+                if (transGroup.getTransactions().get(i).getTransactionType().getDisplayName().equalsIgnoreCase("income")) {
+                    incomeSum += transGroup.getTransactions().get(i).getAmount();
+
+                }
+            }
+            double resultIncome = transGroup.setIncomeSum(incomeSum);
+
+
+            double expenseSum = transGroup.getExpenseSum();
+            for (int i = 0; i < transGroup.getTransactions().size(); i++) {
+                if (transGroup.getTransactions().get(i).getTransactionType().getDisplayName().equalsIgnoreCase("expense")) {
+                    expenseSum += transGroup.getTransactions().get(i).getAmount();
+
+                }
+            }
+            double resultExpense = transGroup.setExpenseSum(expenseSum);
+
+            transGroup.setMonthBalance(resultIncome - resultExpense);
+            System.out.println("TransGroup month balance " + transGroup.getMonthBalance());
+
         } else {
             System.out.println("Empty");
         }
@@ -193,6 +215,7 @@ public class TransactionController {
         transactionService.updateIncome(transaction, transactionId);
         return "redirect:/api/wallet/userWallet/balance/" + userId;
     }
+
     @PostMapping("/updateExpense/{transactionId}")
     public String updateExpense(@PathVariable(value = "transactionId") long transactionId, @Valid Transaction transaction, BindingResult result, Model model) {
 
