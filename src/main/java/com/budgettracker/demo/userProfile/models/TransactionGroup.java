@@ -6,6 +6,9 @@ import java.util.List;
 public class TransactionGroup {
         private LocalDate date;
         private List<Transaction> transactions;
+        private double incomeSum;
+        private double expenseSum;
+        private double monthBalance;
 
         public LocalDate getDate() {
             return date;
@@ -22,6 +25,33 @@ public class TransactionGroup {
         public void setTransactions(List<Transaction> transactions) {
             this.transactions = transactions;
         }
+
+    public double getExpenseSum() {
+        return expenseSum;
+    }
+
+    public double getMonthBalance() {
+        return monthBalance;
+    }
+
+    public double setMonthBalance(double monthBalance) {
+        this.monthBalance = monthBalance;
+        return monthBalance;
+    }
+
+    public double setExpenseSum(double expenseSum) {
+        this.expenseSum = expenseSum;
+        return expenseSum;
+    }
+
+    public double getIncomeSum() {
+        return incomeSum;
+    }
+
+    public double setIncomeSum(double incomeSum) {
+        this.incomeSum = incomeSum;
+        return incomeSum;
+    }
 
     @Override
     public String toString() {
