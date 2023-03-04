@@ -34,8 +34,9 @@ public class TransactionGroup {
         return monthBalance;
     }
 
-    public void setMonthBalance(double monthBalance) {
+    public double setMonthBalance(double monthBalance) {
         this.monthBalance = monthBalance;
+        return monthBalance;
     }
 
     public double setExpenseSum(double expenseSum) {

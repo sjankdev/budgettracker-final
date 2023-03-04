@@ -141,7 +141,7 @@ public class TransactionController {
             transGroup.setTransactions(transOnSingleDate);
             transactionByDate.add(transGroup);
 
-            for (TransactionGroup group: transactionByDate) {
+            for (TransactionGroup group : transactionByDate) {
                 LocalDate date = group.getDate();
                 transactions = group.getTransactions();
                 double income = transactions.stream()
@@ -153,6 +153,7 @@ public class TransactionController {
                         .mapToDouble(Transaction::getAmount)
                         .sum();
                 double balance = income - expense;
+                double result = group.setMonthBalance(balance);
                 System.out.println("date:" + date + ",income:" + income + ",expense:" + expense + ",balance:" + balance);
             }
 

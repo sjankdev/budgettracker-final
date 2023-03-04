@@ -36,7 +36,7 @@
 <br>
 <br>
 <div class="date" th:each="singleGroup  : ${transactionGroup}">
-    <h1 th:text="${singleGroup .date}"></h1>
+    <h1 th:text="${singleGroup .date}"></h1><h1 th:text="${singleGroup.monthBalance}"></h1>
     <div class="transaction" th:each="singleTrans  : ${singleGroup.transactions}">
         <h2>Amount: <span th:text="${singleTrans.amount}"></span></h2><br>
         <h2>Note: <span th:text="${singleTrans.note}"></span></h2><br>
