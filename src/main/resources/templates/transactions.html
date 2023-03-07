@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width"/>
     <script src="http://localhost:35729/livereload.js"></script>
     <script src="https://kit.fontawesome.com/9ab80cc16b.js" crossorigin="anonymous"></script>
-
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Users</title>
 </head>
@@ -27,41 +26,34 @@
         <span></span>
     </label>
 </header>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<div class="date" th:each="singleGroup  : ${transactionGroup}">
-    <h1 th:text="${singleGroup .date}"></h1><h1 th:text="${singleGroup.monthBalance}"></h1>
-    <div class="transaction" th:each="singleTrans  : ${singleGroup.transactions}">
-        <h2>Amount: <span th:text="${singleTrans.amount}"></span></h2><br>
-        <h2>Note: <span th:text="${singleTrans.note}"></span></h2><br>
-        <h2>Wallet name: <span th:text="${singleTrans .walletName}"></span></h2><br>
-        <h2>Expense Category: <span th:text="${singleTrans .expenseCategories}"></span></h2><br>
-        <h2>IncomeCategory: <span th:text="${singleTrans .incomeCategories}"></span></h2>
+
+<div class="transaction-group" th:each="singleGroup  : ${transactionGroup}">
+    <div class="date-balance">
+        <h1 id="left" th:text="${singleGroup .date}"></h1>
+        <h2 id="right">Balance <span th:text="${singleGroup .monthBalance}"></span></h2>
+    </div>
+    <div class="single-transaction" th:each="singleTrans  : ${singleGroup.transactions}">
+        <h2 id="rightBalance" th:text="${singleTrans.amount}"></h2>
+        <h2 th:text="${singleTrans .walletName}"></h2>
+        <h2 th:text="${singleTrans.note}"></h2>
+        <h2 th:text="${singleTrans .expenseCategories}"></h2>
+        <h2 th:text="${singleTrans .incomeCategories}"></h2>
         <a class="card__link" th:href="@{/api/transaction/delete/{id}(id=${singleTrans.id})}"
            th:data-confirm-delete="|Are you sure you want to delete ${singleTrans.walletName} wallet?|"
            onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false">Delete</a>
         <a class="card__link" th:href="@{/api/transaction/showFormForUpdate/{id}(id=${singleTrans.id})}">Update</a>
         <hr>
-
     </div>
-
 </div>
+
 <div style="text-align:center"
      th:if="${#lists.isEmpty(transactionGroup)}"><h1>You don't have any transaction</h1>
     <a th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Wallets</a>
 </div>
-
 
 <form name="logoutForm" th:action="@{/api/auth/signout}" method="post" th:hidden="true">
     <input hidden type="submit" value="Sign Out"/>
 </form>
 
 </body>
-
 </html>
