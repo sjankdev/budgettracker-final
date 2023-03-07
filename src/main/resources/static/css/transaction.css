@@ -279,11 +279,22 @@ nav a:hover {
   background: #6c83ff;
   color: white;
 }
-.date{
-background: radial-gradient(#ba181b, #e5383b);
-text-align: center;
+.transaction-group{
+position:relative;
+top:100px;
+text-align:left;
 }
+.date-balance{
+background:red;
+overflow: hidden;
 
-.transaction{
-background:black;
+}
+#left{
+float:left;
+}
+#right{
+float:right;
+}
+#rightBalance{
+float:right;
 }
