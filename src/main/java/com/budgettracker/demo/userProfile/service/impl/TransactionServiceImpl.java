@@ -82,12 +82,8 @@ public class TransactionServiceImpl implements TransactionService {
         String expense = String.valueOf(transaction.getExpenseCategories());
         System.out.println(transaction.getAmount());
 
-        System.out.println("Amount is " + amount);
-        System.out.println("Existing amount is " + existingTransactionInDb.getAmount());
         existingTransactionInDb.getWallet().setInitialBalance
                 (existingTransactionInDb.getWallet().getInitialBalance() - (amount - existingTransactionInDb.getAmount()));
-        System.out.println("New Amount is " + amount);
-        System.out.println("New Existing amount is " + existingTransactionInDb.getAmount());
         existingTransactionInDb.setNote(note);
         existingTransactionInDb.setAmount(amount);
         existingTransactionInDb.setDate(date);
@@ -101,8 +97,23 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public void deleteTransactionById(Long id) {
-        this.transactionRepository.deleteById(id);
+    public void deleteTransactionById(Long transactionId) {
+        Transaction existingTransactionInDb = getTransactionById(transactionId);
+        double amount = existingTransactionInDb.getAmount();
+
+
+        if (existingTransactionInDb.getTransactionType().getDisplayName().equalsIgnoreCase("income")) {
+            existingTransactionInDb.getWallet().setInitialBalance
+                    (existingTransactionInDb.getWallet()
+                            .getInitialBalance() - amount);
+        }
+        if(existingTransactionInDb.getTransactionType().getDisplayName().equalsIgnoreCase("expense")){
+            existingTransactionInDb.getWallet().setInitialBalance
+                    (existingTransactionInDb.getWallet()
+                            .getInitialBalance() + amount);
+        }
+
+        this.transactionRepository.deleteById(transactionId);
     }
 
     @Override
