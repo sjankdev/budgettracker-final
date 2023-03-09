@@ -1,0 +1,280 @@
+body {
+  align-items: center;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+}
+header {
+  background: black;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  width: 95%;
+  max-width: 1500px;
+}
+
+.logo {
+    font-family: Arial;
+color:white;
+  font-size: 1.25rem;
+  margin: 1rem;
+  text-transform: uppercase;
+}
+
+nav {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  text-align: left;
+  background: black;
+  width: 100%;
+  height: 100vh;
+  margin-top: 1rem;
+  display: none;
+}
+
+.nav-toggle {
+  display: none;
+}
+
+.nav-toggle-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-left: 1em;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.nav-toggle-label span,
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+  display: block;
+  background: white;
+  height: 2px;
+  width: 2em;
+  border-radius: 2px;
+  position: relative;
+}
+
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+  content: '';
+  position: absolute;
+}
+
+.nav-toggle-label span::before {
+  bottom: 7px;
+}
+
+.nav-toggle-label span::after {
+  top: 7px;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav li {
+  margin-bottom: 1.5em;
+  margin-left: 1em;
+}
+
+nav a {
+    font-family: Arial;
+
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+nav a:hover {
+  color: #ffa98e;
+}
+
+.nav-toggle:checked ~ nav {
+  display: block;
+}
+
+@media (min-width: 900px) {
+  .nav-toggle-label {
+    display: none;
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    background: black;
+  }
+
+  nav {
+    all: unset;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-right: 1em;
+  }
+
+  nav ul {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+   nav li {
+    margin-bottom: 0;
+    padding: 0;
+  }
+}
+
+.forms {
+  background-color: #15172b;
+  border-radius: 20px;
+  box-sizing: border-box;
+  height: 500px;
+  padding: 20px;
+  width: 390px;
+}
+
+.title {
+  color: #eee;
+  font-family: sans-serif;
+  font-size: 26px;
+  font-weight: 600;
+  margin-top: -10px;
+}
+
+.subtitle {
+  color: #eee;
+  font-family: sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.input-container {
+  height: 50px;
+  position: relative;
+  width: 100%;
+}
+
+.ic1 {
+  margin-top: 40px;
+}
+
+.ic2 {
+  margin-top: 30px;
+}
+.ic3 {
+  margin-top: 20px;
+}
+.ic3 select{
+   background-color: #303245;
+   color: white;
+   padding: 12px;
+   width: 250px;
+   border: none;
+   font-size: 15px;
+   box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+   -webkit-appearance: button;
+   appearance: button;
+   outline: none;
+   border-radius: 12px;
+}
+
+.input {
+  background-color: #303245;
+  border-radius: 12px;
+  border: 0;
+  box-sizing: border-box;
+  color: #eee;
+  font-size: 18px;
+  height: 100%;
+  outline: 0;
+  padding: 4px 20px 0;
+  width: 100%;
+}
+
+.cut {
+  background-color: #15172b;
+  border-radius: 10px;
+  height: 20px;
+  left: 20px;
+  position: absolute;
+  top: -20px;
+  transform: translateY(0);
+  transition: transform 200ms;
+  width: 76px;
+}
+
+.cut-short {
+  width: 50px;
+}
+
+.input:focus ~ .cut,
+.input:not(:placeholder-shown) ~ .cut {
+  transform: translateY(8px);
+}
+
+.placeholder {
+  color: #65657b;
+  font-family: sans-serif;
+  left: 20px;
+  line-height: 14px;
+  pointer-events: none;
+  position: absolute;
+  transform-origin: 0 50%;
+  transition: transform 200ms, color 200ms;
+  top: 20px;
+}
+
+.input:focus ~ .placeholder,
+.input:not(:placeholder-shown) ~ .placeholder {
+  transform: translateY(-30px) translateX(10px) scale(0.75);
+}
+
+.input:not(:placeholder-shown) ~ .placeholder {
+  color: #808097;
+}
+
+.input:focus ~ .placeholder {
+  color: #dc2f55;
+}
+
+.submit {
+  background-color: #08d;
+  border-radius: 12px;
+  border: 0;
+  box-sizing: border-box;
+  color: #eee;
+  cursor: pointer;
+  font-size: 18px;
+  height: 50px;
+  margin-top: 38px;
+  // outline: 0;
+  text-align: center;
+  width: 100%;
+}
+
+.submit:active {
+  background-color: #06b;
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row wrap;
+  align-items: center;
+  text-decoration: none!important;
+}
+a:link{
+color:white;
+  text-decoration: none!important;
+}
