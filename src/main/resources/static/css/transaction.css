@@ -301,3 +301,7 @@ float:right;
 #rightBalance1{
 float:right;
 }
+.emptyTransaction{
+text-align:center;
+position:relative;
+top:100px}
