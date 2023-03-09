@@ -52,7 +52,7 @@
     </div>
 </div>
 
-<div style="text-align:center"
+<div class="emptyTransaction"
      th:if="${#lists.isEmpty(transactionGroup)}"><h1>You don't have any transaction</h1>
     <a th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Wallets</a>
 </div>
