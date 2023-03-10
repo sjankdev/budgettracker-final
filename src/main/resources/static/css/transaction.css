@@ -1,58 +1,25 @@
+/* HTML */
+
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap");
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
-  margin: 0;
+    box-sizing: border-box;
+    line-height: 1.5em;
 }
 
-img {
-  display: block;
-  width: 100%;
-  max-width: 1500px;
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: #000;
-  color: white;
-  width: 95%;
-  max-width: 1500px;
-      margin: 0;
-      padding:0;
+    margin: 0;
+    font-family: "Open Sans", sans-serif;
+    background-color: black;
 }
 
-.main-container {
-  padding: 65px;
-}
-
-
-.heading {
-  text-align: center;
-    color:white;
-
-}
-
-.heading__title {
-  font-weight: 600;
-    color:white;
-
-}
-
-.heading__credits {
-  margin: 10px 0px;
-  color: #888888;
-  font-size: 25px;
-  transition: all 0.5s;
-    color:white;
-
-}
-
-.heading__link {
-  text-decoration: none;
-}
-
-.heading__credits .heading__link {
-  color: inherit;
-}
 
 /* CARDS */
 
@@ -128,170 +95,34 @@ body {
   background: radial-gradient(#ba181b, #e5383b);
 }
 
-
-
-
 @media (max-width: 1600px) {
   .cards {
     justify-content: center;
   }
 }
-header {
-  background: black;
-  text-align: center;
-  position: fixed;
-  top: 0;
-  z-index: 1000;
-  width: 95%;
-  max-width: 1500px;
-}
 
-.logo {
-    font-family: Arial;
 
-  font-size: 1.25rem;
-  margin: 1rem;
-  text-transform: uppercase;
-}
+/* TRANSACTION-GROUP */
 
-nav {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  text-align: left;
-  background: black;
-  width: 100%;
-  height: 100vh;
-  margin-top: 1rem;
-  display: none;
-}
-
-.nav-toggle {
-  display: none;
-}
-
-.nav-toggle-label {
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin-left: 1em;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-
-.nav-toggle-label span,
-.nav-toggle-label span::before,
-.nav-toggle-label span::after {
-  display: block;
-  background: white;
-  height: 2px;
-  width: 2em;
-  border-radius: 2px;
-  position: relative;
-}
-
-.nav-toggle-label span::before,
-.nav-toggle-label span::after {
-  content: '';
-  position: absolute;
-}
-
-.nav-toggle-label span::before {
-  bottom: 7px;
-}
-
-.nav-toggle-label span::after {
-  top: 7px;
-}
-
-nav ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-nav li {
-  margin-bottom: 1.5em;
-  margin-left: 1em;
-}
-
-nav a {
-    font-family: Arial;
-
-  color: white;
-  text-decoration: none;
-  text-transform: uppercase;
-}
-
-nav a:hover {
-  color: #ffa98e;
-}
-
-.nav-toggle:checked ~ nav {
-  display: block;
-}
-
-@media (min-width: 900px) {
-  .nav-toggle-label {
-    display: none;
-  }
-
-  header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 1rem;
-    background: black;
-  }
-
-  nav {
-    all: unset;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-right: 1em;
-  }
-
-  nav ul {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-   nav li {
-    margin-bottom: 0;
-    padding: 0;
-  }
-}
-.learn-more-btn {
-  background: white;
-  padding: 10px 50px;
-  border-radius: 50px;
-  font-size: .8rem;
-  text-decoration: none;
-  color: black;
-      font-family: Arial;
-
-}
-
-.learn-more-btn:hover {
-  background: #6c83ff;
-  color: white;
-}
 .transaction-group{
-position:relative;
-top:100px;
-text-align:left;
-      width: 100vw;
-
+ position:relative;
+ top:50px;
+ text-align:left;
+ width: 100%;
+ height: 100%;
 }
 .date-balance{
-background:red;
-overflow: hidden;
-      width: 100vw;
-}
+background-color:
+#837272;
+    box-shadow: 0 10px 15px -3px
+rgba(0, 0, 0, 0.1),
+        0 4px 6px -4px
+rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
+    overflow:hidden;
+
+
+    }
 #left{
 float:left;
 }
@@ -313,35 +144,6 @@ top:100px}
 }
 
 
-.heading {
-  text-align: center;
-    color:white;
-
-}
-
-.heading__title {
-  font-weight: 600;
-    color:white;
-
-}
-
-.heading__credits {
-  margin: 10px 0px;
-  color: #888888;
-  font-size: 25px;
-  transition: all 0.5s;
-    color:white;
-
-}
-
-.heading__link {
-  text-decoration: none;
-}
-
-.heading__credits .heading__link {
-  color: inherit;
-}
-
 /* CARDS */
 
 .cards {
@@ -419,4 +221,127 @@ top:100px}
   .cards {
     justify-content: center;
   }
+}
+
+/* HEADER */
+
+header {
+    background-color:
+black;
+    box-shadow: 0 10px 15px -3px
+rgba(0, 0, 0, 0.1),
+        0 4px 6px -4px
+rgba(0, 0, 0, 0.1);
+    padding: 0px 20px;
+}
+header .wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+
+}
+header .logo {
+    height: 50px;
+    display: block;
+    color:white;
+    font-size:8px;
+
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 100%;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background-color:
+white;
+    padding: 20px;
+    transition: left 0.3s;
+}
+
+.navbar.show {
+    left: 0 !important;}
+
+
+.navbar ul {
+    all: unset;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+.navbar ul a {
+    all: unset;
+    color:
+white;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 28px;
+}
+
+.close-nav {
+    text-align: right;
+    margin-bottom: 20px;
+}
+.close-nav button {
+    all: unset;
+    background:
+#f7f7f7;
+    font-size: 42px;
+    cursor: pointer;
+    border: 1px solid
+rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    border-radius: 3px;
+    color:
+#444444;
+}
+.menu-bar button {
+    border: 1px solid
+rgba(0, 0, 0, 0.1);
+    background:
+#f7f7f7;
+    height: 50px;
+    width: 50px;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+.menu-bar i {
+    display: block;
+    border-top: 3px solid
+#444444;
+    border-bottom: 3px solid
+#444444;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+@media (min-width: 550px) {
+    .navbar {
+        all: unset;
+        display: block;
+    }
+    .navbar ul {
+        flex-direction: row;
+        gap: 20px;
+    }
+    .navbar ul a {
+        font-size: inherit;
+    }
+    .close-nav,
+    .menu-bar {
+        display: none;
+    }
 }

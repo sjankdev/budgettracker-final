@@ -13,18 +13,24 @@
 <body>
 
 <header>
-    <h1 class="logo">Spender</h1>
-    <input type="checkbox" class="nav-toggle" id="nav-toggle">
-    <nav>
-        <ul>
-            <li><a th:href="@{/api/test/homePage}">Homepage</a></li>
-            <li><a id="wallets" th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Wallets</a></li>
-            <li><a href="javascript: document.logoutForm.submit()" role="menuitem">Logout</a></li>
-        </ul>
-    </nav>
-    <label for="nav-toggle" class="nav-toggle-label">
-        <span></span>
-    </label>
+    <div class="wrapper">
+        <div class="logo">
+            <h1>SPENDER</h1>
+        </div>
+        <div class="navbar">
+            <div class="close-nav"><button>×</button></div>
+            <nav>
+                <ul>
+                    <li><a th:href="@{/api/test/homePage}">Homepage</a></li>
+                    <li><a id="wallets" th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Wallets</a></li>
+                    <li><a href="javascript: document.logoutForm.submit()" role="menuitem">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="menu-bar">
+            <button><i></i></button>
+        </div>
+    </div>
 </header>
 
 <div class="transaction-group" th:each="singleGroup  : ${transactionGroup}">
