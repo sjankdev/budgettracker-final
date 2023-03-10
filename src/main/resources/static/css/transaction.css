@@ -113,14 +113,14 @@ body {
 }
 .date-balance{
 background-color:
-#837272;
+#e0ddcf;
     box-shadow: 0 10px 15px -3px
 rgba(0, 0, 0, 0.1),
         0 4px 6px -4px
 rgba(0, 0, 0, 0.1);
     padding: 10px 20px;
     overflow:hidden;
-
+align-items: baseline
 
     }
 #left{
@@ -215,7 +215,7 @@ top:100px}
 
 
 .card-1 {
-  background: radial-gradient(#ba181b, #e5383b);
+  background: #474448;
 }
 @media (max-width: 1600px) {
   .cards {
