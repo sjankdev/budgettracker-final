@@ -32,23 +32,39 @@
         <h1 id="left" th:text="${singleGroup .date}"></h1>
         <h2 id="right">Balance <span th:text="${singleGroup .monthBalance}"></span></h2>
     </div>
-    <div class="single-transaction" th:each="singleTrans  : ${singleGroup.transactions}">
-        <div th:if="${singleTrans.expenseCategories}">
-            <h2 id="rightBalance" style="color:red" th:text="${singleTrans.amount}"></h2>
+    <div class="cards">
+        <div class="card card-1" th:each="singleTrans  : ${singleGroup.transactions}">
+            <div class="card__icon"><i class="fa-solid fa-wallet"></i></div>
+            <div th:if="${singleTrans.expenseCategories}">
+                <h2 id="rightBalance" style="color:red" th:text="${singleTrans.amount}"></h2>
+            </div>
+            <div th:unless="${singleTrans.expenseCategories}">
+                <h2 id="rightBalance1" style="color:green" th:text="${singleTrans.amount}"></h2>
+            </div>
+            <h2 class="card__title">
+                <div th:if="${singleTrans.expenseCategories == null}">
+                    Wallet name <span th:text="${singleTrans.walletName}"></span>
+                    <br>
+                    Note <span th:text="${singleTrans.note}"></span>
+                    <br>
+                    Income category <span th:text="${singleTrans.incomeCategories}"></span>
+                </div>
+                <div th:unless="${singleTrans.expenseCategories == null}">
+                    Wallet name <span th:text="${singleTrans.walletName}"></span>
+                    <br>
+                    Note <span th:text="${singleTrans.note}"></span>
+                    <br>
+                    Expense category <span th:text="${singleTrans.expenseCategories}"></span>
+                </div>
+            </h2>
+            <p class="card__apply">
+                <a class="card__link" th:href="@{/api/transaction/delete/{id}(id=${singleTrans.id})}"
+                   th:data-confirm-delete="|Are you sure you want to delete ${singleTrans.walletName} wallet?|"
+                   onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false">Delete</a>
+                <a class="card__link"
+                   th:href="@{/api/transaction/showFormForUpdate/{id}(id=${singleTrans.id})}">Update</a>
+            </p>
         </div>
-        <div th:unless="${singleTrans.expenseCategories}">
-            <h2 id="rightBalance1" style="color:green" th:text="${singleTrans.amount}"></h2>
-        </div>
-
-        <h2 th:text="${singleTrans.walletName}"></h2>
-        <h2 th:text="${singleTrans.note}"></h2>
-        <h2 th:text="${singleTrans.expenseCategories}"></h2>
-        <h2 th:text="${singleTrans.incomeCategories}"></h2>
-        <a class="card__link" th:href="@{/api/transaction/delete/{id}(id=${singleTrans.id})}"
-           th:data-confirm-delete="|Are you sure you want to delete ${singleTrans.walletName} wallet?|"
-           onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false">Delete</a>
-        <a class="card__link" th:href="@{/api/transaction/showFormForUpdate/{id}(id=${singleTrans.id})}">Update</a>
-        <hr>
     </div>
 </div>
 
