@@ -120,7 +120,6 @@ rgba(0, 0, 0, 0.1),
 rgba(0, 0, 0, 0.1);
     padding: 10px 20px;
     overflow:hidden;
-align-items: baseline
 
     }
 #left{
@@ -138,7 +137,16 @@ float:right;
 .emptyTransaction{
 text-align:center;
 position:relative;
-top:100px}
+  color:white;
+
+top:100px
+}
+
+a {
+    color: white;
+    text-decoration: none !important;
+}
+
 .main-container {
   padding: 65px;
 }
