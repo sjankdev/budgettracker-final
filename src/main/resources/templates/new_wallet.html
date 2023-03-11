@@ -29,37 +29,31 @@
 </header>
 
 <div class="form">
-    <form action="#" th:action="@{/api/wallet/saveWallet}" th:object="${wallet}" method="POST">
-        <div class="title">Welcome</div>
-        <div class="subtitle">
-            Let's create your wallet!
-        </div>
-        <div class="input-container ic1">
-            <input id="walletName" th:field="*{walletName}" required class="input" type="text" placeholder=" "/>
-            <div class="cut"></div>
-            <label for="walletName" class="placeholder">Wallet name</label>
-            <div class="error-message" th:errors="*{walletName}"
-                 th:if="${#fields.hasErrors('walletName')}"></div>
-        </div>
-        <br>
-        <div class="input-container ic2">
-            <input id="initialBalance" th:field="*{initialBalance}" required class="input" type="text" placeholder=" "/>
-            <div class="cut"></div>
-            <label for="initialBalance" class="placeholder">Initial balance</label>
-            <div class="error-message" th:errors="*{initialBalance}"
-                 th:if="${#fields.hasErrors('initialBalance')}"></div>
-        </div>
+    <div class="title">Welcome</div>
+    <div class="subtitle">
+        Let's create your wallet!
+        <form name="saveWallet" action="#" th:action="@{/api/wallet/saveWallet}" th:object="${wallet}"
+              method="POST">
+            <div class="input-container ic1">
+                <input id="walletName" th:field="*{walletName}" required class="input" type="text" placeholder=" "/>
+                <div class="cut"></div>
+                <label for="walletName" class="placeholder">Wallet name</label>
+            </div>
+            <div class="input-container ic2">
+                <input id="initialBalance" th:field="*{initialBalance}" required class="input" type="text"
+                       placeholder=" "/>
+                <div class="cut"></div>
+                <label for="initialBalance" class="placeholder">Initial balance</label>
+            </div>
+            <button class="submit">Create</button>
+        </form>
+        <form name="cancelWalletCreating" action="#"
+              th:action="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}" th:object="${wallet}"
+              method="GET">
+            <button class="submit">Cancel</button>
 
-        <button type="text" class="submit">Create</button>
-
-
-    </form>
-    <form action="#" th:action="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}" th:object="${wallet}"
-          method="GET">
-        <button type="text" class="submit">Cancel</button>
-    </form>
+        </form>
+    </div>
 </div>
-
-
 </body>
 </html>

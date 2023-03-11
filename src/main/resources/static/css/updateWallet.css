@@ -124,23 +124,23 @@ header {
 }
 
 .form {
-  background-color: #edede9;
+ position: absolute;
+  width: 300px;
+  height: 200px;
+  z-index: 0;
+  top: 30%;
+  left: 50%;
+  margin: -100px 0 0 -150px;
+  background-color: #15172b;
   border-radius: 20px;
   box-sizing: border-box;
   height: 500px;
   padding: 20px;
   width: 320px;
-   position: absolute;
-      top:0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-
-      margin: auto;
 }
 
 .title {
-  color: black;
+  color: #eee;
   font-family: sans-serif;
   font-size: 36px;
   font-weight: 600;
@@ -148,7 +148,7 @@ header {
 }
 
 .subtitle {
-  color: black;
+  color: #eee;
   font-family: sans-serif;
   font-size: 16px;
   font-weight: 600;
@@ -183,15 +183,15 @@ header {
 }
 
 .cut {
- background-color: #edede9;
-     border-radius: 10px;
-     height: 21px;
-     left: 25px;
-     position: absolute;
-top: -23px;
-     transform: translateY(0);
-     transition: transform 200ms;
-     width: 85px;
+  background-color: #15172b;
+  border-radius: 10px;
+  height: 20px;
+  left: 20px;
+  position: absolute;
+  top: -20px;
+  transform: translateY(0);
+  transition: transform 200ms;
+  width: 100px;
 }
 
 .cut-short {
@@ -237,7 +237,7 @@ top: -23px;
   cursor: pointer;
   font-size: 18px;
   height: 50px;
-  margin-top: 11px;
+  margin-top: 38px;
   // outline: 0;
   text-align: center;
   width: 100%;
@@ -246,13 +246,7 @@ top: -23px;
 .submit:active {
   background-color: #06b;
 }
-.error-message {
-  color: #cc0033;
-  display: inline-block;
-  font-size: 12px;
-  line-height: 15px;
-  margin: 5px 0 0;
-}
+
 .heading {
   text-align: center;
     color:white;
