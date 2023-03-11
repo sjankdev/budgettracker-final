@@ -1,5 +1,12 @@
 /* HTML */
 
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
+
+@font-face {
+  font-family: AstroSpace;
+  src: url(/fonts/AstroSpace.ttf);
+}
+
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap");
 *,
 *::before,
@@ -120,7 +127,10 @@ rgba(0, 0, 0, 0.1),
 rgba(0, 0, 0, 0.1);
     padding: 10px 20px;
     overflow:hidden;
-
+    display:flex;
+      align-items:center;
+      justify-content:space-between;
+height: 50px;
     }
 #left{
 float:left;
