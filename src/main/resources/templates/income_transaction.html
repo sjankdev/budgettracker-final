@@ -33,12 +33,14 @@
     </nav>
 </header>
 
-<div class="forms">
+<div class="form">
     <div class="title">New income transaction for wallet <span style="color:red" th:text="${wallet.walletName}"></span>
         <div class="subtitle">Balance is: <span style="color:red" th:text="${wallet.initialBalance}"></span>
-            <form name="saveIncome" action="/"
+            Let's create your wallet!
+            <form name="saveWallet" action="#"
                   th:action="@{/api/transaction/saveIncome/{walletId} (walletId=${walletId})}"
-                  th:object="${transaction}" method="post">
+                  th:object="${transaction}"
+                  method="POST">
                 <div class="input-container ic1">
                     <input id="amount" class="input" type="text" th:field="*{amount}" placeholder=" "/>
                     <div class="cut"></div>
@@ -65,21 +67,13 @@
                     </select>
                     <div class="select-dropdown"></div>
                 </div>
+                <button class="submit">Create</button>
             </form>
-            <div class="row mb-3">
-                <div class="col-lg-4">
-                    <a href="javascript: document.saveIncome.submit()"
-                       role="menuitem">Create</a>
-                </div>
-                <div class="col-lg-4">
-                    <a href="javascript: document.switchToExpenseTransaction.submit()"
-                       role="menuitem">Switch to expense transaction</a>
-                </div>
-                <div class="col-lg-4">
-                    <a href="javascript: document.cancelTransaction.submit()"
-                       role="menuitem">Cancel</a>
-                </div>
-            </div>
+            <form name="cancelWalletCreating" action="#"
+                  th:action="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}" th:object="${wallet}"
+                  method="GET">
+                <button class="submit">Cancel</button>
+            </form>
         </div>
     </div>
 </div>

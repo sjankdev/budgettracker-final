@@ -123,29 +123,32 @@ header {
   }
 }
 
-.forms {
+.form {
+ position: absolute;
+  z-index: 0;
+  top: 30%;
+  left: 50%;
+  margin: -100px 0 0 -150px;
   background-color: #15172b;
   border-radius: 20px;
   box-sizing: border-box;
-    width: 25%;
-    padding: 10px;
-     margin-left: auto;
-      margin-right: auto;
-      display: table;
+  height: 500px;
+  padding: 20px;
+  width: 320px;
 }
 
 .title {
   color: #eee;
   font-family: sans-serif;
-  font-size: 26px;
+  font-size: 36px;
   font-weight: 600;
-  margin-top: -10px;
+  margin-top: 30px;
 }
 
 .subtitle {
   color: #eee;
   font-family: sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
   margin-top: 10px;
 }
@@ -162,22 +165,6 @@ header {
 
 .ic2 {
   margin-top: 30px;
-}
-.ic3 {
-  margin-top: 20px;
-}
-.ic3 select{
-   background-color: #303245;
-   color: white;
-   padding: 12px;
-   width: 250px;
-   border: none;
-   font-size: 15px;
-   box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
-   -webkit-appearance: button;
-   appearance: button;
-   outline: none;
-   border-radius: 12px;
 }
 
 .input {
@@ -202,7 +189,7 @@ header {
   top: -20px;
   transform: translateY(0);
   transition: transform 200ms;
-  width: 76px;
+  width: 100px;
 }
 
 .cut-short {
@@ -257,13 +244,7 @@ header {
 .submit:active {
   background-color: #06b;
 }
-.row {
-  display: flex;
-  justify-content: space-between;
-  flex-flow: row wrap;
-  align-items: center;
-  text-decoration: none!important;
-}
+
 a:link{
 color:white;
   text-decoration: none!important;
