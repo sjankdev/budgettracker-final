@@ -28,24 +28,25 @@
 </header>
 
 <div class="form">
+    <div class="title">Welcome</div>
+    <div class="subtitle">
+        Let's update your transaction!
     <form action="#" th:action="@{/api/transaction/updateIncome/{transactionId} (transactionId=${transactionId})}"
           th:object="${transaction}" method="POST">
 
         <div th:if="${transaction.incomeCategories != null}">
-
             <div class="input-container ic1">
                 <input id="amount" th:field="*{amount}" required class="input" type="text" placeholder=" "/>
                 <div class="cut"></div>
-                <label for="amount" class="placeholder">Wallet name</label>
+                <label for="amount" class="placeholder">Amount</label>
                 <div class="error-message" th:errors="*{amount}"
                      th:if="${#fields.hasErrors('amount')}"></div>
             </div>
-            <br>
             <div class="input-container ic2">
                 <input id="note" th:field="*{note}" required class="input" type="text"
                        placeholder=" "/>
                 <div class="cut"></div>
-                <label for="note" class="placeholder">Initial balance</label>
+                <label for="note" class="placeholder">Note</label>
                 <div class="error-message" th:errors="*{note}"
                      th:if="${#fields.hasErrors('note')}"></div>
             </div>
@@ -53,7 +54,7 @@
                 <input id="date" th:field="*{date}" required class="input" type="date"
                        placeholder=" "/>
                 <div class="cut"></div>
-                <label for="date" class="placeholder">Initial balance</label>
+                <label for="date" class="placeholder">Date</label>
                 <div class="error-message" th:errors="*{date}"
                      th:if="${#fields.hasErrors('date')}"></div>
             </div>
