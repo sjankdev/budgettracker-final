@@ -123,6 +123,7 @@ header {
   }
 }
 
+
 .form{
   display: flex;
   flex-direction: column;
@@ -265,6 +266,8 @@ label {
    border-radius: 12px;
    height:100%;
 }
+
+
 
 a:link{
 color:white;

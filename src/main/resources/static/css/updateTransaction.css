@@ -17,7 +17,7 @@ body {
     background-color: black;
 }
 
-/* Header */
+/* HEADER */
 
 header {
   background-color: black;
@@ -123,38 +123,20 @@ header {
   }
 }
 
-.form{
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+.form {
+ position: absolute;
+  width: 300px;
+  height: 200px;
+  z-index: 0;
+  top: 30%;
+  left: 50%;
+  margin: -100px 0 0 -150px;
   background-color: #15172b;
   border-radius: 20px;
   box-sizing: border-box;
-  height: 680px;
+  height: 670px;
   padding: 20px;
-  width: 500px;
-   margin-left: auto;
-        margin-right: auto;
-}
-
-.row {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.col {
-  margin-right: 10px;
-    height: 50px;
-  position: relative;
-  width: 100%;
-  margin-top:30px;
-}
-
-label {
-  display: block;
-  margin-bottom: 5px;
+  width: 320px;
 }
 
 .title {
@@ -171,6 +153,20 @@ label {
   font-size: 16px;
   font-weight: 600;
   margin-top: 10px;
+}
+
+.input-container {
+  height: 50px;
+  position: relative;
+  width: 100%;
+}
+
+.ic1 {
+  margin-top: 40px;
+}
+
+.ic2 {
+  margin-top: 30px;
 }
 
 .input {
@@ -195,7 +191,7 @@ label {
   top: -20px;
   transform: translateY(0);
   transition: transform 200ms;
-  width: 100px;
+  width: 68px;
 }
 
 .cut-short {
@@ -251,7 +247,7 @@ label {
   background-color: #06b;
 }
 
-.col select{
+.input-container select{
    background-color: #303245;
    color: white;
    padding: 12px;
@@ -266,7 +262,31 @@ label {
    height:100%;
 }
 
-a:link{
-color:white;
-  text-decoration: none!important;
+.heading {
+  text-align: center;
+    color:white;
+
+}
+
+.heading__title {
+  font-weight: 600;
+    color:white;
+
+}
+
+.heading__credits {
+  margin: 10px 0px;
+  color: #888888;
+  font-size: 25px;
+  transition: all 0.5s;
+    color:white;
+
+}
+
+.heading__link {
+  text-decoration: none;
+}
+
+.heading__credits .heading__link {
+  color: inherit;
 }
