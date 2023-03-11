@@ -78,16 +78,18 @@
                   method="GET">
                 <button class="submit">Cancel</button>
             </form>
+            <form name="switchToExpenseTransaction" action="#"
+                  th:action="@{/api/transaction/expenseTransaction/{walletId}(walletId=${walletId})}"
+                  th:object="${wallet}"
+                  method="GET">
+                <button class="submit">Switch To Expense Transaction</button>
+            </form>
         </div>
     </div>
 </div>
 <form name="switchToExpenseTransaction" action="#"
       th:action="@{/api/transaction/expenseTransaction/{walletId}(walletId=${walletId})}"
       th:object="${wallet}"
-      method="GET">
-</form>
-<form name="cancelTransaction" action="#"
-      th:action="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}" th:object="${wallet}"
       method="GET">
 </form>
 

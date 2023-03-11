@@ -130,9 +130,11 @@ header {
   background-color: #15172b;
   border-radius: 20px;
   box-sizing: border-box;
-  height: 580px;
+  height: 680px;
   padding: 20px;
   width: 500px;
+   margin-left: auto;
+        margin-right: auto;
 }
 
 .row {
@@ -247,6 +249,21 @@ label {
 
 .submit:active {
   background-color: #06b;
+}
+
+.col select{
+   background-color: #303245;
+   color: white;
+   padding: 12px;
+   width: 250px;
+   border: none;
+   font-size: 15px;
+   box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+   -webkit-appearance: button;
+   appearance: button;
+   outline: none;
+   border-radius: 12px;
+   height:100%;
 }
 
 a:link{
