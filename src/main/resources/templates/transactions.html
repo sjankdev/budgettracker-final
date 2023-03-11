@@ -4,38 +4,33 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" th:href="@{/css/transaction.css}"/>
-    <meta name="viewport" content="width=device-width"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <script src="http://localhost:35729/livereload.js"></script>
     <script src="https://kit.fontawesome.com/9ab80cc16b.js" crossorigin="anonymous"></script>
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
     <title>Users</title>
 </head>
 <body>
 
 <header>
-    <div class="wrapper">
-        <div class="logo">
-            <h1>SPENDER</h1>
-        </div>
-        <div class="navbar">
-            <div class="close-nav">
-                <button>×</button>
-            </div>
-            <nav>
-                <ul>
-                    <li><a th:href="@{/api/test/homePage}">Homepage</a></li>
-                    <li><a id="wallets"
-                           th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Wallets</a></li>
-                    <li><a href="javascript: document.logoutForm.submit()" role="menuitem">Logout</a></li>
-                </ul>
-            </nav>
-        </div>
-        <div class="menu-bar">
-            <button><i></i></button>
-        </div>
-    </div>
+    <nav class="main-nav">
+        <input type="checkbox" id="check"/>
+        <label for="check" class="menu-btn">
+            <i class="fas fa-bars"></i>
+        </label>
+        <a href="index.html" class="logo">SPENDER</a>
+        <ul class="navlinks">
+            <li><a th:href="@{/api/test/homePage}">Homepage</a></li>
+            <li><a id="wallets"
+                   th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Wallets</a></li>
+            <li><a href="javascript: document.logoutForm.submit()" role="menuitem">Logout</a></li>
+        </ul>
+    </nav>
 </header>
-
 
 <div class="transaction-group" th:each="singleGroup  : ${transactionGroup}">
     <div class="date-balance">

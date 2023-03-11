@@ -5,8 +5,13 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{/css/homepage.css}"/>
     <script src="http://localhost:35729/livereload.js"></script>
-    <meta name="viewport" content="width=device-width"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
 
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
     <title>Title</title>
 
 </head>
@@ -15,31 +20,30 @@
     <input hidden type="submit" value="Sign Out"/>
 </form>
 <header>
-    <h1 class="logo">Spender</h1>
-    <input type="checkbox" class="nav-toggle" id="nav-toggle">
-    <nav>
-        <ul>
-            <li> <a id="wallets" th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Wallets</a></li>
-            <li> <a th:href="@{/api/transaction/userTransactions/{userId} (userId=${userId})}">Transactions</a></li>
-            <li> <a href="javascript: document.logoutForm.submit()" role="menuitem">Logout</a></li>
+    <nav class="main-nav">
+        <input type="checkbox" id="check"/>
+        <label for="check" class="menu-btn">
+            <i class="fas fa-bars"></i>
+        </label>
+        <a href="index.html" class="logo">SPENDER</a>
+        <ul class="navlinks">
+            <li><a id="wallets" th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Wallets</a></li>
+            <li><a th:href="@{/api/transaction/userTransactions/{userId} (userId=${userId})}">Transactions</a></li>
+            <li><a href="javascript: document.logoutForm.submit()" role="menuitem">Logout</a></li>
         </ul>
     </nav>
-    <label for="nav-toggle" class="nav-toggle-label">
-        <span></span>
-    </label>
 </header>
 
 
 <section class="section-one">
     <h2 class="header">Earn. Save. Spend.</h2>
-    <p class="section-one-paragraph">Save money effortlessly. Spender is a free budgeting application. Seeing all your financial habits
+    <p class="section-one-paragraph">Save money effortlessly. Spender is a free budgeting application. Seeing all your
+        financial habits
         enables
         you to stick to your goals and be organized in what’s important.</p>
     <a class="learn-more-btn" th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Wallets</a>
     <a class="learn-more-btn" th:href="@{/api/wallet/showNewWalletForm}">New wallet</a>
 </section>
-
-
 
 
 </body>
