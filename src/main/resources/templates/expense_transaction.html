@@ -3,30 +3,33 @@
       xmlns:th="http://thymeleaf.org" lang="en">
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/incomeTransaction.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/expenseTransaction.css}"/>
     <script src="http://localhost:35729/livereload.js"></script>
 
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Users</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    /></head>
 <body>
 <form name="logoutForm" th:action="@{/api/auth/signout}" method="post" th:hidden="true">
     <input hidden type="submit" value="Sign Out"/>
 </form>
 <header>
-    <h1 class="logo">Spender</h1>
-    <input type="checkbox" class="nav-toggle" id="nav-toggle">
-    <nav>
-        <ul>
-            <li> <a id="wallets" th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Wallets</a></li>
-            <li> <a th:href="@{/api/transaction/userTransactions/{userId} (userId=${userId})}">Transactions</a></li>
-            <li> <a href="javascript: document.logoutForm.submit()" role="menuitem">Logout</a></li>
+    <nav class="main-nav">
+        <input type="checkbox" id="check"/>
+        <label for="check" class="menu-btn">
+            <i class="fas fa-bars"></i>
+        </label>
+        <a href="index.html" class="logo">SPENDER</a>
+        <ul class="navlinks">
+            <li><a id="wallets" th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Wallets</a></li>
+            <li><a th:href="@{/api/transaction/userTransactions/{userId} (userId=${userId})}">Transactions</a></li>
+            <li><a href="javascript: document.logoutForm.submit()" role="menuitem">Logout</a></li>
         </ul>
     </nav>
-    <label for="nav-toggle" class="nav-toggle-label">
-        <span></span>
-    </label>
 </header>
 
 <div class="forms">

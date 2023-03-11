@@ -4,24 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <meta name="viewport" content="width=device-width"/>
     <script src="http://localhost:35729/livereload.js"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/updateTransaction.css}"/>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
 </head>
 <body>
 <header>
-    <h1 class="logo">Spender</h1>
-    <input type="checkbox" class="nav-toggle" id="nav-toggle">
-    <nav>
-        <ul>
+    <nav class="main-nav">
+        <input type="checkbox" id="check"/>
+        <label for="check" class="menu-btn">
+            <i class="fas fa-bars"></i>
+        </label>
+        <a href="index.html" class="logo">SPENDER</a>
+        <ul class="navlinks">
             <li><a th:href="@{/api/test/homePage}">Homepage</a></li>
             <li><a th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Wallets</a></li>
         </ul>
     </nav>
-    <label for="nav-toggle" class="nav-toggle-label">
-        <span></span>
-    </label>
 </header>
 
 <div class="form">

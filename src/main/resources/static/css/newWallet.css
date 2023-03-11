@@ -1,152 +1,130 @@
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
-  margin: 0;
+    box-sizing: border-box;
+    line-height: 1.5em;
 }
 
-img {
-  display: block;
-  width: 100%;
-  max-width: 1500px;
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: #000;
-  color: white;
-  width: 95%;
-  max-width: 1500px;
-  margin: 0 auto;
+    margin: 0;
+    font-family: "Open Sans", sans-serif;
+    background-color: black;
 }
+
+/* HEADER */
+
 header {
-  background: black;
-  text-align: center;
-  position: fixed;
-  top: 0;
-  z-index: 1000;
-  width: 95%;
-  max-width: 1500px;
+  background-color: black;
+}
+
+.main-nav {
+  height: 90px;
+
 }
 
 .logo {
-    font-family: Arial;
+  color: white;
+  line-height: 90px;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  margin-left: 30px;
+  font-family: "AstroSpace", sans-serif;
+}
 
-  font-size: 1.25rem;
-  margin: 1rem;
+.navlinks {
+  list-style: none;
+  float: right;
+  line-height: 90px;
+  margin: 0;
+  padding: 0;
+        z-index: 1;
+
+}
+
+.navlinks li {
+  display: inline-block;
+  margin: 0px 20px;
+}
+
+.navlinks li a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  transition: all 0.3s linear 0s;
   text-transform: uppercase;
 }
 
-nav {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  text-align: left;
-  background: black;
-  width: 100%;
-  height: 100vh;
-  margin-top: 1rem;
+#check {
   display: none;
 }
 
-.nav-toggle {
+.menu-btn {
+  font-size: 25px;
+  color: white;
+  float: right;
+  line-height: 90px;
+  margin-right: 40px;
   display: none;
-}
-
-.nav-toggle-label {
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin-left: 1em;
-  height: 100%;
-  display: flex;
-  align-items: center;
   cursor: pointer;
 }
 
-.nav-toggle-label span,
-.nav-toggle-label span::before,
-.nav-toggle-label span::after {
-  display: block;
-  background: white;
-  height: 2px;
-  width: 2em;
-  border-radius: 2px;
-  position: relative;
-}
-
-.nav-toggle-label span::before,
-.nav-toggle-label span::after {
-  content: '';
-  position: absolute;
-}
-
-.nav-toggle-label span::before {
-  bottom: 7px;
-}
-
-.nav-toggle-label span::after {
-  top: 7px;
-}
-
-nav ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-nav li {
-  margin-bottom: 1.5em;
-  margin-left: 1em;
-}
-
-nav a {
-    font-family: Arial;
-
-  color: white;
-  text-decoration: none;
-  text-transform: uppercase;
-}
-
-nav a:hover {
-  color: #ffa98e;
-}
-
-.nav-toggle:checked ~ nav {
-  display: block;
-}
-
-@media (min-width: 900px) {
-  .nav-toggle-label {
-    display: none;
-  }
-
-  header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 1rem;
+@media (max-width: 800px) {
+  .navlinks {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    transition: all 0.5s;
+    right: -100%;
     background: black;
   }
 
-  nav {
-    all: unset;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-right: 1em;
+  .navlinks li {
+    display: block;
   }
 
-  nav ul {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+  .navlinks li a {
+    font-size: 20px;
   }
 
-   nav li {
-    margin-bottom: 0;
-    padding: 0;
+  .navlinks li a:hover {
+    border-bottom: none;
+  }
+
+  .menu-btn {
+    display: block;
+  }
+
+  #check:checked ~ .navlinks {
+    right: 0;
   }
 }
+
+@media (max-width: 360px) {
+  .logo {
+    margin-left: 10px;
+    font-size: 25px;
+  }
+
+  .menu-btn {
+    margin-right: 10px;
+    font-size: 25px;
+  }
+
+  .menu-btn:focus {
+    color: black;
+  }
+}
+
+
+
 .form {
   background-color: #edede9;
   border-radius: 20px;
@@ -261,7 +239,7 @@ top: -23px;
   cursor: pointer;
   font-size: 18px;
   height: 50px;
-  margin-top: 38px;
+  margin-top: 11px;
   // outline: 0;
   text-align: center;
   width: 100%;
