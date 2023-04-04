@@ -27,7 +27,7 @@
         <a href="index.html" class="logo">SPENDER</a>
         <ul class="navlinks">
             <li><a th:href="@{/api/test/homePage}">Homepage</a></li>
-            <li><a th:href="@{/api/transaction/userTransactions/{userId} (userId=${userId})}">Transactions</a</li>
+            <li><a th:href="@{/api/transaction/userTransactions/{userId} (userId=${userId})}">Transactions</a></li>
             <li><a href="javascript: document.logoutForm.submit()" role="menuitem">Logout</a></li>
         </ul>
     </nav>
@@ -44,7 +44,7 @@
             <div class="card__icon"><i class="fa-solid fa-wallet"></i></div>
             <h2 class="card__title">Wallet name <span th:text="${wallet.walletName}"></span>
                 <br>
-                Wallet balance <span th:text="${wallet.initialBalance}"></span>
+                Wallet balance <span th:text="${wallet.walletBalance}"></span>
             </h2>
             <p class="card__apply">
                 <a class="card__link" th:href="@{/api/wallet/delete/{id}(id=${wallet.id})}"

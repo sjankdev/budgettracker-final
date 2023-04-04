@@ -24,6 +24,8 @@ public class Wallet {
     @NotNull(message = "Please, insert a amount")
     private Double initialBalance;
 
+    private Double walletBalance;
+
     @Transient
     private double totalBalance;
 
@@ -97,4 +99,11 @@ public class Wallet {
         this.totalBalance = totalBalance;
     }
 
+    public Double getWalletBalance() {
+        return walletBalance;
+    }
+
+    public void setWalletBalance(Double walletBalance) {
+        this.walletBalance = walletBalance;
+    }
 }
