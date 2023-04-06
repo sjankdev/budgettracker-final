@@ -35,7 +35,7 @@
 
 <div class="form">
     <div class="title">New income transaction for wallet <span style="color:red" th:text="${wallet.walletName}"></span>
-        <div class="subtitle">Balance is: <span style="color:red" th:text="${wallet.initialBalance}"></span>
+        <div class="subtitle">Balance is: <span style="color:red" th:text="${wallet.walletBalance}"></span>
             Let's create your wallet!
             <form name="saveWallet" action="#"
                   th:action="@{/api/transaction/saveIncome/{walletId} (walletId=${walletId})}"
