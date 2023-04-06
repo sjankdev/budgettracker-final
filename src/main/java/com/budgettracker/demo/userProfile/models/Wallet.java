@@ -26,8 +26,7 @@ public class Wallet {
 
     private Double walletBalance;
 
-    @Transient
-    private double totalBalance;
+    private Double totalBalance;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "user_id", insertable = false, updatable = false)

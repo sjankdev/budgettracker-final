@@ -42,6 +42,7 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public void saveIncome(Transaction transaction, Long walletId, Long userId) {
         Wallet wallet = walletService.getWalletById(walletId);
+
         double amount = transaction.getAmount();
         amount += wallet.getWalletBalance() == null ? wallet.getInitialBalance(): wallet.getWalletBalance();
         wallet.setWalletBalance(amount);
@@ -63,11 +64,11 @@ public class TransactionServiceImpl implements TransactionService {
 
 
         if (amount < existingTransactionInDb.getAmount()) {
-            existingTransactionInDb.getWallet().setInitialBalance
-                    (existingTransactionInDb.getWallet().getInitialBalance() + (amount - existingTransactionInDb.getAmount()));
+            existingTransactionInDb.getWallet().setWalletBalance
+                    (existingTransactionInDb.getWallet().getWalletBalance() + (amount - existingTransactionInDb.getAmount()));
         } else {
-            existingTransactionInDb.getWallet().setInitialBalance
-                    (existingTransactionInDb.getWallet().getInitialBalance() + (amount - existingTransactionInDb.getAmount()));
+            existingTransactionInDb.getWallet().setWalletBalance
+                    (existingTransactionInDb.getWallet().getWalletBalance() + (amount - existingTransactionInDb.getAmount()));
         }
         existingTransactionInDb.setNote(note);
         existingTransactionInDb.setAmount(amount);
@@ -85,8 +86,8 @@ public class TransactionServiceImpl implements TransactionService {
         String expense = String.valueOf(transaction.getExpenseCategories());
         System.out.println(transaction.getAmount());
 
-        existingTransactionInDb.getWallet().setInitialBalance
-                (existingTransactionInDb.getWallet().getInitialBalance() - (amount - existingTransactionInDb.getAmount()));
+        existingTransactionInDb.getWallet().setWalletBalance
+                (existingTransactionInDb.getWallet().getWalletBalance() - (amount - existingTransactionInDb.getAmount()));
         existingTransactionInDb.setNote(note);
         existingTransactionInDb.setAmount(amount);
         existingTransactionInDb.setDate(date);
