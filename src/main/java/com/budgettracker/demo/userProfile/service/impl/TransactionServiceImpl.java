@@ -32,6 +32,7 @@ public class TransactionServiceImpl implements TransactionService {
         double amount = transaction.getAmount();
         amount = (wallet.getWalletBalance() == null ? wallet.getInitialBalance(): wallet.getWalletBalance()) - amount;
         wallet.setWalletBalance(amount);
+
         System.out.println("Wallet balance after expense " + wallet.getWalletBalance());
 
         transaction.setTransactionType(TransactionType.EXPENSE);
@@ -46,6 +47,7 @@ public class TransactionServiceImpl implements TransactionService {
         double amount = transaction.getAmount();
         amount += wallet.getWalletBalance() == null ? wallet.getInitialBalance(): wallet.getWalletBalance();
         wallet.setWalletBalance(amount);
+
         System.out.println("Wallet balance after income " + wallet.getWalletBalance());
 
         transaction.setTransactionType(TransactionType.INCOME);
