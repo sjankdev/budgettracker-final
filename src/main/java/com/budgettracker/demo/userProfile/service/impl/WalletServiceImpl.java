@@ -43,6 +43,8 @@ public class WalletServiceImpl implements WalletService {
 
     @Override
     public void saveWallet(Wallet wallet) {
+        wallet.setTotalBalance(wallet.getInitialBalance());
+        wallet.setWalletBalance(wallet.getInitialBalance());
         this.walletRepository.save(wallet);
     }
 
@@ -50,7 +52,8 @@ public class WalletServiceImpl implements WalletService {
     public Wallet netWorth(Long userId) {
         Wallet wallet = new Wallet();
         List<Wallet> wallets = walletRepository.findDistinctIdByUserId(userId);
-        wallet.setTotalBalance(wallets.stream().mapToDouble(Wallet::getInitialBalance).sum());
+
+        wallet.setTotalBalance(wallets.stream().mapToDouble(Wallet::getWalletBalance).sum());
         return wallet;
     }
 }

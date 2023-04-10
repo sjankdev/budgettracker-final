@@ -27,7 +27,7 @@
         <a href="index.html" class="logo">SPENDER</a>
         <ul class="navlinks">
             <li><a th:href="@{/api/test/homePage}">Homepage</a></li>
-            <li><a th:href="@{/api/transaction/userTransactions/{userId} (userId=${userId})}">Transactions</a</li>
+            <li><a th:href="@{/api/transaction/userTransactions/{userId} (userId=${userId})}">Transactions</a></li>
             <li><a href="javascript: document.logoutForm.submit()" role="menuitem">Logout</a></li>
         </ul>
     </nav>
@@ -35,7 +35,13 @@
 
 <div class="main-container">
     <div class="heading">
-        <h1>Your net worth is <span th:text="${wallets.totalBalance}"></span></h1>
+        <span th:if="${wallets.totalBalance == null}"><h1>Your net worth is <span
+                th:text="${wallets.initialBalance}"></span></h1>
+</span> <span th:unless="${wallets.totalBalance == null}">        <h1>Your net worth is <span
+            th:text="${wallets.totalBalance}"></span></h1>
+</span>
+
+
         <br>
         <a class="learn-more-btn" th:href="@{/api/wallet/showNewWalletForm}">New wallet</a>
     </div>
@@ -44,7 +50,14 @@
             <div class="card__icon"><i class="fa-solid fa-wallet"></i></div>
             <h2 class="card__title">Wallet name <span th:text="${wallet.walletName}"></span>
                 <br>
-                Wallet balance <span th:text="${wallet.initialBalance}"></span>
+                <span th:if="${wallet.walletBalance == null}">Wallet balance <span
+                        th:text="${wallet.initialBalance}"></span>
+</span>
+                <span th:unless="${wallet.walletBalance == null}">Wallet balance <span
+                        th:text="${wallet.walletBalance}"></span>
+</span>
+
+
             </h2>
             <p class="card__apply">
                 <a class="card__link" th:href="@{/api/wallet/delete/{id}(id=${wallet.id})}"
