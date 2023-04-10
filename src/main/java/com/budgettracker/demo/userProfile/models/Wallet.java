@@ -24,8 +24,9 @@ public class Wallet {
     @NotNull(message = "Please, insert a amount")
     private Double initialBalance;
 
-    @Transient
-    private double totalBalance;
+    private Double walletBalance;
+
+    private Double totalBalance;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "user_id", insertable = false, updatable = false)
@@ -97,4 +98,11 @@ public class Wallet {
         this.totalBalance = totalBalance;
     }
 
+    public Double getWalletBalance() {
+        return walletBalance;
+    }
+
+    public void setWalletBalance(Double walletBalance) {
+        this.walletBalance = walletBalance;
+    }
 }
