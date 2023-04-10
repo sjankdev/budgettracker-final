@@ -1,0 +1,59 @@
+[33mfbafc3c[m[33m ([m[1;36mHEAD[m[33m, [m[1;31morigin/feature/transaction[m[33m)[m HEAD@{0}: reset: moving to fbafc3c44633ce4162645dcf35c5fbbde7e3e0ee
+[33m4cda672[m HEAD@{1}: checkout: moving from feature/transaction to 4cda672078941ab85309044e2613feed388391ae
+[33mcf76fe8[m[33m ([m[1;31morigin/dev[m[33m, [m[1;32mfeature/transaction[m[33m, [m[1;32mdev[m[33m)[m HEAD@{2}: reset: moving to cf76fe8bf425a52abf11ee88991d2ef5327f0685
+[33m7b65d82[m HEAD@{3}: revert: Revert "Form is now working fine, all fields are saved into database after submit. Next task is to subtract from net worth and from wallet balance after transaction is completed."
+[33mfbafc3c[m[33m ([m[1;36mHEAD[m[33m, [m[1;31morigin/feature/transaction[m[33m)[m HEAD@{4}: reset: moving to fbafc3c44633ce4162645dcf35c5fbbde7e3e0ee
+[33mfbafc3c[m[33m ([m[1;36mHEAD[m[33m, [m[1;31morigin/feature/transaction[m[33m)[m HEAD@{5}: reset: moving to fbafc3c44633ce4162645dcf35c5fbbde7e3e0ee
+[33mf33813f[m HEAD@{6}: reset: moving to f33813f48be2fab4c50c82afaa5d1df7d947ee1e
+[33m634c59b[m HEAD@{7}: reset: moving to 634c59b414f4501170b6582827f559b441df66fe
+[33m60b2cb6[m HEAD@{8}: commit: User entered amount is now rendered but have a problem to fix so actually new net worth get updated, now its still same like without subtraction.
+[33m90145b0[m HEAD@{9}: commit: User entered amount is now rendered but have a problem to fix so actually new net worth get updated, now its still same like without subtraction.
+[33m634c59b[m HEAD@{10}: commit: User entered amount for transaction is rendered but still have a problem with subtract from net worth of user.
+[33mf33813f[m HEAD@{11}: commit: User entered amount for transaction is rendered but still have a problem with subtract from net worth of user.
+[33mfbafc3c[m[33m ([m[1;36mHEAD[m[33m, [m[1;31morigin/feature/transaction[m[33m)[m HEAD@{12}: checkout: moving from feature/adding-security-for-api-calls to feature/transaction
+[33md9e16a5[m[33m ([m[1;31morigin/feature/adding-security-for-api-calls[m[33m, [m[1;32mfeature/adding-security-for-api-calls[m[33m)[m HEAD@{13}: commit: Added small changes for security on API calls, user cant have access without login for unauthorized pages, as well user cant access other user wallets.
+[33mcf76fe8[m[33m ([m[1;31morigin/dev[m[33m, [m[1;32mfeature/transaction[m[33m, [m[1;32mdev[m[33m)[m HEAD@{14}: checkout: moving from dev to feature/adding-security-for-api-calls
+[33mcf76fe8[m[33m ([m[1;31morigin/dev[m[33m, [m[1;32mfeature/transaction[m[33m, [m[1;32mdev[m[33m)[m HEAD@{15}: merge origin/dev: Fast-forward
+[33m1deb5df[m HEAD@{16}: checkout: moving from feature/transaction to dev
+[33mfbafc3c[m[33m ([m[1;36mHEAD[m[33m, [m[1;31morigin/feature/transaction[m[33m)[m HEAD@{17}: commit: Form is now working fine, all fields are saved into database after submit. Next task is to subtract from net worth and from wallet balance after transaction is completed.
+[33m77bb938[m HEAD@{18}: commit: Minor changes to mapping between entities.
+[33m2290356[m HEAD@{19}: commit: Created form for creating a new transaction, transaction is saved well in database, there is just a column category to be fixed as so far item is not saved in table column
+[33m159102d[m HEAD@{20}: commit: Created full form for add a new transaction, there is still stuff to fix, like setting walletId in transaction table.
+[33m5118720[m HEAD@{21}: commit: Created initially service, repository and controller for showing option to create a new transaction. Some stuff still not work as well, for example date is making a problem so far.
+[33m49ac422[m HEAD@{22}: commit: Created initially tables for Transaction feature.
+[33mec23745[m HEAD@{23}: commit: Small changes about column names in Role, User, Wallet.
+[33m1deb5df[m HEAD@{24}: checkout: moving from dev to feature/transaction
+[33m1deb5df[m HEAD@{25}: merge origin/dev: Fast-forward
+[33m45c2628[m HEAD@{26}: checkout: moving from feature/creating-user-profile to dev
+[33m590f878[m[33m ([m[1;31morigin/feature/creating-user-profile[m[33m, [m[1;32mfeature/creating-user-profile[m[33m)[m HEAD@{27}: commit: Created a better personalized home page for user.
+[33m0cdfc16[m HEAD@{28}: commit: Created a better personalized home page for user.
+[33md49842d[m HEAD@{29}: commit: Created a better personalized home page for user.
+[33m6840a53[m HEAD@{30}: commit: Created a better personalized home page for user.
+[33m1a54f7d[m HEAD@{31}: commit: Created a better personalized home page for user.
+[33mfda9b02[m HEAD@{32}: commit: Created a better personalized home page for user.
+[33m01b0611[m HEAD@{33}: commit: Created a better personalized home page for user.
+[33m3e8c747[m HEAD@{34}: commit: Created home page that with link that redirect user to his wallets.
+[33m4dbcf09[m HEAD@{35}: commit: Created "Add new wallet" option so user can create a wallet with name and initial balance.
+[33m2eb1b5c[m HEAD@{36}: commit: Created Delete and Update options for user wallets. User can now delete and edit wallets through HTML page.
+[33m8a0cea1[m HEAD@{37}: commit: Created Delete and Update options for user wallets. User can now delete and edit wallets through HTML page.
+[33mde9ce37[m HEAD@{38}: commit: Created Delete and Update options for user wallets. User can now delete and edit wallets through HTML page.
+[33ma03e04e[m HEAD@{39}: commit: Creating user profile to display data as username, email, initialBalance of wallet
+[33m39140a0[m HEAD@{40}: commit: Creating user profile to display data as username, email, initialBalance of wallet
+[33m6180cc9[m HEAD@{41}: commit: Creating user profile to display data as username, email, initialBalance of wallet
+[33m45c2628[m HEAD@{42}: checkout: moving from dev to feature/creating-user-profile
+[33m45c2628[m HEAD@{43}: checkout: moving from feature/user-profile to dev
+[33mfc603ef[m HEAD@{44}: checkout: moving from dev to feature/user-profile
+[33m45c2628[m HEAD@{45}: merge origin/dev: Fast-forward
+[33mee2f13d[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m HEAD@{46}: checkout: moving from feature/user-profile to dev
+[33mfc603ef[m HEAD@{47}: commit: Created API to display user profile.
+[33mee2f13d[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m HEAD@{48}: checkout: moving from dev to feature/user-profile
+[33mee2f13d[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m HEAD@{49}: checkout: moving from feature/page-for-login-and-registration to dev
+[33m175ab1a[m[33m ([m[1;31morigin/feature/page-for-login-and-registration[m[33m, [m[1;32mfeature/page-for-login-and-registration[m[33m)[m HEAD@{50}: commit: Created CSS for login and registration page.
+[33m8d45e30[m HEAD@{51}: commit: Created page for login and registration form.
+[33mee2f13d[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m HEAD@{52}: Branch: renamed refs/heads/feature/pages-for-login-and-registration to refs/heads/feature/page-for-login-and-registration
+[33mee2f13d[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m HEAD@{54}: checkout: moving from dev to feature/pages-for-login-and-registration
+[33mee2f13d[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m HEAD@{55}: checkout: moving from feature/login-register-security to dev
+[33m73a3690[m[33m ([m[1;31morigin/feature/login-register-security[m[33m, [m[1;32mfeature/login-register-security[m[33m)[m HEAD@{56}: commit: Login and registration has been created.
+[33mee2f13d[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m HEAD@{57}: checkout: moving from dev to feature/login-register-security
+[33mee2f13d[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m HEAD@{58}: checkout: moving from master to dev
+[33mee2f13d[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m HEAD@{59}: commit (initial): Initial commit

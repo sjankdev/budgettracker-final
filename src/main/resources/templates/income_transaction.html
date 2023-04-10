@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://thymeleaf.org" lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/incomeTransaction.css}"/>
+    <script src="http://localhost:35729/livereload.js"></script>
+
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Users</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
+</head>
+<body>
+<form name="logoutForm" th:action="@{/api/auth/signout}" method="post" th:hidden="true">
+    <input hidden type="submit" value="Sign Out"/>
+</form>
+<header>
+    <nav class="main-nav">
+        <input type="checkbox" id="check"/>
+        <label for="check" class="menu-btn">
+            <i class="fas fa-bars"></i>
+        </label>
+        <a href="index.html" class="logo">SPENDER</a>
+        <ul class="navlinks">
+            <li><a id="wallets" th:href="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}">Wallets</a></li>
+            <li><a th:href="@{/api/transaction/userTransactions/{userId} (userId=${userId})}">Transactions</a></li>
+            <li><a href="javascript: document.logoutForm.submit()" role="menuitem">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="form">
+    <div class="title">New income transaction for wallet <span style="color:red" th:text="${wallet.walletName}"></span>
+        <div class="subtitle">Balance is: <span style="color:red" th:text="${wallet.initialBalance}"></span>
+            Let's create your wallet!
+            <form name="saveWallet" action="#"
+                  th:action="@{/api/transaction/saveIncome/{walletId} (walletId=${walletId})}"
+                  th:object="${transaction}"
+                  method="POST">
+                <div class="row">
+                    <div class="col">
+                        <input id="amount" class="input" type="text" th:field="*{amount}" placeholder=" "/>
+                        <div class="cut"></div>
+                        <label for="amount" class="placeholder">Amount</label>
+                    </div>
+                    <div class="col">
+                        <input id="note" class="input" type="text" th:field="*{note}" placeholder=" "/>
+                        <div class="cut"></div>
+                        <label for="note" class="placeholder">Note</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input id="theDate" class="input" type="date" th:field="*{date}" placeholder=" "/>
+                        <div class="cut cut-short"></div>
+                        <label for="theDate" class="placeholder">Date</label>
+                    </div>
+                    <div class="col">
+                        <select th:field="${transaction.incomeCategories}">
+                            <option value="0">Select income category</option>
+                            <option
+                                    th:each="incomeCategories : ${incomeCategories}"
+                                    th:value="${incomeCategories}"
+                                    th:text="${incomeCategories.displayName}"
+                            ></option>
+                        </select>
+                        <div class="select-dropdown"></div>
+                    </div>
+                </div>
+                <button class="submit">Create</button>
+            </form>
+            <form name="cancelWalletCreating" action="#"
+                  th:action="@{/api/wallet/userWallet/balance/{userId} (userId=${userId})}" th:object="${wallet}"
+                  method="GET">
+                <button class="submit">Cancel</button>
+            </form>
+            <form name="switchToExpenseTransaction" action="#"
+                  th:action="@{/api/transaction/expenseTransaction/{walletId}(walletId=${walletId})}"
+                  th:object="${wallet}"
+                  method="GET">
+                <button class="submit">Switch To Expense Transaction</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" th:src="@{/js/transaction.js}"></script>
+</body>
+</html>

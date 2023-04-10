@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/userProfile.css}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="http://localhost:35729/livereload.js"></script>
+    <script src="https://kit.fontawesome.com/9ab80cc16b.js" crossorigin="anonymous"></script>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Users</title>
+</head>
+<body>
+
+
+<header>
+    <nav class="main-nav">
+        <input type="checkbox" id="check"/>
+        <label for="check" class="menu-btn">
+            <i class="fas fa-bars"></i>
+        </label>
+        <a href="index.html" class="logo">SPENDER</a>
+        <ul class="navlinks">
+            <li><a th:href="@{/api/test/homePage}">Homepage</a></li>
+            <li><a th:href="@{/api/transaction/userTransactions/{userId} (userId=${userId})}">Transactions</a</li>
+            <li><a href="javascript: document.logoutForm.submit()" role="menuitem">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="main-container">
+    <div class="heading">
+        <h1>Your net worth is <span th:text="${wallets.totalBalance}"></span></h1>
+        <br>
+        <a class="learn-more-btn" th:href="@{/api/wallet/showNewWalletForm}">New wallet</a>
+    </div>
+    <div class="cards">
+        <div class="card card-1" th:each="wallet : ${wallet}">
+            <div class="card__icon"><i class="fa-solid fa-wallet"></i></div>
+            <h2 class="card__title">Wallet name <span th:text="${wallet.walletName}"></span>
+                <br>
+                Wallet balance <span th:text="${wallet.initialBalance}"></span>
+            </h2>
+            <p class="card__apply">
+                <a class="card__link" th:href="@{/api/wallet/delete/{id}(id=${wallet.id})}"
+                   th:data-confirm-delete="|Are you sure you want to delete ${wallet.walletName} wallet?|"
+                   onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false">Delete</a>
+                <a class="card__link" th:href="@{/api/wallet/showFormForUpdate/{id}(id=${wallet.id})}">Update</a>
+                <a class="card__link" th:href="@{/api/transaction/incomeTransaction/{walletId}(walletId=${wallet.id})}">Income</a>
+                <a class="card__link"
+                   th:href="@{/api/transaction/expenseTransaction/{walletId}(walletId=${wallet.id})}">Expense</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+
+<form name="logoutForm" th:action="@{/api/auth/signout}" method="post" th:hidden="true">
+    <input hidden type="submit" value="Sign Out"/>
+</form>
+
+
+</body>
+
+</html>
