@@ -48,12 +48,6 @@ public class WalletServiceImpl implements WalletService {
         this.walletRepository.save(wallet);
     }
 
-    @Override
-    public void updateWallet(Wallet wallet) {
-
-        wallet.setTotalBalance(wallet.getWalletBalance() - wallet.getInitialBalance());
-        this.walletRepository.save(wallet);
-    }
 
     @Override
     public Wallet netWorth(Long userId) {
