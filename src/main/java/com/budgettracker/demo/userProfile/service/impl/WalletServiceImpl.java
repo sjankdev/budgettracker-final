@@ -57,5 +57,7 @@ public class WalletServiceImpl implements WalletService {
         wallet.setTotalBalance(wallets.stream().mapToDouble(Wallet::getWalletBalance).sum());
         return wallet;
     }
+
+
 }
 

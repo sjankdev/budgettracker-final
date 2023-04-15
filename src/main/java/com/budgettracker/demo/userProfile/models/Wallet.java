@@ -28,6 +28,9 @@ public class Wallet {
 
     private Double totalBalance;
 
+    @Column(name = "last_updated_initial_balance")
+    private Double lastUpdatedInitialBalance;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "user_id", insertable = false, updatable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -104,5 +107,24 @@ public class Wallet {
 
     public void setWalletBalance(Double walletBalance) {
         this.walletBalance = walletBalance;
+    }
+
+    public Double getLastUpdatedInitialBalance() {
+        return lastUpdatedInitialBalance;
+    }
+
+    public void setLastUpdatedInitialBalance(Double lastUpdatedInitialBalance) {
+        this.lastUpdatedInitialBalance = lastUpdatedInitialBalance;
+    }
+
+    public void updateInitialBalance(Double newInitialBalance) {
+        double diff = newInitialBalance - this.initialBalance;
+        this.initialBalance = newInitialBalance;
+        this.lastUpdatedInitialBalance = newInitialBalance;
+        if (this.walletBalance != null) {
+            this.walletBalance += diff;
+        } else {
+            this.walletBalance = newInitialBalance;
+        }
     }
 }
